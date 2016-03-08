@@ -129,6 +129,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     let p = Player.kInstance
     
     g.createSprite()
+    g.setPosition(-1)
     p.createSprite()
     
     self.addChild(g.mSprite)

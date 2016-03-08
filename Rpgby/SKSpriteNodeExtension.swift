@@ -28,7 +28,11 @@ extension SKNode {
 
 extension SKSpriteNode {
   func bottom() {
-    self.position = CGPointMake(self.position.x, self.size.height / 2)
+    self.position.y = halfHeight()
+  }
+  
+  func halfHeight() -> CGFloat {
+    return self.size.height / 2
   }
   
   func anchorPointX(x: CGFloat) {
