@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-// Helper funcs extension for SKNode and SKSpriteNode
+// Helper funcs extensions for SKNode and SKSpriteNode
 
 extension SKNode {
   func center(size: CGSize) {

@@ -52,7 +52,7 @@
 
 /* Begin PBXFileReference section */
 		EF363CC81C8E7CC100A060F8 /* Background_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background_small.png; sourceTree = "<group>"; };
-		EF908A081C862A3F006364BA /* Rpgby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rpgby.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF908A081C862A3F006364BA /* Orb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF908A0B1C862A3F006364BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF908A0D1C862A3F006364BA /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		EF908A0F1C862A3F006364BA /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 		EF9089FF1C862A3F006364BA = {
 			isa = PBXGroup;
 			children = (
-				EF908A0A1C862A3F006364BA /* Rpgby */,
+				EF908A0A1C862A3F006364BA /* Orb */,
 				EF908A091C862A3F006364BA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -118,12 +118,12 @@
 		EF908A091C862A3F006364BA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EF908A081C862A3F006364BA /* Rpgby.app */,
+				EF908A081C862A3F006364BA /* Orb.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EF908A0A1C862A3F006364BA /* Rpgby */ = {
+		EF908A0A1C862A3F006364BA /* Orb */ = {
 			isa = PBXGroup;
 			children = (
 				EF908A211C862B7F006364BA /* Res */,
@@ -144,6 +144,7 @@
 				EF908A181C862A3F006364BA /* LaunchScreen.storyboard */,
 				EF908A1B1C862A3F006364BA /* Info.plist */,
 			);
+			name = Orb;
 			path = Rpgby;
 			sourceTree = "<group>";
 		};
@@ -247,9 +248,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EF908A071C862A3F006364BA /* Rpgby */ = {
+		EF908A071C862A3F006364BA /* Orb */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EF908A1E1C862A3F006364BA /* Build configuration list for PBXNativeTarget "Rpgby" */;
+			buildConfigurationList = EF908A1E1C862A3F006364BA /* Build configuration list for PBXNativeTarget "Orb" */;
 			buildPhases = (
 				EF908A041C862A3F006364BA /* Sources */,
 				EF908A051C862A3F006364BA /* Frameworks */,
@@ -259,9 +260,9 @@
 			);
 			dependencies = (
 			);
-			name = Rpgby;
+			name = Orb;
 			productName = Rpgby;
-			productReference = EF908A081C862A3F006364BA /* Rpgby.app */;
+			productReference = EF908A081C862A3F006364BA /* Orb.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -278,7 +279,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EF908A031C862A3F006364BA /* Build configuration list for PBXProject "Rpgby" */;
+			buildConfigurationList = EF908A031C862A3F006364BA /* Build configuration list for PBXProject "Orb" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -291,7 +292,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EF908A071C862A3F006364BA /* Rpgby */,
+				EF908A071C862A3F006364BA /* Orb */,
 			);
 		};
 /* End PBXProject section */
@@ -465,9 +466,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Rpgby/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.jamescarroll.Rpgby;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Orb;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -476,16 +479,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Rpgby/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.jamescarroll.Rpgby;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Orb;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EF908A031C862A3F006364BA /* Build configuration list for PBXProject "Rpgby" */ = {
+		EF908A031C862A3F006364BA /* Build configuration list for PBXProject "Orb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EF908A1C1C862A3F006364BA /* Debug */,
@@ -494,7 +499,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EF908A1E1C862A3F006364BA /* Build configuration list for PBXNativeTarget "Rpgby" */ = {
+		EF908A1E1C862A3F006364BA /* Build configuration list for PBXNativeTarget "Orb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EF908A1F1C862A3F006364BA /* Debug */,
