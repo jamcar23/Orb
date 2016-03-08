@@ -18,6 +18,12 @@ final class Player: BaseSprite {
   static let kJumpSfx = SKAction.playSoundFileNamed("sfx-jump.mp3",
     waitForCompletion: false)
   static let kRunTex = Player.setUpRunningTextures()
+  static let kRunAni = SKAction.animateWithTextures(Player.kRunTex,
+    timePerFrame: 0.03)
+  static let kJumpUpAni = SKAction.animateWithTextures([SKTexture(imageNamed:
+    "jump_up")], timePerFrame: 0, resize: false, restore: true)
+  static let kJumpDownAni = SKAction.animateWithTextures([SKTexture(imageNamed:
+    "jump_fall")], timePerFrame: 0, resize: false, restore: true)
   
   var mJumping = false
   private var mBaseY: CGFloat = 0
@@ -27,33 +33,34 @@ final class Player: BaseSprite {
     super.init(imageName: "idle-1")
   }
   
+  // Starts the running animation
+  
   func beginRunning() {
-    self.mSprite.runAction(SKAction.repeatActionForever(SKAction.moveByX(10, y:
-      0, duration: 0.05)))
-    self.mSprite.runAction(SKAction.repeatActionForever(
-        SKAction.animateWithTextures(Player.kRunTex, timePerFrame: 0.03)))
+    self.mSprite.runAction(SKAction.repeatActionForever(Player.kRunAni))
   }
   
+  // Handles jumping animation and movement
+  
   func beginJumping() {
-    let x: CGFloat = 10
+    let phy = self.mSprite.physicsBody
     
     if !mJumping { // single jump only
       mJumping = true
       mBaseY = self.mSprite.position.y
       self.mSprite.removeAllActions()
       self.mSprite.runAction(Player.kJumpSfx)
-      self.mSprite.runAction(SKAction.animateWithTextures([SKTexture(imageNamed:
-        "jump_up")], timePerFrame: 0, resize: false, restore: true))
-      self.mSprite.physicsBody?.applyImpulse(CGVectorMake(x, mJumpY))
+      self.mSprite.runAction(Player.kJumpUpAni)
+      phy?.applyImpulse(CGVectorMake(phy!.velocity.dx , mJumpY))
     }
   }
+  
+  // Handles falling animation
   
   func endJumping() {
     let y = self.mSprite.position.y
     
     if y >= mBaseY + mJumpY {
-      self.mSprite.runAction(SKAction.animateWithTextures([SKTexture(imageNamed:
-        "jump_fall")], timePerFrame: 0, resize: false, restore: true))
+      self.mSprite.runAction(Player.kJumpDownAni)
     }
   }
   

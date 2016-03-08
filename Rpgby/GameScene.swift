@@ -8,9 +8,10 @@
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+final class GameScene: SKScene, SKPhysicsContactDelegate {
   static let kBackground = "Background"
   var mBegin = false
+  var mBackgrounds = [SKSpriteNode]()
   let mCamera = SKCameraNode()
   
   override init(size: CGSize) {
@@ -54,23 +55,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     if mBegin {
+      p.mSprite.position.x += 10
+      
+      if p.mSprite.position.y < CGRectGetMinY(self.frame) {
+        p.mSprite.removeFromParent()
+        return
+      }
+      
       if let cam = self.camera {
         cam.position.x = p.mSprite.position.x
       }
       
-      if let bg = self.childNodeWithName(GameScene.kBackground) as? SKSpriteNode,
-        let bg2 = self.childNodeWithName(GameScene.kBackground + "2") as?
-        SKSpriteNode {
-          let cx = camera?.position.x
-          
-          if CGRectGetMaxX(bg.frame) <=  cx {
-            bg.position = setBackgroundPosition(bg2, bg2: bg)
-          }
-          
-          if CGRectGetMaxX(bg2.frame) <= cx {
-            bg2.position = setBackgroundPosition(bg, bg2: bg2)
-          }
+      let cx = camera?.position.x ?? 0 + 100
+      let bg = mBackgrounds[0]
+      let bg2 = mBackgrounds[1]
+      
+      if CGRectGetMaxX(bg.frame) <=  cx {
+        bg.position = setBackgroundPosition(bg2, bg2: bg)
       }
+      
+      if CGRectGetMaxX(bg2.frame) <= cx {
+        bg2.position = setBackgroundPosition(bg, bg2: bg2)
+      }
+      
     }
   }
   
@@ -85,10 +92,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       
       if mBegin {
         p.beginRunning()
-      }  
+      }
     case (Collision.kPerson, Collision.kOrb): // handle running into orb
-      self.childNodeWithName(Orb.kName)?.removeFromParent()
       self.runAction(Orb.kCollectSfx)
+      self.childNodeWithName(Orb.kName)?.removeFromParent()
     default:
       break
     }
@@ -103,9 +110,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     bg.name = GameScene.kBackground
     bg.zPosition = Spacing.kBackgroundZIndex
     
-    let bg2: SKSpriteNode = bg.copy() as! SKSpriteNode
+    let bg2 = bg.copy() as! SKSpriteNode
     bg2.name = GameScene.kBackground + "2"
     bg2.position = setBackgroundPosition(bg, bg2: bg2)
+    
+    mBackgrounds.append(bg)
+    mBackgrounds.append(bg2)
+    
     self.addChild(bg)
     self.addChild(bg2)
   }
@@ -135,10 +146,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     self.addChild(o.mSprite)
   }
   
-  // Handles infinite background
+  // Handles infinite background position
   
   private func setBackgroundPosition(bg: SKSpriteNode, bg2: SKSpriteNode) -> CGPoint {
-    return CGPointMake(CGRectGetMaxX(bg.frame), bg2.position.y)
+    return CGPointMake(CGRectGetMaxX(bg.frame) + 100, bg2.position.y)
   }
   
   // Single init func to be called from multiple init
@@ -152,6 +163,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     setUpBackground()
     setUpPlayer()
     setUpOre()
-    
+    self.camera?.position.x = Player.kInstance.mSprite.position.x
   }
 }
