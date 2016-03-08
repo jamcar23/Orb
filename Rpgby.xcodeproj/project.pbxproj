@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF363CC91C8E7CC100A060F8 /* Background_small.png in Resources */ = {isa = PBXBuildFile; fileRef = EF363CC81C8E7CC100A060F8 /* Background_small.png */; settings = {ASSET_TAGS = (); }; };
 		EF908A0C1C862A3F006364BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A0B1C862A3F006364BA /* AppDelegate.swift */; };
 		EF908A0E1C862A3F006364BA /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EF908A0D1C862A3F006364BA /* GameScene.sks */; };
 		EF908A101C862A3F006364BA /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A0F1C862A3F006364BA /* GameScene.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF363CC81C8E7CC100A060F8 /* Background_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background_small.png; sourceTree = "<group>"; };
 		EF908A081C862A3F006364BA /* Rpgby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rpgby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF908A0B1C862A3F006364BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF908A0D1C862A3F006364BA /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		EF908A311C863CC0006364BA /* world */ = {
 			isa = PBXGroup;
 			children = (
+				EF363CC81C8E7CC100A060F8 /* Background_small.png */,
 				EF908A221C862BA2006364BA /* Background.png */,
 				EF908A231C862BA2006364BA /* LargePlatform.png */,
 				EF908A241C862BA2006364BA /* LowTile.png */,
@@ -325,6 +328,7 @@
 				EF908A2A1C862BA2006364BA /* LowTile.png in Resources */,
 				EF908A171C862A3F006364BA /* Assets.xcassets in Resources */,
 				EF908A291C862BA2006364BA /* LargePlatform.png in Resources */,
+				EF363CC91C8E7CC100A060F8 /* Background_small.png in Resources */,
 				EF98A4641C8775FF005E57D1 /* S31-City-on-Speed.mp3 in Resources */,
 				EF908A151C862A3F006364BA /* Main.storyboard in Resources */,
 			);

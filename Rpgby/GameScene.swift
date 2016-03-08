@@ -55,7 +55,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     if mBegin {
-      p.mSprite.position.x += 10
+      p.mSprite.position.x += Player.kMovement
       
       if p.mSprite.position.y < CGRectGetMinY(self.frame) {
         p.mSprite.removeFromParent()
@@ -63,19 +63,20 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
       }
       
       if let cam = self.camera {
-        cam.position.x = p.mSprite.position.x
+        cam.position.x += Player.kMovement
       }
       
-      let cx = camera?.position.x ?? 0 + 100
+      let adv: CGFloat = 400
+      let cx = mCamera.position.x
       let bg = mBackgrounds[0]
       let bg2 = mBackgrounds[1]
       
-      if CGRectGetMaxX(bg.frame) <=  cx {
-        bg.position = setBackgroundPosition(bg2, bg2: bg)
+      if CGRectGetMaxX(bg.frame) + adv <=  cx {
+        bg.position = setBackgroundPosition(bg2, bg2: bg, adv: adv)
       }
       
-      if CGRectGetMaxX(bg2.frame) <= cx {
-        bg2.position = setBackgroundPosition(bg, bg2: bg2)
+      if CGRectGetMaxX(bg2.frame) + adv <= cx {
+        bg2.position = setBackgroundPosition(bg, bg2: bg2, adv: adv)
       }
       
     }
@@ -112,7 +113,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let bg2 = bg.copy() as! SKSpriteNode
     bg2.name = GameScene.kBackground + "2"
-    bg2.position = setBackgroundPosition(bg, bg2: bg2)
+    bg2.position = setBackgroundPosition(bg, bg2: bg2, adv: 100)
     
     mBackgrounds.append(bg)
     mBackgrounds.append(bg2)
@@ -148,8 +149,9 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
   
   // Handles infinite background position
   
-  private func setBackgroundPosition(bg: SKSpriteNode, bg2: SKSpriteNode) -> CGPoint {
-    return CGPointMake(CGRectGetMaxX(bg.frame) + 100, bg2.position.y)
+  private func setBackgroundPosition(bg: SKSpriteNode, bg2: SKSpriteNode, adv:
+    CGFloat) -> CGPoint {
+    return CGPointMake(CGRectGetMaxX(bg.frame) + adv, bg2.position.y)
   }
   
   // Single init func to be called from multiple init
@@ -163,6 +165,6 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     setUpBackground()
     setUpPlayer()
     setUpOre()
-    self.camera?.position.x = Player.kInstance.mSprite.position.x
+    self.camera?.position.x = Player.kInstance.mSprite.position.x * 9.42
   }
 }

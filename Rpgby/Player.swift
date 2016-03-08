@@ -14,10 +14,11 @@ import SpriteKit
 
 final class Player: BaseSprite {
   static let kName = "player"
+  static let kMovement: CGFloat = 10
   static let kInstance = Player()
+  static let kRunTex = Player.setUpRunningTextures()
   static let kJumpSfx = SKAction.playSoundFileNamed("sfx-jump.mp3",
     waitForCompletion: false)
-  static let kRunTex = Player.setUpRunningTextures()
   static let kRunAni = SKAction.animateWithTextures(Player.kRunTex,
     timePerFrame: 0.03)
   static let kJumpUpAni = SKAction.animateWithTextures([SKTexture(imageNamed:
