@@ -32,7 +32,7 @@ class Platform: BaseSprite, GetXY {
     self.mSprite.physicsBody?.affectedByGravity = false
     self.mSprite.physicsBody?.friction = 0.75
     self.mSprite.physicsBody?.categoryBitMask = Collision.kPlatform
-    self.mSprite.physicsBody?.collisionBitMask = Collision.kOrb | Collision.kPlatform
+    self.mSprite.physicsBody?.collisionBitMask = Collision.kOrb
     self.mSprite.physicsBody?.contactTestBitMask = Collision.kPerson
     
     self.mSprite.zPosition = Spacing.kPlatformZIndex
@@ -51,10 +51,11 @@ class Platform: BaseSprite, GetXY {
   
   // Set a random distance to jump within a certain margin
   
-  private func randomDistance(previous: CGFloat) {
-    let b = Player.kMovement + self.mSprite.size.width 
-    let m = b * 0.05
-    let u = previous + b + m
+  private func randomDistance(var previous: CGFloat) {
+    let b = 20 + self.mSprite.size.width
+    let m = b * 0.07
+    previous += 18
+    let u = previous + m
     let l = previous + -m
     let x = CGFloat(arc4random_uniform(UInt32(u - l))) + l
     self.mSprite.position.x = x

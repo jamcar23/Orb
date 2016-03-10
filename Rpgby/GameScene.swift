@@ -15,7 +15,6 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
   var mPlatforms = [Platform]()
   var mPreviousPlatform = 0
   let mCamera = SKCameraNode()
-  var mTimer: NSTimer!
   
   override init(size: CGSize) {
     super.init(size: size)
@@ -74,11 +73,14 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
       let bg = mBackgrounds[0]
       let bg2 = mBackgrounds[1]
       
-      for p in mPlatforms {
-        if p.mSprite.isPast(self.mCamera.frame) {
-          print(p.mSprite.name)
-          p.mSprite.removeFromParent()
+      if mPlatforms.count > 0 {
+        let pz = mPlatforms[0]
+        
+        if pz.mSprite.isPast(self.mCamera.frame) {
           self.mPlatforms.removeFirst()
+        }
+        
+        if mPlatforms.lastSprite().isPast(self.mCamera.frame) {
           self.createPlatform()
         }
       }
@@ -90,15 +92,15 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
       if bg2.getMaxX() + adv <= cx {
         bg2.position = setBackgroundPosition(bg, bg2: bg2, adv: adv)
       }
-      
     }
   }
   
   func didBeginContact(contact: SKPhysicsContact) {
-    let a = contact.bodyA
-    let b = contact.bodyB
+    var a = contact.bodyA.categoryBitMask
+    var b = contact.bodyB.categoryBitMask
+    (a, b) = a < b ? (a, b) : (b, a)
     
-    switch (a.categoryBitMask, b.categoryBitMask) {
+    switch (a, b) {
     case (Collision.kPlatform, Collision.kPerson): // handle landing
       let p = Player.kInstance
       p.mJumping = false
@@ -168,16 +170,17 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
       return CGPointMake(bg.getMaxX() + adv, bg2.position.y)
   }
   
+  // Selects the next platform, randomly
+  
   func createPlatform() {
-    while self.mPlatforms.count < 4 {
-      let n = Platform.nextPlatform(mPreviousPlatform)
-      let p: Platform = n.1
-      
-      mPreviousPlatform = n.0
-      p.setPosition(mPlatforms.lastSprite().getMaxX())
-      mPlatforms.append(p)
-      self.addChild(mPlatforms.lastSprite())
-    }
+    let n = Platform.nextPlatform(mPreviousPlatform)
+    let p: Platform = n.1
+    
+    mPreviousPlatform = n.0
+    p.setPosition(mPlatforms.lastSprite().getMaxX())
+    mPlatforms.append(p)
+    self.addChild(mPlatforms.lastSprite())
+    
   }
   
   // Single init func to be called from multiple init
@@ -193,6 +196,8 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     setUpOre()
     self.camera?.position.x = Player.kInstance.mSprite.position.x * 9.42
     
-    createPlatform()
+    for _ in 0..<3 {
+      createPlatform()
+    }
   }
 }

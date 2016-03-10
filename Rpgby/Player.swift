@@ -77,7 +77,7 @@ final class Player: BaseSprite {
     self.mSprite.name = Player.kName
     self.mSprite.zPosition = Spacing.kPersonOrbZIndex
     
-    self.mJumpY = 200 * self.mSprite.physicsBody!.mass
+    self.mJumpY = 300 * self.mSprite.physicsBody!.mass
   }
   
   static private func setUpRunningTextures() -> [SKTexture] {
