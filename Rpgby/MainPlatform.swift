@@ -13,6 +13,7 @@ import SpriteKit
 
 final class MainPlatform: Platform {
   static let kName = "mainPlatform"
+  override var mName: String { return MainPlatform.kName }
   
   init() {
     super.init(imageName: "mainTile")

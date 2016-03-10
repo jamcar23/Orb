@@ -12,7 +12,10 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
   static let kBackground = "Background"
   var mBegin = false
   var mBackgrounds = [SKSpriteNode]()
+  var mPlatforms = [Platform]()
+  var mPreviousPlatform = 0
   let mCamera = SKCameraNode()
+  var mTimer: NSTimer!
   
   override init(size: CGSize) {
     super.init(size: size)
@@ -57,7 +60,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     if mBegin {
       p.mSprite.position.x += Player.kMovement
       
-      if p.mSprite.position.y < CGRectGetMinY(self.frame) {
+      if p.mSprite.isPast(self.frame) {
         p.mSprite.removeFromParent()
         return
       }
@@ -71,11 +74,20 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
       let bg = mBackgrounds[0]
       let bg2 = mBackgrounds[1]
       
-      if CGRectGetMaxX(bg.frame) + adv <=  cx {
+      for p in mPlatforms {
+        if p.mSprite.isPast(self.mCamera.frame) {
+          print(p.mSprite.name)
+          p.mSprite.removeFromParent()
+          self.mPlatforms.removeFirst()
+          self.createPlatform()
+        }
+      }
+      
+      if bg.getMaxX() + adv <=  cx {
         bg.position = setBackgroundPosition(bg2, bg2: bg, adv: adv)
       }
       
-      if CGRectGetMaxX(bg2.frame) + adv <= cx {
+      if bg2.getMaxX() + adv <= cx {
         bg2.position = setBackgroundPosition(bg, bg2: bg2, adv: adv)
       }
       
@@ -125,15 +137,16 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
   // Set up main platform and player
   
   private func setUpPlayer() {
-    let g = MainPlatform()
+    let g = Platform.kAllPlatforms[0]
     let p = Player.kInstance
     
-    g.createSprite()
     g.setPosition(-1)
     p.createSprite()
     
-    self.addChild(g.mSprite)
+    mPlatforms.append(g)
+    
     self.addChild(p.mSprite)
+    self.addChild(mPlatforms.lastSprite())
     self.camera?.position.x = p.mSprite.position.x
   }
   
@@ -143,7 +156,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     let o = Orb(imageName: Orb.kRed)
     
     o.createSprite()
-    o.setPosition((self.childNodeWithName(MainPlatform.kName)?.frame)!)
+    o.setPosition(mPlatforms.findPlatform(MainPlatform.kName).getMaxX())
     
     self.addChild(o.mSprite)
   }
@@ -152,7 +165,19 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
   
   private func setBackgroundPosition(bg: SKSpriteNode, bg2: SKSpriteNode, adv:
     CGFloat) -> CGPoint {
-    return CGPointMake(CGRectGetMaxX(bg.frame) + adv, bg2.position.y)
+      return CGPointMake(bg.getMaxX() + adv, bg2.position.y)
+  }
+  
+  func createPlatform() {
+    while self.mPlatforms.count < 4 {
+      let n = Platform.nextPlatform(mPreviousPlatform)
+      let p: Platform = n.1
+      
+      mPreviousPlatform = n.0
+      p.setPosition(mPlatforms.lastSprite().getMaxX())
+      mPlatforms.append(p)
+      self.addChild(mPlatforms.lastSprite())
+    }
   }
   
   // Single init func to be called from multiple init
@@ -167,5 +192,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     setUpPlayer()
     setUpOre()
     self.camera?.position.x = Player.kInstance.mSprite.position.x * 9.42
+    
+    createPlatform()
   }
 }

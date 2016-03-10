@@ -11,8 +11,9 @@ import SpriteKit
 
 // Base class for all sprites
 
-class BaseSprite: Sprite {
+class BaseSprite: NSObject, Sprite {
   let mSprite: SKSpriteNode!
+  var mName: String { return "BaseSprite" }
   
   init(imageName: String) {
     self.mSprite = SKSpriteNode(imageNamed: imageName)

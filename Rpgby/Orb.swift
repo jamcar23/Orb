@@ -30,7 +30,7 @@ final class Orb: BaseSprite {
     self.mSprite.zPosition = Spacing.kPersonOrbZIndex
   }
   
-  func setPosition(frame: CGRect) {
-    self.mSprite.position = CGPointMake(CGRectGetMaxX(frame) - 100, 500)
+  func setPosition(maxX: CGFloat) {
+    self.mSprite.position = CGPointMake(maxX - 100, 500)
   }
 }
