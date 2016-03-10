@@ -15,8 +15,8 @@ class BaseSprite: NSObject, Sprite {
   let mSprite: SKSpriteNode!
   var mName: String { return "BaseSprite" }
   
-  init(imageName: String) {
-    self.mSprite = SKSpriteNode(imageNamed: imageName)
+  init(textureName: String) {
+    self.mSprite = SKSpriteNode(texture: SKTexture(imageNamed: textureName))
   }
   
   func createSprite() {

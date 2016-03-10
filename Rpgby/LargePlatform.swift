@@ -10,9 +10,10 @@ import SpriteKit
 
 class LargePlatform: Platform {
   static let kName = "LargePlatform"
+  override var mName: String { return LargePlatform.kName }
   
   init() {
-    super.init(imageName: LargePlatform.kName)
+    super.init(textureName: LargePlatform.kName)
     self.mBottom = false
   }
   

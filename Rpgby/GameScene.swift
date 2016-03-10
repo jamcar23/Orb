@@ -9,11 +9,12 @@
 import SpriteKit
 
 final class GameScene: SKScene, SKPhysicsContactDelegate {
-  static let kBackground = "Background"
+  static let kBackground = "Background_cloud"
   var mBegin = false
   var mBackgrounds = [SKSpriteNode]()
   var mPlatforms = [Platform]()
   var mPreviousPlatform = 0
+  var mPreviousSprite: SKSpriteNode!
   let mCamera = SKCameraNode()
   
   override init(size: CGSize) {
@@ -48,6 +49,22 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     }
   }
   
+  override func didSimulatePhysics() {
+    if mPlatforms.count > 0 {
+      let pz = mPlatforms[0]
+      
+      if mPreviousSprite.isPast(self.mCamera.frame) && mPlatforms.count < 4 {
+        self.createPlatform()
+      }
+      
+      if pz.mSprite.isPast(self.mCamera.frame) {
+        self.removeFromParent()
+        pz.mSprite.removeFromParent()
+        self.mPlatforms.removeFirst()
+      }
+    }
+  }
+  
   override func update(currentTime: CFTimeInterval) {
     /* Called before each frame is rendered */
     let p = Player.kInstance
@@ -57,15 +74,15 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     if mBegin {
-      p.mSprite.position.x += Player.kMovement
+      p.mSprite.position.x += p.mMovement
+      
+      if let cam = self.camera {
+        cam.position.x += p.mMovement
+      }
       
       if p.mSprite.isPast(self.frame) {
         p.mSprite.removeFromParent()
         return
-      }
-      
-      if let cam = self.camera {
-        cam.position.x += Player.kMovement
       }
       
       let adv: CGFloat = 400
@@ -73,17 +90,6 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
       let bg = mBackgrounds[0]
       let bg2 = mBackgrounds[1]
       
-      if mPlatforms.count > 0 {
-        let pz = mPlatforms[0]
-        
-        if pz.mSprite.isPast(self.mCamera.frame) {
-          self.mPlatforms.removeFirst()
-        }
-        
-        if mPlatforms.lastSprite().isPast(self.mCamera.frame) {
-          self.createPlatform()
-        }
-      }
       
       if bg.getMaxX() + adv <=  cx {
         bg.position = setBackgroundPosition(bg2, bg2: bg, adv: adv)
@@ -109,7 +115,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         p.beginRunning()
       }
     case (Collision.kPerson, Collision.kOrb): // handle running into orb
-      self.runAction(Orb.kCollectSfx)
+      //      self.runAction(Orb.kCollectSfx)
       self.childNodeWithName(Orb.kName)?.removeFromParent()
     default:
       break
@@ -155,7 +161,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
   // Sets up the orb
   
   private func setUpOre() {
-    let o = Orb(imageName: Orb.kRed)
+    let o = Orb(textureName: Orb.kRed)
     
     o.createSprite()
     o.setPosition(mPlatforms.findPlatform(MainPlatform.kName).getMaxX())
@@ -172,20 +178,22 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
   
   // Selects the next platform, randomly
   
-  func createPlatform() {
+  private func createPlatform() {
     let n = Platform.nextPlatform(mPreviousPlatform)
     let p: Platform = n.1
     
     mPreviousPlatform = n.0
-    p.setPosition(mPlatforms.lastSprite().getMaxX())
+    mPreviousSprite = mPlatforms.lastSprite()
+    p.setPosition(mPreviousSprite.getMaxX())
     mPlatforms.append(p)
-    self.addChild(mPlatforms.lastSprite())
+    self.addChild(p.mSprite.copy() as! SKSpriteNode)
     
   }
   
   // Single init func to be called from multiple init
   
   private func fInit() {
+    self.view?.ignoresSiblingOrder = true
     self.physicsWorld.gravity = CGVectorMake(0, -4.2)
     self.physicsWorld.contactDelegate = self
     self.userInteractionEnabled = true
@@ -199,5 +207,15 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     for _ in 0..<3 {
       createPlatform()
     }
+    
+    let w = SKAction.waitForDuration(5)
+    let rb = SKAction.runBlock({
+      let p = Player.kInstance
+      
+      p.mMovement = p.mMovement < 40 ? p.mMovement * 1.1 : 42
+      print(p.mMovement)
+    })
+    
+    self.runAction(SKAction.repeatActionForever(SKAction.sequence([w, rb])))
   }
 }

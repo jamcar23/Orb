@@ -16,7 +16,7 @@ final class MainPlatform: Platform {
   override var mName: String { return MainPlatform.kName }
   
   init() {
-    super.init(imageName: "mainTile")
+    super.init(textureName: MainPlatform.kName)
   }
   
   override func createSprite() {

@@ -14,30 +14,41 @@ import SpriteKit
 
 final class Player: BaseSprite {
   static let kName = "player"
-  static let kMovement: CGFloat = 10
   static let kInstance = Player()
-  static let kRunTex = Player.setUpRunningTextures()
+  static let kRunTex = SKTextureAtlas(named: "running")
+  static let kJumpTex = SKTextureAtlas(named: "jump")
   static let kJumpSfx = SKAction.playSoundFileNamed("sfx-jump.mp3",
     waitForCompletion: false)
-  static let kRunAni = SKAction.animateWithTextures(Player.kRunTex,
-    timePerFrame: 0.03)
-  static let kJumpUpAni = SKAction.animateWithTextures([SKTexture(imageNamed:
-    "jump_up")], timePerFrame: 0, resize: false, restore: true)
-  static let kJumpDownAni = SKAction.animateWithTextures([SKTexture(imageNamed:
-    "jump_fall")], timePerFrame: 0, resize: false, restore: true)
   
   var mJumping = false
+  var mMovement: CGFloat = 8
+  var mRunAni: SKAction!
+  var mJumpUpAni: SKAction!
+  var mJumpDownAni: SKAction!
   private var mBaseY: CGFloat = 0
   private var mJumpY: CGFloat!
   
   private init() {
-    super.init(imageName: "idle-1")
+    super.init(textureName: "idle-1")
+    Player.kRunTex.preloadWithCompletionHandler({
+      self.mRunAni = SKAction.animateWithTextures(Player.kRunTex.toTextures(),
+      timePerFrame: 0.06)
+    })
+    
+    Player.kJumpTex.preloadWithCompletionHandler({
+      let texs = Player.kJumpTex.toTextures()
+        
+      self.mJumpUpAni = SKAction.animateWithTextures([texs[1]], timePerFrame: 0,
+        resize: false, restore: true)
+      self.mJumpDownAni = SKAction.animateWithTextures([texs[0]], timePerFrame:
+      0, resize: false, restore: true)
+    })
   }
   
   // Starts the running animation
   
   func beginRunning() {
-    self.mSprite.runAction(SKAction.repeatActionForever(Player.kRunAni))
+    self.mSprite.runAction(SKAction.repeatActionForever(mRunAni))
   }
   
   // Handles jumping animation and movement
@@ -49,9 +60,9 @@ final class Player: BaseSprite {
       mJumping = true
       mBaseY = self.mSprite.position.y
       self.mSprite.removeAllActions()
-      self.mSprite.runAction(Player.kJumpSfx)
-      self.mSprite.runAction(Player.kJumpUpAni)
-      phy?.applyImpulse(CGVectorMake(phy!.velocity.dx , mJumpY))
+//      self.mSprite.runAction(Player.kJumpSfx)
+      self.mSprite.runAction(mJumpUpAni)
+      phy?.applyImpulse(CGVectorMake(phy!.velocity.dx, mJumpY))
     }
   }
   
@@ -61,7 +72,7 @@ final class Player: BaseSprite {
     let y = self.mSprite.position.y
     
     if y >= mBaseY + mJumpY {
-      self.mSprite.runAction(Player.kJumpDownAni)
+      self.mSprite.runAction(mJumpDownAni)
     }
   }
   
@@ -78,15 +89,5 @@ final class Player: BaseSprite {
     self.mSprite.zPosition = Spacing.kPersonOrbZIndex
     
     self.mJumpY = 300 * self.mSprite.physicsBody!.mass
-  }
-  
-  static private func setUpRunningTextures() -> [SKTexture] {
-    var texs = [SKTexture]()
-    
-    for i in 1...6 {
-      texs.append(SKTexture(imageNamed: "run-" + i.description))
-    }
-    
-    return texs
   }
 }

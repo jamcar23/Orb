@@ -7,86 +7,58 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EF363CC91C8E7CC100A060F8 /* Background_small.png in Resources */ = {isa = PBXBuildFile; fileRef = EF363CC81C8E7CC100A060F8 /* Background_small.png */; settings = {ASSET_TAGS = (); }; };
-		EF363CCB1C8F49D000A060F8 /* PRNG.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF363CCA1C8F49D000A060F8 /* PRNG.swift */; settings = {ASSET_TAGS = (); }; };
-		EF363CCD1C8F4B1800A060F8 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF363CCC1C8F4B1800A060F8 /* Platform.swift */; settings = {ASSET_TAGS = (); }; };
-		EF363CCF1C8F9A2900A060F8 /* LargePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF363CCE1C8F9A2900A060F8 /* LargePlatform.swift */; settings = {ASSET_TAGS = (); }; };
-		EF363CD11C9081BB00A060F8 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF363CD01C9081BB00A060F8 /* ArrayExtension.swift */; settings = {ASSET_TAGS = (); }; };
+		EF363CCB1C8F49D000A060F8 /* PRNG.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF363CCA1C8F49D000A060F8 /* PRNG.swift */; };
+		EF363CCD1C8F4B1800A060F8 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF363CCC1C8F4B1800A060F8 /* Platform.swift */; };
+		EF363CCF1C8F9A2900A060F8 /* LargePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF363CCE1C8F9A2900A060F8 /* LargePlatform.swift */; };
+		EF363CD11C9081BB00A060F8 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF363CD01C9081BB00A060F8 /* ArrayExtension.swift */; };
 		EF908A0C1C862A3F006364BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A0B1C862A3F006364BA /* AppDelegate.swift */; };
-		EF908A0E1C862A3F006364BA /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EF908A0D1C862A3F006364BA /* GameScene.sks */; };
 		EF908A101C862A3F006364BA /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A0F1C862A3F006364BA /* GameScene.swift */; };
 		EF908A121C862A3F006364BA /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A111C862A3F006364BA /* GameViewController.swift */; };
 		EF908A151C862A3F006364BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF908A131C862A3F006364BA /* Main.storyboard */; };
 		EF908A171C862A3F006364BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF908A161C862A3F006364BA /* Assets.xcassets */; };
 		EF908A1A1C862A3F006364BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF908A181C862A3F006364BA /* LaunchScreen.storyboard */; };
-		EF908A281C862BA2006364BA /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A221C862BA2006364BA /* Background.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A291C862BA2006364BA /* LargePlatform.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A231C862BA2006364BA /* LargePlatform.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A2A1C862BA2006364BA /* LowTile.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A241C862BA2006364BA /* LowTile.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A2B1C862BA2006364BA /* mainTile.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A251C862BA2006364BA /* mainTile.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A2C1C862BA2006364BA /* SmallPlatform.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A261C862BA2006364BA /* SmallPlatform.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A2D1C862BA2006364BA /* SmallTile.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A271C862BA2006364BA /* SmallTile.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A2F1C863093006364BA /* SKSpriteNodeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A2E1C863093006364BA /* SKSpriteNodeExtension.swift */; settings = {ASSET_TAGS = (); }; };
-		EF908A421C863CF5006364BA /* frame-got-hit.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A341C863CF5006364BA /* frame-got-hit.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A431C863CF5006364BA /* idle-1.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A361C863CF5006364BA /* idle-1.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A441C863CF5006364BA /* idle-2.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A371C863CF5006364BA /* idle-2.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A451C863CF5006364BA /* jump_fall.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A391C863CF5006364BA /* jump_fall.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A461C863CF5006364BA /* jump_up.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A3A1C863CF5006364BA /* jump_up.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A471C863CF5006364BA /* run-1.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A3C1C863CF5006364BA /* run-1.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A481C863CF5006364BA /* run-2.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A3D1C863CF5006364BA /* run-2.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A491C863CF5006364BA /* run-3.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A3E1C863CF5006364BA /* run-3.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A4A1C863CF5006364BA /* run-4.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A3F1C863CF5006364BA /* run-4.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A4B1C863CF5006364BA /* run-5.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A401C863CF5006364BA /* run-5.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A4C1C863CF5006364BA /* run-6.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A411C863CF5006364BA /* run-6.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A501C86438E006364BA /* Collision.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A4F1C86438E006364BA /* Collision.swift */; settings = {ASSET_TAGS = (); }; };
-		EF908A561C8659AF006364BA /* orb-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A541C8659AF006364BA /* orb-blue.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A571C8659AF006364BA /* orb-red.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A551C8659AF006364BA /* orb-red.png */; settings = {ASSET_TAGS = (); }; };
-		EF908A5B1C865D6A006364BA /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A5A1C865D6A006364BA /* Spacing.swift */; settings = {ASSET_TAGS = (); }; };
-		EF98A4521C876065005E57D1 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98A4511C876065005E57D1 /* Sprite.swift */; settings = {ASSET_TAGS = (); }; };
-		EF98A4541C8760EA005E57D1 /* BaseSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98A4531C8760EA005E57D1 /* BaseSprite.swift */; settings = {ASSET_TAGS = (); }; };
-		EF98A4561C8761D3005E57D1 /* MainPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98A4551C8761D3005E57D1 /* MainPlatform.swift */; settings = {ASSET_TAGS = (); }; };
-		EF98A4581C876398005E57D1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98A4571C876398005E57D1 /* Player.swift */; settings = {ASSET_TAGS = (); }; };
-		EF98A45A1C87652F005E57D1 /* Orb.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98A4591C87652F005E57D1 /* Orb.swift */; settings = {ASSET_TAGS = (); }; };
-		EF98A45E1C876F74005E57D1 /* sfx-jump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A45D1C876F74005E57D1 /* sfx-jump.mp3 */; settings = {ASSET_TAGS = (); }; };
-		EF98A4631C8775FF005E57D1 /* Coin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A45F1C8775FF005E57D1 /* Coin.mp3 */; settings = {ASSET_TAGS = (); }; };
-		EF98A4641C8775FF005E57D1 /* S31-City-on-Speed.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4601C8775FF005E57D1 /* S31-City-on-Speed.mp3 */; settings = {ASSET_TAGS = (); }; };
-		EF98A4651C8775FF005E57D1 /* S31-Internal-Reflection.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4611C8775FF005E57D1 /* S31-Internal-Reflection.mp3 */; settings = {ASSET_TAGS = (); }; };
-		EF98A4661C8775FF005E57D1 /* spaceranger3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4621C8775FF005E57D1 /* spaceranger3.mp3 */; settings = {ASSET_TAGS = (); }; };
-		EF98A4681C877616005E57D1 /* Ascend.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4671C877616005E57D1 /* Ascend.mp3 */; settings = {ASSET_TAGS = (); }; };
+		EF908A2F1C863093006364BA /* SKSpriteNodeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A2E1C863093006364BA /* SKSpriteNodeExtension.swift */; };
+		EF908A421C863CF5006364BA /* frame-got-hit.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A341C863CF5006364BA /* frame-got-hit.png */; };
+		EF908A431C863CF5006364BA /* idle-1.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A361C863CF5006364BA /* idle-1.png */; };
+		EF908A441C863CF5006364BA /* idle-2.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A371C863CF5006364BA /* idle-2.png */; };
+		EF908A501C86438E006364BA /* Collision.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A4F1C86438E006364BA /* Collision.swift */; };
+		EF908A561C8659AF006364BA /* orb-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A541C8659AF006364BA /* orb-blue.png */; };
+		EF908A571C8659AF006364BA /* orb-red.png in Resources */ = {isa = PBXBuildFile; fileRef = EF908A551C8659AF006364BA /* orb-red.png */; };
+		EF908A5B1C865D6A006364BA /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A5A1C865D6A006364BA /* Spacing.swift */; };
+		EF98A4521C876065005E57D1 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98A4511C876065005E57D1 /* Sprite.swift */; };
+		EF98A4541C8760EA005E57D1 /* BaseSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98A4531C8760EA005E57D1 /* BaseSprite.swift */; };
+		EF98A4561C8761D3005E57D1 /* MainPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98A4551C8761D3005E57D1 /* MainPlatform.swift */; };
+		EF98A4581C876398005E57D1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98A4571C876398005E57D1 /* Player.swift */; };
+		EF98A45A1C87652F005E57D1 /* Orb.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98A4591C87652F005E57D1 /* Orb.swift */; };
+		EF98A45E1C876F74005E57D1 /* sfx-jump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A45D1C876F74005E57D1 /* sfx-jump.mp3 */; };
+		EF98A4631C8775FF005E57D1 /* Coin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A45F1C8775FF005E57D1 /* Coin.mp3 */; };
+		EF98A4641C8775FF005E57D1 /* S31-City-on-Speed.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4601C8775FF005E57D1 /* S31-City-on-Speed.mp3 */; };
+		EF98A4651C8775FF005E57D1 /* S31-Internal-Reflection.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4611C8775FF005E57D1 /* S31-Internal-Reflection.mp3 */; };
+		EF98A4661C8775FF005E57D1 /* spaceranger3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4621C8775FF005E57D1 /* spaceranger3.mp3 */; };
+		EF98A4681C877616005E57D1 /* Ascend.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4671C877616005E57D1 /* Ascend.mp3 */; };
+		EFCF3E441C9130F60014A66C /* running.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E431C9130F60014A66C /* running.atlas */; };
+		EFCF3E481C9132090014A66C /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E471C9132090014A66C /* jump.atlas */; };
+		EFCF3E4A1C91321E0014A66C /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E491C91321E0014A66C /* background.atlas */; };
+		EFCF3E521C9137C00014A66C /* world.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E511C9137C00014A66C /* world.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EF363CC81C8E7CC100A060F8 /* Background_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background_small.png; sourceTree = "<group>"; };
 		EF363CCA1C8F49D000A060F8 /* PRNG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRNG.swift; sourceTree = "<group>"; };
 		EF363CCC1C8F4B1800A060F8 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		EF363CCE1C8F9A2900A060F8 /* LargePlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePlatform.swift; sourceTree = "<group>"; };
 		EF363CD01C9081BB00A060F8 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		EF908A081C862A3F006364BA /* Orb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF908A0B1C862A3F006364BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EF908A0D1C862A3F006364BA /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		EF908A0F1C862A3F006364BA /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		EF908A111C862A3F006364BA /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		EF908A141C862A3F006364BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EF908A161C862A3F006364BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF908A191C862A3F006364BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF908A1B1C862A3F006364BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EF908A221C862BA2006364BA /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
-		EF908A231C862BA2006364BA /* LargePlatform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LargePlatform.png; sourceTree = "<group>"; };
-		EF908A241C862BA2006364BA /* LowTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LowTile.png; sourceTree = "<group>"; };
-		EF908A251C862BA2006364BA /* mainTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainTile.png; sourceTree = "<group>"; };
-		EF908A261C862BA2006364BA /* SmallPlatform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallPlatform.png; sourceTree = "<group>"; };
-		EF908A271C862BA2006364BA /* SmallTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallTile.png; sourceTree = "<group>"; };
 		EF908A2E1C863093006364BA /* SKSpriteNodeExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKSpriteNodeExtension.swift; sourceTree = "<group>"; };
 		EF908A341C863CF5006364BA /* frame-got-hit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "frame-got-hit.png"; sourceTree = "<group>"; };
 		EF908A361C863CF5006364BA /* idle-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "idle-1.png"; sourceTree = "<group>"; };
 		EF908A371C863CF5006364BA /* idle-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "idle-2.png"; sourceTree = "<group>"; };
-		EF908A391C863CF5006364BA /* jump_fall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jump_fall.png; sourceTree = "<group>"; };
-		EF908A3A1C863CF5006364BA /* jump_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jump_up.png; sourceTree = "<group>"; };
-		EF908A3C1C863CF5006364BA /* run-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "run-1.png"; sourceTree = "<group>"; };
-		EF908A3D1C863CF5006364BA /* run-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "run-2.png"; sourceTree = "<group>"; };
-		EF908A3E1C863CF5006364BA /* run-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "run-3.png"; sourceTree = "<group>"; };
-		EF908A3F1C863CF5006364BA /* run-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "run-4.png"; sourceTree = "<group>"; };
-		EF908A401C863CF5006364BA /* run-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "run-5.png"; sourceTree = "<group>"; };
-		EF908A411C863CF5006364BA /* run-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "run-6.png"; sourceTree = "<group>"; };
 		EF908A4F1C86438E006364BA /* Collision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collision.swift; sourceTree = "<group>"; };
 		EF908A541C8659AF006364BA /* orb-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orb-blue.png"; sourceTree = "<group>"; };
 		EF908A551C8659AF006364BA /* orb-red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orb-red.png"; sourceTree = "<group>"; };
@@ -102,6 +74,10 @@
 		EF98A4611C8775FF005E57D1 /* S31-Internal-Reflection.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "S31-Internal-Reflection.mp3"; sourceTree = "<group>"; };
 		EF98A4621C8775FF005E57D1 /* spaceranger3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = spaceranger3.mp3; sourceTree = "<group>"; };
 		EF98A4671C877616005E57D1 /* Ascend.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ascend.mp3; sourceTree = "<group>"; };
+		EFCF3E431C9130F60014A66C /* running.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = running.atlas; sourceTree = "<group>"; };
+		EFCF3E471C9132090014A66C /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = jump.atlas; path = ../idle/jump.atlas; sourceTree = "<group>"; };
+		EFCF3E491C91321E0014A66C /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
+		EFCF3E511C9137C00014A66C /* world.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = world.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +112,6 @@
 			children = (
 				EF908A211C862B7F006364BA /* Res */,
 				EF908A0B1C862A3F006364BA /* AppDelegate.swift */,
-				EF908A0D1C862A3F006364BA /* GameScene.sks */,
 				EF908A0F1C862A3F006364BA /* GameScene.swift */,
 				EF98A4511C876065005E57D1 /* Sprite.swift */,
 				EF98A4531C8760EA005E57D1 /* BaseSprite.swift */,
@@ -174,13 +149,8 @@
 		EF908A311C863CC0006364BA /* world */ = {
 			isa = PBXGroup;
 			children = (
-				EF363CC81C8E7CC100A060F8 /* Background_small.png */,
-				EF908A221C862BA2006364BA /* Background.png */,
-				EF908A231C862BA2006364BA /* LargePlatform.png */,
-				EF908A241C862BA2006364BA /* LowTile.png */,
-				EF908A251C862BA2006364BA /* mainTile.png */,
-				EF908A261C862BA2006364BA /* SmallPlatform.png */,
-				EF908A271C862BA2006364BA /* SmallTile.png */,
+				EFCF3E511C9137C00014A66C /* world.atlas */,
+				EFCF3E491C91321E0014A66C /* background.atlas */,
 			);
 			name = world;
 			sourceTree = "<group>";
@@ -188,10 +158,10 @@
 		EF908A321C863CCA006364BA /* player */ = {
 			isa = PBXGroup;
 			children = (
+				EFCF3E431C9130F60014A66C /* running.atlas */,
 				EF908A331C863CF5006364BA /* got hit */,
 				EF908A351C863CF5006364BA /* idle */,
 				EF908A381C863CF5006364BA /* jump */,
-				EF908A3B1C863CF5006364BA /* running */,
 			);
 			name = player;
 			sourceTree = "<group>";
@@ -216,23 +186,9 @@
 		EF908A381C863CF5006364BA /* jump */ = {
 			isa = PBXGroup;
 			children = (
-				EF908A391C863CF5006364BA /* jump_fall.png */,
-				EF908A3A1C863CF5006364BA /* jump_up.png */,
+				EFCF3E471C9132090014A66C /* jump.atlas */,
 			);
 			path = jump;
-			sourceTree = "<group>";
-		};
-		EF908A3B1C863CF5006364BA /* running */ = {
-			isa = PBXGroup;
-			children = (
-				EF908A3C1C863CF5006364BA /* run-1.png */,
-				EF908A3D1C863CF5006364BA /* run-2.png */,
-				EF908A3E1C863CF5006364BA /* run-3.png */,
-				EF908A3F1C863CF5006364BA /* run-4.png */,
-				EF908A401C863CF5006364BA /* run-5.png */,
-				EF908A411C863CF5006364BA /* run-6.png */,
-			);
-			path = running;
 			sourceTree = "<group>";
 		};
 		EF908A511C86570B006364BA /* orb */ = {
@@ -315,35 +271,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF908A571C8659AF006364BA /* orb-red.png in Resources */,
-				EF908A451C863CF5006364BA /* jump_fall.png in Resources */,
-				EF908A4A1C863CF5006364BA /* run-4.png in Resources */,
-				EF908A491C863CF5006364BA /* run-3.png in Resources */,
+				EFCF3E441C9130F60014A66C /* running.atlas in Resources */,
 				EF98A45E1C876F74005E57D1 /* sfx-jump.mp3 in Resources */,
-				EF908A0E1C862A3F006364BA /* GameScene.sks in Resources */,
 				EF908A421C863CF5006364BA /* frame-got-hit.png in Resources */,
 				EF98A4681C877616005E57D1 /* Ascend.mp3 in Resources */,
 				EF908A1A1C862A3F006364BA /* LaunchScreen.storyboard in Resources */,
-				EF908A461C863CF5006364BA /* jump_up.png in Resources */,
 				EF908A561C8659AF006364BA /* orb-blue.png in Resources */,
-				EF908A2C1C862BA2006364BA /* SmallPlatform.png in Resources */,
-				EF908A2B1C862BA2006364BA /* mainTile.png in Resources */,
 				EF98A4631C8775FF005E57D1 /* Coin.mp3 in Resources */,
 				EF98A4651C8775FF005E57D1 /* S31-Internal-Reflection.mp3 in Resources */,
-				EF908A471C863CF5006364BA /* run-1.png in Resources */,
-				EF908A4C1C863CF5006364BA /* run-6.png in Resources */,
-				EF908A281C862BA2006364BA /* Background.png in Resources */,
-				EF908A4B1C863CF5006364BA /* run-5.png in Resources */,
+				EFCF3E4A1C91321E0014A66C /* background.atlas in Resources */,
 				EF908A441C863CF5006364BA /* idle-2.png in Resources */,
-				EF908A2D1C862BA2006364BA /* SmallTile.png in Resources */,
 				EF98A4661C8775FF005E57D1 /* spaceranger3.mp3 in Resources */,
-				EF908A481C863CF5006364BA /* run-2.png in Resources */,
+				EFCF3E521C9137C00014A66C /* world.atlas in Resources */,
 				EF908A431C863CF5006364BA /* idle-1.png in Resources */,
-				EF908A2A1C862BA2006364BA /* LowTile.png in Resources */,
 				EF908A171C862A3F006364BA /* Assets.xcassets in Resources */,
-				EF908A291C862BA2006364BA /* LargePlatform.png in Resources */,
-				EF363CC91C8E7CC100A060F8 /* Background_small.png in Resources */,
 				EF98A4641C8775FF005E57D1 /* S31-City-on-Speed.mp3 in Resources */,
 				EF908A151C862A3F006364BA /* Main.storyboard in Resources */,
+				EFCF3E481C9132090014A66C /* jump.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +426,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Rpgby/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.jamescarroll.Rpgby;
 				PRODUCT_NAME = Orb;
@@ -494,6 +439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Rpgby/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.jamescarroll.Rpgby;
 				PRODUCT_NAME = Orb;

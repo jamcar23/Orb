@@ -6,7 +6,7 @@
 //  Copyright © 2016 James Carroll. All rights reserved.
 //
 
-import UIKit
+import SpriteKit
 
 // Protocol for getting max/min XY coords
 
@@ -21,6 +21,7 @@ protocol GetXY {
 
 class Platform: BaseSprite, GetXY {
   static let kAllPlatforms = Platform.createPlatforms()
+  static let kTextures = SKTextureAtlas(named: "world")
   override var mName: String { return "Platform" }
   var mBottom = true
   
@@ -52,8 +53,8 @@ class Platform: BaseSprite, GetXY {
   // Set a random distance to jump within a certain margin
   
   private func randomDistance(var previous: CGFloat) {
-    let b = 20 + self.mSprite.size.width
-    let m = b * 0.07
+    let b = Player.kInstance.mMovement + self.mSprite.size.width
+    let m = b * 0.1
     previous += 18
     let u = previous + m
     let l = previous + -m

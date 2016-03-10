@@ -45,7 +45,7 @@ extension SKNode: GetXY {
     let x = self.position.x
     let y = self.position.y
     
-    return x <= frame.origin.x || y <= frame.origin.y
+    return x <= frame.origin.x || y <= 0
   }
 }
 
@@ -64,5 +64,17 @@ extension SKSpriteNode {
   
   func anchorPointX(x: CGFloat) {
     self.anchorPoint.x = x
+  }
+}
+
+extension SKTextureAtlas {
+  func toTextures() -> [SKTexture] {
+    var texs = [SKTexture]()
+    
+    for n in self.textureNames {
+      texs.append(SKTexture(imageNamed: n))
+    }
+    
+    return texs
   }
 }
