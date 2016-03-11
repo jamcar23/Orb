@@ -8,18 +8,9 @@
 
 import SpriteKit
 
-// Protocol for getting max/min XY coords
-
-protocol GetXY {
-  func getMaxY() -> CGFloat
-  func getMinY() -> CGFloat
-  func getMaxX() -> CGFloat
-  func getMinX() -> CGFloat
-}
-
 // Code all platforms share
 
-class Platform: BaseSprite, GetXY {
+class Platform: BaseSprite {
   static let kAllPlatforms = Platform.createPlatforms()
   static let kTextures = SKTextureAtlas(named: "world")
   override var mName: String { return "Platform" }
@@ -28,20 +19,23 @@ class Platform: BaseSprite, GetXY {
   // Handle setting up everything platforms share
   
   func setSharedProperties() {
-    self.mSprite.physicsBody?.dynamic = false
-    self.mSprite.physicsBody?.restitution = 0
-    self.mSprite.physicsBody?.affectedByGravity = false
-    self.mSprite.physicsBody?.friction = 0.75
-    self.mSprite.physicsBody?.categoryBitMask = Collision.kPlatform
-    self.mSprite.physicsBody?.collisionBitMask = Collision.kOrb
-    self.mSprite.physicsBody?.contactTestBitMask = Collision.kPerson
+    let s = self.mSprite
     
-    self.mSprite.zPosition = Spacing.kPlatformZIndex
-    self.mSprite.anchorPoint.x = 0
+    s.physicsBody?.dynamic = false
+    s.physicsBody?.restitution = 0
+    s.physicsBody?.affectedByGravity = false
+    s.physicsBody?.friction = 0.75
+    s.physicsBody?.categoryBitMask = Collision.kPlatform
+    s.physicsBody?.collisionBitMask = Collision.kOrb
+    s.physicsBody?.contactTestBitMask = Collision.kPerson
+    
+    s.zPosition = Spacing.kPlatformZIndex
+    s.anchorPoint.x = 0
   }
   
   // Set a random elevation between the screen height and the point where 
   // the sprite touches the bottom
+  // TODO fix y
   
   private func randomElevation() {
     let s = self.mSprite
@@ -51,16 +45,23 @@ class Platform: BaseSprite, GetXY {
   }
   
   // Set a random distance to jump within a certain margin
+  // TODO tweak x
   
-  private func randomDistance(var previous: CGFloat) {
-    let b = Player.kInstance.mMovement + self.mSprite.size.width
+  private func randomDistance(previous: CGFloat) {
+    let s = self.mSprite
+    let b = (Player.kInstance.mMovement * calcRandom(upper: 3, lower: 1)) + previous
     let m = b * 0.1
-    previous += 18
     let u = previous + m
-    let l = previous + -m
-    let x = CGFloat(arc4random_uniform(UInt32(u - l))) + l
-    self.mSprite.position.x = x
+    let l = previous
+    let x = calcRandom(upper: u, lower: l)
+    s.position.x = x
   }
+  
+  private func calcRandom(upper u: CGFloat, lower l: CGFloat) -> CGFloat {
+    return CGFloat(arc4random_uniform(UInt32(u - l))) + l
+  }
+  
+  // Public to call for setting the position
   
   func setPosition(previous: CGFloat) {
     if previous != -1 {
@@ -68,24 +69,6 @@ class Platform: BaseSprite, GetXY {
     }
     
     mBottom ? self.mSprite.bottom() : randomElevation()
-  }
-  
-  // MARK: - GetXY
-  
-  func getMaxX() -> CGFloat {
-    return self.mSprite.getMaxX()
-  }
-  
-  func getMaxY() -> CGFloat {
-    return self.mSprite.getMaxY()
-  }
-  
-  func getMinX() -> CGFloat {
-    return self.mSprite.getMinX()
-  }
-  
-  func getMinY() -> CGFloat {
-    return self.mSprite.getMinY()
   }
   
   // MARK: - Static methods
@@ -97,7 +80,7 @@ class Platform: BaseSprite, GetXY {
     all.append(LargePlatform())
     
     for a in all {
-      a.createSprite()
+      a.createNode()
     }
     
     return all
@@ -106,9 +89,9 @@ class Platform: BaseSprite, GetXY {
   static func nextPlatform(pervious: Int) -> (Int, Platform) {
     var r = 0
     
-    while r == pervious {
+    repeat {
       r = Int(arc4random_uniform(UInt32(Platform.kAllPlatforms.count)))
-    }
+    } while r == pervious
     
     return (r, Platform.kAllPlatforms[r])
   }

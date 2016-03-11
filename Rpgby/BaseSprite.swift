@@ -11,7 +11,7 @@ import SpriteKit
 
 // Base class for all sprites
 
-class BaseSprite: NSObject, Sprite {
+class BaseSprite: NSObject, Node {
   let mSprite: SKSpriteNode!
   var mName: String { return "BaseSprite" }
   
@@ -19,7 +19,41 @@ class BaseSprite: NSObject, Sprite {
     self.mSprite = SKSpriteNode(texture: SKTexture(imageNamed: textureName))
   }
   
-  func createSprite() {
+  init(color: UIColor, size: CGSize) {
+    self.mSprite = SKSpriteNode(color: color, size: size)
+  }
+  
+  func createNode() {
     return
+  }
+  
+  // MARK: - GetXY
+  
+  func getMaxX() -> CGFloat {
+    return self.mSprite.getMaxX()
+  }
+  
+  func getMaxY() -> CGFloat {
+    return self.mSprite.getMaxY()
+  }
+  
+  func getMidX() -> CGFloat {
+    return self.mSprite.getMidX()
+  }
+  
+  func getMidY() -> CGFloat {
+    return self.mSprite.getMidY()
+  }
+  
+  func getMinX() -> CGFloat {
+    return self.mSprite.getMinX()
+  }
+  
+  func getMinY() -> CGFloat {
+    return self.mSprite.getMinY()
+  }
+  
+  func getCenterPoint() -> CGPoint {
+    return CGPointMake(getMidX(), getMidY())
   }
 }

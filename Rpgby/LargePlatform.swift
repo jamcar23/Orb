@@ -17,11 +17,14 @@ class LargePlatform: Platform {
     self.mBottom = false
   }
   
-  override func createSprite() {
-    self.mSprite.scale(0.7)
-    self.mSprite.anchorPointX(0)
-    self.mSprite.physicsBody = SKPhysicsBody(rectangleOfSize: self.mSprite.size)
-    self.mSprite.name = LargePlatform.kName
+  override func createNode() {
+    let s = self.mSprite
+    
+    s.scale(0.7)
+    s.anchorPointX(0)
+    s.physicsBody = SKPhysicsBody(rectangleOfSize: s.size,
+      center: self.getCenterPoint())
+    s.name = LargePlatform.kName
     self.setSharedProperties()
   }
 }

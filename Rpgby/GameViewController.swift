@@ -27,7 +27,6 @@ class GameViewController: UIViewController {
     mScene.scaleMode = .ResizeFill
     
     skView.presentScene(mScene)
-    
   }
   
   override func shouldAutorotate() -> Bool {

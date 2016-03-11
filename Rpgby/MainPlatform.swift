@@ -19,11 +19,13 @@ final class MainPlatform: Platform {
     super.init(textureName: MainPlatform.kName)
   }
   
-  override func createSprite() {
-    self.mSprite.scale(0.7)
-    self.mSprite.anchorPointX(0)
-    self.mSprite.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.mSprite.size.width * 1.8, self.mSprite.size.height - 160))
-    self.mSprite.name = MainPlatform.kName
+  override func createNode() {
+    let s = self.mSprite
+    
+    s.scale(0.7)
+    s.anchorPointX(0)
+    s.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(s.size.width, s.size.height - 160), center: self.getCenterPoint())
+    s.name = MainPlatform.kName
     self.setSharedProperties()
   }
 }

@@ -18,16 +18,18 @@ final class Orb: BaseSprite {
   static let kCollectSfx = SKAction.playSoundFileNamed("Coin.mp3",
     waitForCompletion: false)
   
-  override func createSprite() {
-    self.mSprite.anchorPointX(0)
-    self.mSprite.scale(0.035)
-    self.mSprite.physicsBody = SKPhysicsBody(circleOfRadius: self.mSprite.size.width / 2)
-    self.mSprite.physicsBody?.categoryBitMask = Collision.kOrb
-    self.mSprite.physicsBody?.collisionBitMask = Collision.kPlatform
-    self.mSprite.physicsBody?.contactTestBitMask = Collision.kPerson
-    self.mSprite.physicsBody?.restitution = 0.7
-    self.mSprite.name = Orb.kName
-    self.mSprite.zPosition = Spacing.kPersonOrbZIndex
+  override func createNode() {
+    let s = self.mSprite
+    
+    s.anchorPointX(0)
+    s.scale(0.035)
+    s.physicsBody = SKPhysicsBody(circleOfRadius: s.size.width / 2)
+    s.physicsBody?.categoryBitMask = Collision.kOrb
+    s.physicsBody?.collisionBitMask = Collision.kPlatform
+    s.physicsBody?.contactTestBitMask = Collision.kPerson
+    s.physicsBody?.restitution = 0.7
+    s.name = Orb.kName
+    s.zPosition = Spacing.kPersonOrbZIndex
   }
   
   func setPosition(maxX: CGFloat) {

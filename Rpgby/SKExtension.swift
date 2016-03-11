@@ -1,5 +1,5 @@
 //
-//  SKSpriteNodeExtension.swift
+//  SKExtension.swift
 //  Rpgby
 //
 //  Created by James Carroll on 3/1/16.
@@ -9,9 +9,13 @@
 import Foundation
 import SpriteKit
 
-// Helper funcs extensions for SKNode and SKSpriteNode
+// Helper funcs extensions for SKNode, SKSpriteNode, and SKTextureAtlas
 
-extension SKNode: GetXY {
+// MARK : - SKNode
+
+extension SKNode: Node {
+  // MARK: - Helper funcs
+  
   func center(size: CGSize) {
     self.position = CGPointMake(size.width / 2, size.height / 2)
   }
@@ -25,8 +29,27 @@ extension SKNode: GetXY {
     self.position = CGPointMake(self.position.x, size.height / 2)
   }
   
+  func isPast(frame: CGRect) -> Bool {
+    let x = self.position.x
+    let y = self.position.y
+    
+    return x <= frame.origin.x || y <= 0
+  }
+  
+  // MARK: - Node
+  
+  var mName: String { return "SKNode" }
+  
+  func createNode() {
+    return
+  }
+  
   func getMaxY() -> CGFloat {
     return CGRectGetMaxY(self.frame)
+  }
+  
+  func getMidY() -> CGFloat {
+    return CGRectGetMidY(self.frame)
   }
   
   func getMinY() -> CGFloat {
@@ -37,19 +60,24 @@ extension SKNode: GetXY {
     return CGRectGetMaxX(self.frame)
   }
   
+  func getMidX() -> CGFloat {
+    return CGRectGetMidX(self.frame)
+  }
+  
   func getMinX() -> CGFloat {
     return CGRectGetMinX(self.frame)
   }
   
-  func isPast(frame: CGRect) -> Bool {
-    let x = self.position.x
-    let y = self.position.y
-    
-    return x <= frame.origin.x || y <= 0
+  func getCenterPoint() -> CGPoint {
+    return CGPointMake(getMidX(), getMidY())
   }
 }
 
+// MARK: - SKSpriteNode
+
 extension SKSpriteNode {
+  // MARK: - Helper funcs
+  
   func bottom() {
     self.position.y = halfHeight()
   }
@@ -67,7 +95,11 @@ extension SKSpriteNode {
   }
 }
 
+// MARk: - SKTextureAtlas
+
 extension SKTextureAtlas {
+  // MARK: - Helper funcs
+  
   func toTextures() -> [SKTexture] {
     var texs = [SKTexture]()
     

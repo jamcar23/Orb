@@ -8,9 +8,10 @@
 
 import SpriteKit
 
-final class GameScene: SKScene, SKPhysicsContactDelegate {
+final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
   static let kBackground = "Background_cloud"
   var mBegin = false
+  var mGameOver = false
   var mBackgrounds = [SKSpriteNode]()
   var mPlatforms = [Platform]()
   var mPreviousPlatform = 0
@@ -29,25 +30,25 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     fInit()
   }
   
-  override func didMoveToView(view: SKView) {
-    /* Setup your scene here */
-    view.showsFPS = true
-    view.showsNodeCount = true
-  }
-  
   // Handle jumping
   
   override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
     /* Called when a touch begins */
     let pl = Player.kInstance
+    let hud = HudUi.kInstance.mSprite
     
-    if !mBegin {
-      mBegin = true
-      pl.beginRunning()
+    if !mBegin && !mGameOver {
+      if let sl = HudUi.kHUDs[StartLabel.kIndex] as? StartLabel {
+        
+        sl.position = self.getCenterPoint()
+        hud.runAction(StartLabel.kCountAct, completion: begin)
+      }
     } else {
       pl.beginJumping()
     }
   }
+  
+  // Handle platform generation
   
   override func didSimulatePhysics() {
     if mPlatforms.count > 0 {
@@ -58,7 +59,6 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
       }
       
       if pz.mSprite.isPast(self.mCamera.frame) {
-        self.removeFromParent()
         pz.mSprite.removeFromParent()
         self.mPlatforms.removeFirst()
       }
@@ -68,6 +68,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
   override func update(currentTime: CFTimeInterval) {
     /* Called before each frame is rendered */
     let p = Player.kInstance
+    let hud = HudUi.kInstance.mSprite
     
     if p.mJumping {
       p.endJumping()
@@ -75,28 +76,32 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     
     if mBegin {
       p.mSprite.position.x += p.mMovement
+      hud.position.x += p.mMovement
       
       if let cam = self.camera {
         cam.position.x += p.mMovement
       }
       
-      if p.mSprite.isPast(self.frame) {
-        p.mSprite.removeFromParent()
+      if p.isDead(hud.frame) {
+        end()
         return
       }
       
       let adv: CGFloat = 400
       let cx = mCamera.position.x
-      let bg = mBackgrounds[0]
-      let bg2 = mBackgrounds[1]
       
-      
-      if bg.getMaxX() + adv <=  cx {
-        bg.position = setBackgroundPosition(bg2, bg2: bg, adv: adv)
-      }
-      
-      if bg2.getMaxX() + adv <= cx {
-        bg2.position = setBackgroundPosition(bg, bg2: bg2, adv: adv)
+      if mBackgrounds.count > 0 {
+        let bg = mBackgrounds[0]
+        let bg2 = mBackgrounds[1]
+        
+        
+        if bg.getMaxX() + adv <=  cx {
+          bg.position = setBackgroundPosition(bg2, bg2: bg, adv: adv)
+        }
+        
+        if bg2.getMaxX() + adv <= cx {
+          bg2.position = setBackgroundPosition(bg, bg2: bg2, adv: adv)
+        }
       }
     }
   }
@@ -115,11 +120,38 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         p.beginRunning()
       }
     case (Collision.kPerson, Collision.kOrb): // handle running into orb
-      //      self.runAction(Orb.kCollectSfx)
+      self.runAction(Orb.kCollectSfx)
       self.childNodeWithName(Orb.kName)?.removeFromParent()
     default:
       break
     }
+  }
+  
+  func begin() {
+    let pl = Player.kInstance
+    let w = SKAction.waitForDuration(1)
+    let rb = SKAction.runBlock({
+      
+      if pl.mMovement <= 18 {
+        pl.mMovement *= 1.1
+      } else {
+        pl.mMovement = 20
+        self.removeActionForKey(Player.kTimer)
+      }
+      
+    })
+    
+    self.mBegin = true
+    pl.beginRunning()
+    self.runAction(SKAction.repeatActionForever(SKAction.sequence([w,
+      rb])), withKey: Player.kTimer)
+  }
+  
+  func end() {
+    self.runAction(Player.kFallSfx)
+    Player.kInstance.mSprite.removeFromParent()
+    self.mBegin = false
+    self.mGameOver = true
   }
   
   // Set up background
@@ -149,7 +181,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     let p = Player.kInstance
     
     g.setPosition(-1)
-    p.createSprite()
+    p.createNode()
     
     mPlatforms.append(g)
     
@@ -163,7 +195,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
   private func setUpOre() {
     let o = Orb(textureName: Orb.kRed)
     
-    o.createSprite()
+    o.createNode()
     o.setPosition(mPlatforms.findPlatform(MainPlatform.kName).getMaxX())
     
     self.addChild(o.mSprite)
@@ -193,6 +225,8 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
   // Single init func to be called from multiple init
   
   private func fInit() {
+    let hud = HudUi.kInstance.mSprite
+    
     self.view?.ignoresSiblingOrder = true
     self.physicsWorld.gravity = CGVectorMake(0, -4.2)
     self.physicsWorld.contactDelegate = self
@@ -202,20 +236,11 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     setUpBackground()
     setUpPlayer()
     setUpOre()
+    self.addChild(hud)
     self.camera?.position.x = Player.kInstance.mSprite.position.x * 9.42
     
-    for _ in 0..<3 {
+    for _ in 0...3 {
       createPlatform()
     }
-    
-    let w = SKAction.waitForDuration(5)
-    let rb = SKAction.runBlock({
-      let p = Player.kInstance
-      
-      p.mMovement = p.mMovement < 40 ? p.mMovement * 1.1 : 42
-      print(p.mMovement)
-    })
-    
-    self.runAction(SKAction.repeatActionForever(SKAction.sequence([w, rb])))
   }
 }

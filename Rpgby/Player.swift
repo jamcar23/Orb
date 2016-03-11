@@ -14,14 +14,17 @@ import SpriteKit
 
 final class Player: BaseSprite {
   static let kName = "player"
+  static let kTimer = "timer"
   static let kInstance = Player()
   static let kRunTex = SKTextureAtlas(named: "running")
   static let kJumpTex = SKTextureAtlas(named: "jump")
   static let kJumpSfx = SKAction.playSoundFileNamed("sfx-jump.mp3",
     waitForCompletion: false)
+  static let kFallSfx = SKAction.playSoundFileNamed("sfx-fall.mp3",
+    waitForCompletion: false)
   
   var mJumping = false
-  var mMovement: CGFloat = 8
+  var mMovement: CGFloat = 4.2
   var mRunAni: SKAction!
   var mJumpUpAni: SKAction!
   var mJumpDownAni: SKAction!
@@ -32,16 +35,16 @@ final class Player: BaseSprite {
     super.init(textureName: "idle-1")
     Player.kRunTex.preloadWithCompletionHandler({
       self.mRunAni = SKAction.animateWithTextures(Player.kRunTex.toTextures(),
-      timePerFrame: 0.06)
+        timePerFrame: 0.06)
     })
     
     Player.kJumpTex.preloadWithCompletionHandler({
       let texs = Player.kJumpTex.toTextures()
-        
+      
       self.mJumpUpAni = SKAction.animateWithTextures([texs[1]], timePerFrame: 0,
         resize: false, restore: true)
       self.mJumpDownAni = SKAction.animateWithTextures([texs[0]], timePerFrame:
-      0, resize: false, restore: true)
+        0, resize: false, restore: true)
     })
   }
   
@@ -54,14 +57,15 @@ final class Player: BaseSprite {
   // Handles jumping animation and movement
   
   func beginJumping() {
-    let phy = self.mSprite.physicsBody
+    let s = self.mSprite
+    let phy = s.physicsBody
     
     if !mJumping { // single jump only
       mJumping = true
-      mBaseY = self.mSprite.position.y
-      self.mSprite.removeAllActions()
-//      self.mSprite.runAction(Player.kJumpSfx)
-      self.mSprite.runAction(mJumpUpAni)
+      mBaseY = s.position.y
+      s.removeAllActions()
+      s.runAction(Player.kJumpSfx)
+      s.runAction(mJumpUpAni)
       phy?.applyImpulse(CGVectorMake(phy!.velocity.dx, mJumpY))
     }
   }
@@ -69,25 +73,38 @@ final class Player: BaseSprite {
   // Handles falling animation
   
   func endJumping() {
-    let y = self.mSprite.position.y
+    let s = self.mSprite
+    let y = s.position.y
     
     if y >= mBaseY + mJumpY {
-      self.mSprite.runAction(mJumpDownAni)
+      s.runAction(mJumpDownAni)
     }
   }
   
-  override func createSprite() {
-    self.mSprite.scale(0.075)
-    self.mSprite.anchorPointX(0)
-    self.mSprite.position = CGPointMake(30, 500)
-    self.mSprite.physicsBody = SKPhysicsBody(rectangleOfSize: self.mSprite.size)
-    self.mSprite.physicsBody?.categoryBitMask = Collision.kPerson
-    self.mSprite.physicsBody?.collisionBitMask = Collision.kPlatform
-    self.mSprite.physicsBody?.contactTestBitMask = Collision.kOrb
-    self.mSprite.physicsBody?.allowsRotation = false
-    self.mSprite.name = Player.kName
-    self.mSprite.zPosition = Spacing.kPersonOrbZIndex
+  // Checks if the player is off the screen
+  
+  func isDead(frame: CGRect) -> Bool {
+    let s = self.mSprite
+    let x = s.getMaxX()
+    let y = s.getMidY()
     
-    self.mJumpY = 300 * self.mSprite.physicsBody!.mass
+    return x <= frame.origin.x || y <= 0
+  }
+  
+  override func createNode() {
+    let s = self.mSprite
+    
+    s.scale(0.075)
+    s.anchorPointX(0)
+    s.position = CGPointMake(30, 500)
+    s.physicsBody = SKPhysicsBody(rectangleOfSize: s.size)
+    s.physicsBody?.categoryBitMask = Collision.kPerson
+    s.physicsBody?.collisionBitMask = Collision.kPlatform
+    s.physicsBody?.contactTestBitMask = Collision.kOrb
+    s.physicsBody?.allowsRotation = false
+    s.name = Player.kName
+    s.zPosition = Spacing.kPersonOrbZIndex
+    
+    self.mJumpY = 300 * s.physicsBody!.mass
   }
 }
