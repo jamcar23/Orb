@@ -10,6 +10,7 @@ import SpriteKit
 
 final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
   static let kBackground = "Background_cloud"
+  var mCountDown = false
   var mBegin = false
   var mGameOver = false
   var mBackgrounds = [SKSpriteNode]()
@@ -37,14 +38,25 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     let pl = Player.kInstance
     let hud = HudUi.kInstance.mSprite
     
-    if !mBegin && !mGameOver {
+    if !mCountDown {
+      mCountDown = true
+      
       if let sl = HudUi.kHUDs[StartLabel.kIndex] as? StartLabel {
-        
+        hud.addChild(sl)
         sl.position = self.getCenterPoint()
         hud.runAction(StartLabel.kCountAct, completion: begin)
       }
-    } else {
+    } else if mBegin {
       pl.beginJumping()
+    } else if mGameOver {
+      self.removeAllChildren()
+      self.removeAllActions()
+      self.mGameOver = false
+      self.mBegin = false
+      HudUi.kInstance.mSprite.removeAllChildren()
+      self.mPlatforms.removeAll()
+      self.removeFromParent()
+      self.fInit()
     }
   }
   
@@ -132,12 +144,14 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     let w = SKAction.waitForDuration(1)
     let rb = SKAction.runBlock({
       
-      if pl.mMovement <= 18 {
-        pl.mMovement *= 1.1
+      if pl.mVelocity > 1.0 {
+        pl.mMovement *= pl.mVelocity
+        pl.mVelocity -= pl.mVelocity * 0.005
       } else {
-        pl.mMovement = 20
         self.removeActionForKey(Player.kTimer)
       }
+      
+      print("Move: " + pl.mMovement.description + " Velocity: " + pl.mVelocity.description)
       
     })
     
@@ -148,7 +162,13 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
   }
   
   func end() {
+    let el = HudUi.kHUDs[EndLabel.kIndex]
+    
     self.runAction(Player.kFallSfx)
+    
+    el.position = self.getCenterPoint()
+    HudUi.kInstance.mSprite.addChild(el)
+    
     Player.kInstance.mSprite.removeFromParent()
     self.mBegin = false
     self.mGameOver = true
@@ -180,7 +200,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     let g = Platform.kAllPlatforms[0]
     let p = Player.kInstance
     
-    g.setPosition(-1)
+    g.setPosition(-1, width: 0)
     p.createNode()
     
     mPlatforms.append(g)
@@ -193,7 +213,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
   // Sets up the orb
   
   private func setUpOre() {
-    let o = Orb(textureName: Orb.kRed)
+    let o = Orb(texture: Orb.kTextures.textureNamed(Orb.kRed))
     
     o.createNode()
     o.setPosition(mPlatforms.findPlatform(MainPlatform.kName).getMaxX())
@@ -216,7 +236,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     
     mPreviousPlatform = n.0
     mPreviousSprite = mPlatforms.lastSprite()
-    p.setPosition(mPreviousSprite.getMaxX())
+    p.setPosition(mPreviousSprite.getMaxX(), width: self.size.width)
     mPlatforms.append(p)
     self.addChild(p.mSprite.copy() as! SKSpriteNode)
     

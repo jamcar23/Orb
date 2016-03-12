@@ -24,7 +24,8 @@ final class Player: BaseSprite {
     waitForCompletion: false)
   
   var mJumping = false
-  var mMovement: CGFloat = 4.2
+  var mMovement: CGFloat = 2
+  var mVelocity: CGFloat = 1.2
   var mRunAni: SKAction!
   var mJumpUpAni: SKAction!
   var mJumpDownAni: SKAction!
@@ -32,7 +33,7 @@ final class Player: BaseSprite {
   private var mJumpY: CGFloat!
   
   private init() {
-    super.init(textureName: "idle-1")
+    super.init(texture: SKTexture(imageNamed: "idle-1"))
     Player.kRunTex.preloadWithCompletionHandler({
       self.mRunAni = SKAction.animateWithTextures(Player.kRunTex.toTextures(),
         timePerFrame: 0.06)
@@ -96,12 +97,13 @@ final class Player: BaseSprite {
     
     s.scale(0.075)
     s.anchorPointX(0)
-    s.position = CGPointMake(30, 500)
+    s.position = CGPointMake(30, 142)
     s.physicsBody = SKPhysicsBody(rectangleOfSize: s.size)
     s.physicsBody?.categoryBitMask = Collision.kPerson
     s.physicsBody?.collisionBitMask = Collision.kPlatform
     s.physicsBody?.contactTestBitMask = Collision.kOrb
     s.physicsBody?.allowsRotation = false
+    s.physicsBody?.velocity.dx = 1.2
     s.name = Player.kName
     s.zPosition = Spacing.kPersonOrbZIndex
     

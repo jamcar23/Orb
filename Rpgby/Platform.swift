@@ -47,25 +47,31 @@ class Platform: BaseSprite {
   // Set a random distance to jump within a certain margin
   // TODO tweak x
   
-  private func randomDistance(previous: CGFloat) {
-    let s = self.mSprite
-    let b = (Player.kInstance.mMovement * calcRandom(upper: 3, lower: 1)) + previous
-    let m = b * 0.1
-    let u = previous + m
-    let l = previous
-    let x = calcRandom(upper: u, lower: l)
-    s.position.x = x
+  private func randomDistance(previous: CGFloat, width: CGFloat) {
+    let p = Player.kInstance
+    let max = calcXDistance(sin: 45, cos: 45)
+    let min = p.mSprite.size.width * 1.5
+    let x = calcRandom(upper: max, lower: 0, min: min)
+    let w = width * 1.1
+    self.mSprite.position.x = (x < width ? x : calcRandom(upper: width + w,
+      lower: 0, min: width - w))  + previous
   }
   
-  private func calcRandom(upper u: CGFloat, lower l: CGFloat) -> CGFloat {
-    return CGFloat(arc4random_uniform(UInt32(u - l))) + l
+  private func calcXDistance(sin s: CGFloat, cos c: CGFloat) -> CGFloat {
+    return (((2 * Player.kInstance.mMovement) ^^ 2) * sin(s) * cos(c)) / 4.2
+  }
+  
+  // Calcs a random number between upper and lower plus the minimum
+  
+  private func calcRandom(upper u: CGFloat, lower l: CGFloat, min m: CGFloat) -> CGFloat {
+    return CGFloat(arc4random_uniform(UInt32(u - l))) + l + m
   }
   
   // Public to call for setting the position
   
-  func setPosition(previous: CGFloat) {
+  func setPosition(previous: CGFloat, width: CGFloat) {
     if previous != -1 {
-      randomDistance(previous)
+      randomDistance(previous, width: width)
     }
     
     mBottom ? self.mSprite.bottom() : randomElevation()
@@ -78,6 +84,9 @@ class Platform: BaseSprite {
     
     all.append(MainPlatform())
     all.append(LargePlatform())
+    all.append(SmallPlatform())
+    all.append(LowPlatform())
+    all.append(MedPlatform())
     
     for a in all {
       a.createNode()

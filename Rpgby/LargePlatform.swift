@@ -8,12 +8,12 @@
 
 import SpriteKit
 
-class LargePlatform: Platform {
+final class LargePlatform: Platform {
   static let kName = "LargePlatform"
   override var mName: String { return LargePlatform.kName }
   
   init() {
-    super.init(textureName: LargePlatform.kName)
+    super.init(texture: Platform.kTextures.textureNamed(LargePlatform.kName))
     self.mBottom = false
   }
   

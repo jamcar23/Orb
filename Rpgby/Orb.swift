@@ -13,8 +13,9 @@ import SpriteKit
 
 final class Orb: BaseSprite {
   static let kName = "orb"
-  static let kRed = "orb-red"
-  static let kBlue = "orb-blue"
+  static let kTextures = SKTextureAtlas(named: "orb")
+  static let kRed = "red"
+  static let kBlue = "blue"
   static let kCollectSfx = SKAction.playSoundFileNamed("Coin.mp3",
     waitForCompletion: false)
   
@@ -27,12 +28,12 @@ final class Orb: BaseSprite {
     s.physicsBody?.categoryBitMask = Collision.kOrb
     s.physicsBody?.collisionBitMask = Collision.kPlatform
     s.physicsBody?.contactTestBitMask = Collision.kPerson
-    s.physicsBody?.restitution = 0.7
+    s.physicsBody?.restitution = 0.2
     s.name = Orb.kName
     s.zPosition = Spacing.kPersonOrbZIndex
   }
   
   func setPosition(maxX: CGFloat) {
-    self.mSprite.position = CGPointMake(maxX - 100, 500)
+    self.mSprite.position = CGPointMake(maxX - 100, 142)
   }
 }

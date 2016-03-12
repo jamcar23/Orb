@@ -29,10 +29,10 @@ class HudUi: BaseSprite {
     var n = [SKNode]()
     
     n.insert(StartLabel.kInstance, atIndex: StartLabel.kIndex)
+    n.insert(EndLabel.kInstance, atIndex: EndLabel.kIndex)
     
     for h in n {
       h.createNode()
-      kInstance.mSprite.addChild(h)
     }
     
     return n

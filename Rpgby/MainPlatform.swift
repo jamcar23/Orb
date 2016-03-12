@@ -16,7 +16,7 @@ final class MainPlatform: Platform {
   override var mName: String { return MainPlatform.kName }
   
   init() {
-    super.init(textureName: MainPlatform.kName)
+    super.init(texture: Platform.kTextures.textureNamed(MainPlatform.kName))
   }
   
   override func createNode() {
