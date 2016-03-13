@@ -37,10 +37,11 @@ class Platform: BaseSprite {
   // the sprite touches the bottom
   // TODO fix y
   
-  private func randomElevation() {
+  private func randomElevation(height: CGFloat) {
     let s = self.mSprite
-    let y = CGFloat(arc4random_uniform(UInt32((s.scene?.frame.height) ??
-      0))) + s.halfHeight()
+    let y = mBottom ? calcRandom(upper: s.halfHeight(), lower: 0, min: 5) :
+      calcRandom(upper: height - s.halfHeight() - Player.kInstance.mSprite
+        .getMaxY(), lower: 0, min: s.getMaxY())
     s.position.y = y
   }
   
@@ -69,12 +70,12 @@ class Platform: BaseSprite {
   
   // Public to call for setting the position
   
-  func setPosition(previous: CGFloat, width: CGFloat) {
+  func setPosition(previous: CGFloat, size: CGSize) {
     if previous != -1 {
-      randomDistance(previous, width: width)
+      randomDistance(previous, width: size.width)
     }
     
-    mBottom ? self.mSprite.bottom() : randomElevation()
+    randomElevation(size.height)
   }
   
   // MARK: - Static methods

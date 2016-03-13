@@ -144,6 +144,10 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     let w = SKAction.waitForDuration(1)
     let rb = SKAction.runBlock({
       
+      if self.mGameOver {
+        pl.mVelocity = 0
+      }
+      
       if pl.mVelocity > 1.0 {
         pl.mMovement *= pl.mVelocity
         pl.mVelocity -= pl.mVelocity * 0.005
@@ -200,7 +204,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     let g = Platform.kAllPlatforms[0]
     let p = Player.kInstance
     
-    g.setPosition(-1, width: 0)
+    g.setPosition(-1, size: self.size)
     p.createNode()
     
     mPlatforms.append(g)
@@ -236,7 +240,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     
     mPreviousPlatform = n.0
     mPreviousSprite = mPlatforms.lastSprite()
-    p.setPosition(mPreviousSprite.getMaxX(), width: self.size.width)
+    p.setPosition(mPreviousSprite.getMaxX(), size: self.size)
     mPlatforms.append(p)
     self.addChild(p.mSprite.copy() as! SKSpriteNode)
     

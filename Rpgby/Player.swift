@@ -107,6 +107,6 @@ final class Player: BaseSprite {
     s.name = Player.kName
     s.zPosition = Spacing.kPersonOrbZIndex
     
-    self.mJumpY = 300 * s.physicsBody!.mass
+    self.mJumpY = 400 * s.physicsBody!.mass
   }
 }
