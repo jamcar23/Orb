@@ -30,7 +30,7 @@ final class Player: BaseSprite {
   var mJumpUpAni: SKAction!
   var mJumpDownAni: SKAction!
   private var mBaseY: CGFloat = 0
-  private var mJumpY: CGFloat!
+  var mJumpY: CGFloat!
   
   private init() {
     super.init(texture: SKTexture(imageNamed: "idle-1"))

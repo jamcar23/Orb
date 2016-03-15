@@ -252,7 +252,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     let hud = HudUi.kInstance.mSprite
     
     self.view?.ignoresSiblingOrder = true
-    self.physicsWorld.gravity = CGVectorMake(0, -4.2)
+    self.physicsWorld.gravity = CGVectorMake(0, -Physics.kGravity)
     self.physicsWorld.contactDelegate = self
     self.userInteractionEnabled = true
     self.camera = mCamera

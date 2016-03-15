@@ -12,7 +12,7 @@ import UIKit
 
 // power operations
 
-infix operator ^^ { associativity left precedence 160 }
+infix operator ^^ { associativity left precedence 220 }
 
 func ^^ (radix: CGFloat, power: CGFloat) -> CGFloat {
   return CGFloat(pow(Double(radix), Double(power)))

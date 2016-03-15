@@ -40,6 +40,7 @@
 		EF98A4651C8775FF005E57D1 /* S31-Internal-Reflection.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4611C8775FF005E57D1 /* S31-Internal-Reflection.mp3 */; };
 		EF98A4661C8775FF005E57D1 /* spaceranger3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4621C8775FF005E57D1 /* spaceranger3.mp3 */; };
 		EF98A4681C877616005E57D1 /* Ascend.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4671C877616005E57D1 /* Ascend.mp3 */; };
+		EFA8A9751C974AB700085A18 /* Phyiscs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9741C974AB700085A18 /* Phyiscs.swift */; };
 		EFCF3E441C9130F60014A66C /* running.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E431C9130F60014A66C /* running.atlas */; };
 		EFCF3E481C9132090014A66C /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E471C9132090014A66C /* jump.atlas */; };
 		EFCF3E4A1C91321E0014A66C /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E491C91321E0014A66C /* background.atlas */; };
@@ -88,6 +89,7 @@
 		EF98A4611C8775FF005E57D1 /* S31-Internal-Reflection.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "S31-Internal-Reflection.mp3"; sourceTree = "<group>"; };
 		EF98A4621C8775FF005E57D1 /* spaceranger3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = spaceranger3.mp3; sourceTree = "<group>"; };
 		EF98A4671C877616005E57D1 /* Ascend.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ascend.mp3; sourceTree = "<group>"; };
+		EFA8A9741C974AB700085A18 /* Phyiscs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Phyiscs.swift; sourceTree = "<group>"; };
 		EFCF3E431C9130F60014A66C /* running.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = running.atlas; sourceTree = "<group>"; };
 		EFCF3E471C9132090014A66C /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = jump.atlas; path = idle/jump.atlas; sourceTree = "<group>"; };
 		EFCF3E491C91321E0014A66C /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			children = (
 				EF98A4531C8760EA005E57D1 /* BaseSprite.swift */,
 				EF98A4591C87652F005E57D1 /* Orb.swift */,
+				EF98A4571C876398005E57D1 /* Player.swift */,
 				EF55D0D91C94B84A0020F89D /* Platforms */,
 				EFCF3E531C9207C70014A66C /* HUD.swift */,
 			);
@@ -168,10 +171,10 @@
 				EF908A0B1C862A3F006364BA /* AppDelegate.swift */,
 				EF908A0F1C862A3F006364BA /* GameScene.swift */,
 				EF98A4511C876065005E57D1 /* SKProtocol.swift */,
+				EFA8A9741C974AB700085A18 /* Phyiscs.swift */,
 				EF55D0DB1C94B8790020F89D /* Sprites */,
 				EF55D0DA1C94B85E0020F89D /* Labels */,
 				EF363CD01C9081BB00A060F8 /* ArrayExtension.swift */,
-				EF98A4571C876398005E57D1 /* Player.swift */,
 				EF363CCA1C8F49D000A060F8 /* GameManager.swift */,
 				EF16E1B31C93CD6400069B67 /* Operators.swift */,
 				EF908A4F1C86438E006364BA /* Collision.swift */,
@@ -293,7 +296,7 @@
 		EF908A001C862A3F006364BA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "James Carroll";
 				TargetAttributes = {
 					EF908A071C862A3F006364BA = {
@@ -365,6 +368,7 @@
 				EFCF3E541C9207C70014A66C /* HUD.swift in Sources */,
 				EFCF3E561C920D410014A66C /* BaseLabel.swift in Sources */,
 				EF363CCD1C8F4B1800A060F8 /* Platform.swift in Sources */,
+				EFA8A9751C974AB700085A18 /* Phyiscs.swift in Sources */,
 				EF98A4521C876065005E57D1 /* SKProtocol.swift in Sources */,
 				EF98A4581C876398005E57D1 /* Player.swift in Sources */,
 				EF908A101C862A3F006364BA /* GameScene.swift in Sources */,
@@ -494,7 +498,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.jamescarroll.Rpgby;
 				PRODUCT_NAME = Orb;
-				SDKROOT = iphoneos9.2;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				"Texture Atlas Maximum Size" = 2048x2048;
 			};
@@ -509,7 +513,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.jamescarroll.Rpgby;
 				PRODUCT_NAME = Orb;
-				SDKROOT = iphoneos9.2;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				"Texture Atlas Maximum Size" = 2048x2048;
 			};

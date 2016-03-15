@@ -22,8 +22,7 @@ final class MedPlatform: Platform {
     
     s.scale(0.5)
     s.anchorPointX(0)
-    s.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(s.getMaxX(),
-      s.getMaxY() - 5), center: s.getCenterPoint())
+    s.physicsBody = SKPhysicsBody(rectangleOfSize: s.size, center: s.getCenterPoint())
     self.setSharedProperties()
   }
 }

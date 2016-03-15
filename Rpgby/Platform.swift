@@ -33,49 +33,18 @@ class Platform: BaseSprite {
     s.anchorPoint.x = 0
   }
   
-  // Set a random elevation between the screen height and the point where 
-  // the sprite touches the bottom
-  // TODO fix y
-  
-  private func randomElevation(height: CGFloat) {
-    let s = self.mSprite
-    let y = mBottom ? calcRandom(upper: s.halfHeight(), lower: 0, min: 5) :
-      calcRandom(upper: height - s.halfHeight() - Player.kInstance.mSprite
-        .getMaxY(), lower: 0, min: s.getMaxY())
-    s.position.y = y
-  }
-  
-  // Set a random distance to jump within a certain margin
-  // TODO tweak x
-  
-  private func randomDistance(previous: CGFloat, width: CGFloat) {
-    let p = Player.kInstance
-    let max = calcXDistance(sin: 45, cos: 45)
-    let min = p.mSprite.size.width * 1.5
-    let x = calcRandom(upper: max, lower: 0, min: min)
-    let w = width * 1.1
-    self.mSprite.position.x = (x < width ? x : calcRandom(upper: width + w,
-      lower: 0, min: width - w))  + previous
-  }
-  
-  private func calcXDistance(sin s: CGFloat, cos c: CGFloat) -> CGFloat {
-    return (((2 * Player.kInstance.mMovement) ^^ 2) * sin(s) * cos(c)) / 4.2
-  }
-  
-  // Calcs a random number between upper and lower plus the minimum
-  
-  private func calcRandom(upper u: CGFloat, lower l: CGFloat, min m: CGFloat) -> CGFloat {
-    return CGFloat(arc4random_uniform(UInt32(u - l))) + l + m
-  }
-  
   // Public to call for setting the position
   
   func setPosition(previous: CGFloat, size: CGSize) {
-    if previous != -1 {
-      randomDistance(previous, width: size.width)
+    let p = Physics.kInstance
+    
+    if previous >= 0 {
+      p.randomDistance(sprite: self.mSprite, previous: previous, width:
+        size.width, time: nil)
     }
     
-    randomElevation(size.height)
+    p.randomElevation(sprite: self.mSprite, height: size.height, bottom: mBottom,
+      time: nil)
   }
   
   // MARK: - Static methods
