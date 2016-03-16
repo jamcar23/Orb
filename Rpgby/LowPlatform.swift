@@ -14,7 +14,6 @@ final class LowPlatform: Platform {
   
   init() {
     super.init(texture: Platform.kTextures.textureNamed(LowPlatform.kName))
-    print(Platform.kTextures.textureNames)
     self.mBottom = true
   }
   

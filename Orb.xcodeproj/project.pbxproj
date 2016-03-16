@@ -41,6 +41,7 @@
 		EF98A4661C8775FF005E57D1 /* spaceranger3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4621C8775FF005E57D1 /* spaceranger3.mp3 */; };
 		EF98A4681C877616005E57D1 /* Ascend.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF98A4671C877616005E57D1 /* Ascend.mp3 */; };
 		EFA8A9751C974AB700085A18 /* Phyiscs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9741C974AB700085A18 /* Phyiscs.swift */; };
+		EFA8A9771C99CBB000085A18 /* MeterLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9761C99CBB000085A18 /* MeterLabel.swift */; };
 		EFCF3E441C9130F60014A66C /* running.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E431C9130F60014A66C /* running.atlas */; };
 		EFCF3E481C9132090014A66C /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E471C9132090014A66C /* jump.atlas */; };
 		EFCF3E4A1C91321E0014A66C /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E491C91321E0014A66C /* background.atlas */; };
@@ -90,6 +91,7 @@
 		EF98A4621C8775FF005E57D1 /* spaceranger3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = spaceranger3.mp3; sourceTree = "<group>"; };
 		EF98A4671C877616005E57D1 /* Ascend.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ascend.mp3; sourceTree = "<group>"; };
 		EFA8A9741C974AB700085A18 /* Phyiscs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Phyiscs.swift; sourceTree = "<group>"; };
+		EFA8A9761C99CBB000085A18 /* MeterLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeterLabel.swift; sourceTree = "<group>"; };
 		EFCF3E431C9130F60014A66C /* running.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = running.atlas; sourceTree = "<group>"; };
 		EFCF3E471C9132090014A66C /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = jump.atlas; path = idle/jump.atlas; sourceTree = "<group>"; };
 		EFCF3E491C91321E0014A66C /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				EFCF3E551C920D410014A66C /* BaseLabel.swift */,
 				EFCF3E631C92794C0014A66C /* EndLabel.swift */,
 				EFCF3E571C920EB10014A66C /* StartLabel.swift */,
+				EFA8A9761C99CBB000085A18 /* MeterLabel.swift */,
 			);
 			name = Labels;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF363CD11C9081BB00A060F8 /* ArrayExtension.swift in Sources */,
+				EFA8A9771C99CBB000085A18 /* MeterLabel.swift in Sources */,
 				EF16E1B41C93CD6400069B67 /* Operators.swift in Sources */,
 				EF363CCF1C8F9A2900A060F8 /* LargePlatform.swift in Sources */,
 				EF363CCB1C8F49D000A060F8 /* GameManager.swift in Sources */,

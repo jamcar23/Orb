@@ -119,7 +119,7 @@ final class Player: BaseSprite {
   }
   
   private func createJumpTimerAction() -> SKAction {
-    let wt: CGFloat = 0.2
+    let wt: CGFloat = 0.3
     let w = SKAction.waitForDuration(0.01)
     let t = SKAction.runBlock({
       if self.mTime < Physics.kMaxJumpTime {

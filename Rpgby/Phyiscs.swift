@@ -50,10 +50,10 @@ class Physics {
       let w = width * CGFloat(drand48())
       var px = min
       
-      if x < width {
+      if x < width / 2 {
         px = x
       } else {
-        px = calcRandom(width + w, lower: 0, min: width - w)
+        px = calcRandom(width / 2, lower: w, min: width / 4 - w)
         
         if px > max {
           px = max - 25
@@ -69,15 +69,13 @@ class Physics {
     return (Player.kInstance.mMovement ^^ time) * cos(angle)
   }
   
-//  func calcYDistance(angle: CGFloat, time: CGFloat) -> CGFloat {
-//    return ((mVelocityY ^^ time) * sin(angle)) - (0.5 * (
-//      Physics.kGravity * (time ^^ 2)))
-//  }
+  // Calculates max jump height based on angle and time
   
   func calcYDistance(angle: CGFloat, time: CGFloat) -> CGFloat {
     return ((mVelocityY ^^ 2) * (sin(angle) ^^ 2)) / (2 * Physics.kGravity)
   }
-
+  
+  // Checks if time is not nil and less than max time 
   
   func calcTime(time: CGFloat?) -> CGFloat {
     return time != nil && time! < Physics.kMaxJumpTime ? time! : Physics.kMaxJumpTime

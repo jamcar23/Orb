@@ -89,6 +89,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     /* Called before each frame is rendered */
     let p = Player.kInstance
     let hud = HudUi.kInstance.mSprite
+    let ml = HudUi.kHUDs[MeterLabel.kIndex] as! MeterLabel
     
     if p.mJumping {
       p.endJumping()
@@ -97,6 +98,8 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     if mBegin {
       p.mSprite.position.x += p.mMovement
       hud.position.x += p.mMovement
+      ml.mDistance += Int(p.mMovement)
+      ml.handleText()
       
       if let cam = self.camera {
         cam.position.x += p.mMovement
@@ -270,6 +273,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     setUpBackground()
     setUpPlayer()
     setUpOre()
+    hud.addChild(HudUi.kHUDs[MeterLabel.kIndex])
     self.addChild(hud)
     self.camera?.position.x = Player.kInstance.mSprite.position.x * 9.42
     self.camera?.frame.size
