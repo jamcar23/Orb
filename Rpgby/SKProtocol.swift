@@ -22,3 +22,7 @@ protocol Node {
   func getMinX() -> CGFloat
   func getCenterPoint() -> CGPoint
 }
+
+protocol Reset {
+  func fInit()
+}

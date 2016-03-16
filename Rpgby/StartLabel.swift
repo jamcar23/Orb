@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-final class StartLabel: BaseLabel, Manager {
+final class StartLabel: BaseLabel, Manager, Reset {
   static let kName = "StartLabel"
   static let kIndex = 0
   static let kInstance = StartLabel()
@@ -37,6 +37,11 @@ final class StartLabel: BaseLabel, Manager {
   
   func end() {
     return
+  }
+  
+  func fInit() {
+    createNode()
+    mCount = 3
   }
   
   override func createNode() {

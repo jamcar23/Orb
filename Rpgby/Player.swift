@@ -138,6 +138,10 @@ final class Player: BaseSprite {
   override func createNode() {
     let s = self.mSprite
     
+    self.mMovement = 2
+    self.mVelocity = 1.2
+    
+    s.removeAllActions()
     s.scale(0.075)
     s.anchorPointX(0)
     s.position = CGPointMake(30, 142)

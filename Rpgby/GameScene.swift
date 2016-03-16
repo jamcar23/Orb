@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
+final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset {
   static let kBackground = "Background_cloud"
   var mCountDown = false
   var mBegin = false
@@ -51,12 +51,15 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     } else if mGameOver {
       self.removeAllChildren()
       self.removeAllActions()
-      self.mGameOver = false
-      self.mBegin = false
       HudUi.kInstance.mSprite.removeAllChildren()
       self.mPlatforms.removeAll()
-      self.removeFromParent()
+      self.mBackgrounds.removeAll()
+      self.mBegin = false
+      self.mCountDown = false 
+      self.mPreviousSprite = nil
+      self.mGameOver = false
       self.fInit()
+      
     }
   }
   
@@ -190,6 +193,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
   
   private func setUpBackground() {
     let bg = SKSpriteNode(imageNamed: GameScene.kBackground)
+    bg.position = mCamera.position
     bg.center(self.size)
     bg.size.height = self.size.height
     bg.name = GameScene.kBackground
@@ -251,7 +255,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     mPreviousSprite = mPlatforms.lastSprite()
     p.setPosition(mPreviousSprite.getMaxX(), size: self.size)
     mPlatforms.append(p)
-    self.addChild(p.mSprite.copy() as! SKSpriteNode)
+    self.addChild(mPlatforms.lastSprite())
     
     if drand48() <= Orb.kProbablity {
       o.setPosition(p.mSprite)
@@ -259,11 +263,17 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     }
   }
   
+  private func setUpHUD() {
+    let h = HudUi.kInstance
+    let hud = h.mSprite
+    h.fInit()
+    hud.addChild(HudUi.kHUDs[MeterLabel.kIndex])
+    self.addChild(hud)
+  }
+  
   // Single init func to be called from multiple init
   
-  private func fInit() {
-    let hud = HudUi.kInstance.mSprite
-    
+  func fInit() {
     self.view?.ignoresSiblingOrder = true
     self.physicsWorld.gravity = CGVectorMake(0, -Physics.kGravity)
     self.physicsWorld.contactDelegate = self
@@ -273,8 +283,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     setUpBackground()
     setUpPlayer()
     setUpOre()
-    hud.addChild(HudUi.kHUDs[MeterLabel.kIndex])
-    self.addChild(hud)
+    setUpHUD()
     self.camera?.position.x = Player.kInstance.mSprite.position.x * 9.42
     self.camera?.frame.size
     

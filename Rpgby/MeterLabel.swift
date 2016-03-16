@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-final class MeterLabel: BaseLabel {
+final class MeterLabel: BaseLabel, Reset {
   static let kName = "MeterLabel"
   static let kIndex = 2
   static let kInstance = MeterLabel()
@@ -31,6 +31,11 @@ final class MeterLabel: BaseLabel {
   
   func handleText() {
     self.text = mDistance.description + " M"
+  }
+  
+  func fInit() {
+    mDistance = 0
+    handleText()
   }
   
   override func createNode() {

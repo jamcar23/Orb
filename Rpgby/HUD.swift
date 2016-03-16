@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class HudUi: BaseSprite {
+class HudUi: BaseSprite, Reset {
   static let kName = "HUD"
   static let kInstance = HudUi()
   static let kHUDs = HudUi.createHUD()
@@ -20,12 +20,19 @@ class HudUi: BaseSprite {
     fInit()
   }
   
-  private func fInit() {
+  func fInit() {
     self.mSprite.anchorPointX(0)
     self.mSprite.zPosition = Spacing.kHUDZIndex
+    self.mSprite.position = self.mSprite.anchorPoint
     
     (HudUi.kHUDs[MeterLabel.kIndex] as! MeterLabel).setLabelPosition(self
       .mSprite.frame)
+    
+    for hud in HudUi.kHUDs {
+      if let h = hud as? Reset {
+        h.fInit()
+      }
+    }
   }
   
   static func createHUD() -> [SKNode] {

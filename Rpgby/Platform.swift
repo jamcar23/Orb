@@ -41,6 +41,8 @@ class Platform: BaseSprite {
     if previous >= 0 {
       p.randomDistance(sprite: self.mSprite, previous: previous, width:
         size.width, time: nil)
+    } else if previous == -1 {
+      self.mSprite.position = self.mSprite.anchorPoint
     }
     
     p.randomElevation(sprite: self.mSprite, height: size.height, bottom: mBottom,
