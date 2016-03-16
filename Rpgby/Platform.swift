@@ -47,6 +47,14 @@ class Platform: BaseSprite {
       time: nil)
   }
   
+  func setOrb(orb: SKSpriteNode) {
+    let s = self.mSprite
+    let x = s.position.x
+    let r = Physics.kInstance.calcRandom(getMaxX(), lower: orb.halfWidth(), min:
+      x)
+    orb.position = CGPointMake(r, getMaxY())
+  }
+  
   // MARK: - Static methods
   
   static func createPlatforms() -> [Platform] {

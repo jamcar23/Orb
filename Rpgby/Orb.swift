@@ -16,8 +16,18 @@ final class Orb: BaseSprite {
   static let kTextures = SKTextureAtlas(named: "orb")
   static let kRed = "red"
   static let kBlue = "blue"
+  static let kProbablity = 0.5
+  static let kInstance = Orb()
   static let kCollectSfx = SKAction.playSoundFileNamed("Coin.mp3",
     waitForCompletion: false)
+  
+  private init() {
+    super.init(texture: Orb.kTextures.textureNamed(Orb.kRed))
+  }
+  
+  override init(texture: SKTexture) {
+    super.init(texture: texture)
+  }
   
   override func createNode() {
     let s = self.mSprite
@@ -33,7 +43,12 @@ final class Orb: BaseSprite {
     s.zPosition = Spacing.kPersonOrbZIndex
   }
   
-  func setPosition(maxX: CGFloat) {
-    self.mSprite.position = CGPointMake(maxX - 100, 142)
+  func setPosition(platform: SKSpriteNode) {
+    let s = self.mSprite
+    let x = platform.position.x
+    let r = Physics.kInstance.calcRandom(platform.getMaxX(),
+      lower: x, min: 0)
+    
+    s.position = CGPointMake(r - s.halfWidth(), platform.getMaxY())
   }
 }

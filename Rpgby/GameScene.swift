@@ -74,7 +74,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     if mPlatforms.count > 0 {
       let pz = mPlatforms[0]
       
-      if mPreviousSprite.isPast(self.mCamera.frame) && mPlatforms.count < 4 {
+      if mPreviousSprite.isPast(self.mCamera.frame) && mPlatforms.count < 10 {
         self.createPlatform()
       }
       
@@ -141,7 +141,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
       }
     case (Collision.kPerson, Collision.kOrb): // handle running into orb
       self.runAction(Orb.kCollectSfx)
-      self.childNodeWithName(Orb.kName)?.removeFromParent()
+      contact.bodyB.node?.removeFromParent()
     default:
       break
     }
@@ -162,9 +162,6 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
       } else {
         self.removeActionForKey(Player.kTimer)
       }
-      
-//      print("Move: " + pl.mMovement.description + " Velocity: " + pl.mVelocity.description)
-      
     })
     
     self.mBegin = true
@@ -225,12 +222,12 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
   // Sets up the orb
   
   private func setUpOre() {
-    let o = Orb(texture: Orb.kTextures.textureNamed(Orb.kRed))
+    let o = Orb.kInstance
     
     o.createNode()
-    o.setPosition(mPlatforms.findPlatform(MainPlatform.kName).getMaxX())
+    o.setPosition(mPlatforms[0].mSprite)
     
-    self.addChild(o.mSprite)
+    self.addChild(o.mSprite.copy() as! SKSpriteNode)
   }
   
   // Handles infinite background position
@@ -245,6 +242,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
   private func createPlatform() {
     let n = Platform.nextPlatform(mPreviousPlatform)
     let p: Platform = n.1
+    let o = Orb.kInstance
     
     mPreviousPlatform = n.0
     mPreviousSprite = mPlatforms.lastSprite()
@@ -252,6 +250,10 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     mPlatforms.append(p)
     self.addChild(p.mSprite.copy() as! SKSpriteNode)
     
+    if drand48() <= Orb.kProbablity {
+      o.setPosition(p.mSprite)
+      self.addChild(o.mSprite.copy() as! SKSpriteNode)
+    }
   }
   
   // Single init func to be called from multiple init
@@ -270,8 +272,9 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
     setUpOre()
     self.addChild(hud)
     self.camera?.position.x = Player.kInstance.mSprite.position.x * 9.42
+    self.camera?.frame.size
     
-    for _ in 0...3 {
+    for _ in 0...9 {
       createPlatform()
     }
   }

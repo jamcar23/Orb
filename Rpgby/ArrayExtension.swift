@@ -8,6 +8,12 @@
 
 import SpriteKit
 
+extension Array where Element:SKSpriteNode {
+  func lastSprite() -> SKSpriteNode {
+    return self.last!.copy() as! SKSpriteNode
+  }
+}
+
 extension Array where Element:Platform  {
   func lastSprite() -> SKSpriteNode {
     return self.last!.mSprite.copy() as! SKSpriteNode

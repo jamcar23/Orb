@@ -11,7 +11,7 @@ import SpriteKit
 class Physics {
   static let kInstance = Physics()
   static let kGravity: CGFloat = 4.2
-  static let kMaxJumpTime: CGFloat = 3 // seconds
+  static let kMaxJumpTime: CGFloat = 3.5 // seconds
   
   var mVelocityY: CGFloat!
   
@@ -85,7 +85,7 @@ class Physics {
   
   // Calcs a random number between upper and lower plus the minimum
   
-  private func calcRandom(upper: CGFloat, lower: CGFloat, min m: CGFloat) -> CGFloat {
+  func calcRandom(upper: CGFloat, lower: CGFloat, min m: CGFloat) -> CGFloat {
     let f: (CGFloat, CGFloat) = (fabs(upper), fabs(lower))
     let ul = f.0 >= f.1 ? (f.0, f.1) : (f.1, f.0)
     
