@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Physics {
+final class Physics {
   static let kInstance = Physics()
   static let kGravity: CGFloat = 4.2
   static let kMaxJumpTime: CGFloat = 3.5 // seconds
@@ -53,7 +53,7 @@ class Physics {
       if x < width / 2 {
         px = x
       } else {
-        px = calcRandom(width / 2, lower: w, min: width / 4 - w)
+        px = calcRandom(width * 0.75, lower: w, min: width / 3 - w)
         
         if px > max {
           px = max - 25

@@ -56,7 +56,6 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset {
       self.mBackgrounds.removeAll()
       self.mBegin = false
       self.mCountDown = false 
-      self.mPreviousSprite = nil
       self.mGameOver = false
       self.fInit()
       
