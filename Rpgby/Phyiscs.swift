@@ -11,7 +11,9 @@ import SpriteKit
 class Physics {
   static let kInstance = Physics()
   static let kGravity: CGFloat = 4.2
-  static let kMaxJumpTime: CGFloat = 0.5 // seconds
+  static let kMaxJumpTime: CGFloat = 3 // seconds
+  
+  var mVelocityY: CGFloat!
   
   private init() {
     
@@ -26,13 +28,13 @@ class Physics {
       let t = calcTime(time)
       
       if b {
-        s.position.y = calcRandom(upper: s.halfHeight(), lower: 0, min: 5)
+        s.position.y = calcRandom(s.halfHeight(), lower: 5, min: 5)
         return
       }
       
       let max = calcYDistance(45, time: t)
-      s.position.y = calcRandom(upper: max - Player.kInstance.mSprite.size
-        .height, lower: 0, min: s.getMaxY())
+      s.position.y = calcRandom(max - Player.kInstance.mSprite.size
+        .height, lower: 0, min: s.halfHeight())
   }
   
   // Set a random distance to jump within a certain margin
@@ -44,14 +46,14 @@ class Physics {
       let t = calcTime(time)
       let max = calcXDistance(45, time: t) // distance of jump
       let min = calcXDistance(0, time: 0.25) // distance of fall
-      let x = calcRandom(upper: max, lower: min, min: p.mSprite.size.width)
+      let x = calcRandom(max, lower: min, min: p.mSprite.size.width)
       let w = width * CGFloat(drand48())
       var px = min
       
       if x < width {
         px = x
       } else {
-        px = calcRandom(upper: width + w, lower: 0, min: width - w)
+        px = calcRandom(width + w, lower: 0, min: width - w)
         
         if px > max {
           px = max - 25
@@ -63,22 +65,30 @@ class Physics {
   
   // Calculates x position based on angle and time
   
-  private func calcXDistance(angle: CGFloat, time: CGFloat) -> CGFloat {
+  func calcXDistance(angle: CGFloat, time: CGFloat) -> CGFloat {
     return (Player.kInstance.mMovement ^^ time) * cos(angle)
   }
   
-  private func calcYDistance(angle: CGFloat, time: CGFloat) -> CGFloat {
-    return ((Player.kInstance.mJumpY ^^ time) * sin(angle)) - (0.5 * (
-      Physics.kGravity * (time ^^ 2)))
-  }
+//  func calcYDistance(angle: CGFloat, time: CGFloat) -> CGFloat {
+//    return ((mVelocityY ^^ time) * sin(angle)) - (0.5 * (
+//      Physics.kGravity * (time ^^ 2)))
+//  }
   
-  private func calcTime(time: CGFloat?) -> CGFloat {
+  func calcYDistance(angle: CGFloat, time: CGFloat) -> CGFloat {
+    return ((mVelocityY ^^ 2) * (sin(angle) ^^ 2)) / (2 * Physics.kGravity)
+  }
+
+  
+  func calcTime(time: CGFloat?) -> CGFloat {
     return time != nil && time! < Physics.kMaxJumpTime ? time! : Physics.kMaxJumpTime
   }
   
   // Calcs a random number between upper and lower plus the minimum
   
-  private func calcRandom(upper u: CGFloat, lower l: CGFloat, min m: CGFloat) -> CGFloat {
-    return CGFloat(arc4random_uniform(UInt32(fabs(u) - fabs(l)))) + l + m
+  private func calcRandom(upper: CGFloat, lower: CGFloat, min m: CGFloat) -> CGFloat {
+    let f: (CGFloat, CGFloat) = (fabs(upper), fabs(lower))
+    let ul = f.0 >= f.1 ? (f.0, f.1) : (f.1, f.0)
+    
+    return CGFloat(arc4random_uniform(UInt32(ul.0 - ul.1))) + ul.1 + m
   }
 }

@@ -15,6 +15,7 @@ import SpriteKit
 final class Player: BaseSprite {
   static let kName = "player"
   static let kTimer = "timer"
+  static let kJumpTimer = "jumpTimer"
   static let kInstance = Player()
   static let kRunTex = SKTextureAtlas(named: "running")
   static let kJumpTex = SKTextureAtlas(named: "jump")
@@ -24,13 +25,16 @@ final class Player: BaseSprite {
     waitForCompletion: false)
   
   var mJumping = false
+  var mCounting = false
   var mMovement: CGFloat = 2
   var mVelocity: CGFloat = 1.2
   var mRunAni: SKAction!
   var mJumpUpAni: SKAction!
   var mJumpDownAni: SKAction!
+  var mJumpTimeAct: SKAction!
   private var mBaseY: CGFloat = 0
-  var mJumpY: CGFloat!
+  var mJumpY: CGFloat = 0
+  var mTime: CGFloat = 0.001
   
   private init() {
     super.init(texture: SKTexture(imageNamed: "idle-1"))
@@ -43,10 +47,12 @@ final class Player: BaseSprite {
       let texs = Player.kJumpTex.toTextures()
       
       self.mJumpUpAni = SKAction.animateWithTextures([texs[1]], timePerFrame: 0,
-        resize: false, restore: true)
+        resize: false, restore: false)
       self.mJumpDownAni = SKAction.animateWithTextures([texs[0]], timePerFrame:
-        0, resize: false, restore: true)
+        0, resize: false, restore: false)
     })
+    
+    self.mJumpTimeAct = createJumpTimerAction()
   }
   
   // Starts the running animation
@@ -55,19 +61,34 @@ final class Player: BaseSprite {
     self.mSprite.runAction(SKAction.repeatActionForever(mRunAni))
   }
   
-  // Handles jumping animation and movement
-  
-  func beginJumping() {
+  func startJumpTimer() {
     let s = self.mSprite
-    let phy = s.physicsBody
     
     if !mJumping { // single jump only
       mJumping = true
       mBaseY = s.position.y
+      self.mTime = 1
+      s.runAction(mJumpTimeAct, withKey: Player.kJumpTimer)
+      self.mCounting = true
+    }
+  }
+  
+  // Handles jumping animation and movement
+  
+  func beginJumping() {
+    let s = self.mSprite
+    let phy = Physics.kInstance
+    let phyBody = s.physicsBody
+    let t = phy.calcTime(self.mTime)
+    
+    if mJumping && mCounting {
+      mCounting = false
       s.removeAllActions()
       s.runAction(Player.kJumpSfx)
       s.runAction(mJumpUpAni)
-      phy?.applyImpulse(CGVectorMake(phy!.velocity.dx, mJumpY))
+//      let x = phy.calcXDistance(45, time: t)
+      mJumpY = phy.calcYDistance(45, time: t)
+      phyBody?.applyImpulse(CGVectorMake(0, mJumpY + 5))
     }
   }
   
@@ -82,6 +103,11 @@ final class Player: BaseSprite {
     }
   }
   
+  func endJumpTimer() {
+    self.mSprite.removeActionForKey(Player.kJumpTimer)
+    beginJumping()
+  }
+  
   // Checks if the player is off the screen
   
   func isDead(frame: CGRect) -> Bool {
@@ -91,6 +117,23 @@ final class Player: BaseSprite {
     
     return x <= frame.origin.x || y <= 0
   }
+  
+  private func createJumpTimerAction() -> SKAction {
+    let wt: CGFloat = 0.15
+    let w = SKAction.waitForDuration(0.01)
+    let t = SKAction.runBlock({
+      if self.mTime < Physics.kMaxJumpTime {
+        self.mTime += wt
+      } else {
+        self.endJumpTimer()
+      }
+      
+      print(self.mTime)
+    })
+    
+    return SKAction.repeatActionForever(SKAction.sequence([t, w]))
+  }
+  
   
   override func createNode() {
     let s = self.mSprite
@@ -107,6 +150,6 @@ final class Player: BaseSprite {
     s.name = Player.kName
     s.zPosition = Spacing.kPersonOrbZIndex
     
-    self.mJumpY = 400 * s.physicsBody!.mass
+    Physics.kInstance.mVelocityY = 200 * s.physicsBody!.mass
   }
 }

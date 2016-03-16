@@ -47,7 +47,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
         hud.runAction(StartLabel.kCountAct, completion: begin)
       }
     } else if mBegin {
-      pl.beginJumping()
+      pl.startJumpTimer()
     } else if mGameOver {
       self.removeAllChildren()
       self.removeAllActions()
@@ -57,6 +57,14 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
       self.mPlatforms.removeAll()
       self.removeFromParent()
       self.fInit()
+    }
+  }
+  
+  override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    let p = Player.kInstance
+    
+    if mBegin && p.mJumping {
+      p.endJumpTimer()
     }
   }
   
@@ -155,7 +163,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager {
         self.removeActionForKey(Player.kTimer)
       }
       
-      print("Move: " + pl.mMovement.description + " Velocity: " + pl.mVelocity.description)
+//      print("Move: " + pl.mMovement.description + " Velocity: " + pl.mVelocity.description)
       
     })
     
