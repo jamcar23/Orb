@@ -8,7 +8,8 @@
 
 import SpriteKit
 
-final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset {
+final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset,
+PauseDelegate {
   static let kBackground = "Background_cloud"
   var mCountDown = false
   var mBegin = false
@@ -17,6 +18,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset {
   var mPlatforms = [Platform]()
   var mPreviousPlatform = 0
   var mPreviousSprite: SKSpriteNode!
+  var mPreviousTime: CFTimeInterval?
   let mCamera = SKCameraNode()
   
   override init(size: CGSize) {
@@ -52,11 +54,13 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset {
       self.removeAllChildren()
       self.removeAllActions()
       HudUi.kInstance.mSprite.removeAllChildren()
+      Physics.kInstance.fInit()
       self.mPlatforms.removeAll()
       self.mBackgrounds.removeAll()
       self.mBegin = false
       self.mCountDown = false 
       self.mGameOver = false
+      self.mPreviousTime = nil
       self.fInit()
       
     }
@@ -92,20 +96,24 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset {
     let p = Player.kInstance
     let hud = HudUi.kInstance.mSprite
     let ml = HudUi.kHUDs[MeterLabel.kIndex] as! MeterLabel
+    let phy = Physics.kInstance
     
     if p.mJumping {
       p.endJumping()
     }
     
     if mBegin {
-      p.mSprite.position.x += p.mMovement
-      hud.position.x += p.mMovement
-      ml.mDistance += Int(p.mMovement)
-      ml.handleText()
-      
-      if let cam = self.camera {
-        cam.position.x += p.mMovement
+      if !self.paused {
+        let x =  phy.mRunSpeed * CGFloat(currentTime - (mPreviousTime ?? currentTime))
+        p.mSprite.position.x += x
+        hud.position.x += x
+        mCamera.position.x += x
+        ml.mDistance += Int(x)
+        ml.handleText()
+        phy.mVelocityX = x
       }
+      
+      mPreviousTime = currentTime
       
       if p.isDead(hud.frame) {
         end()
@@ -146,6 +154,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset {
       }
     case (Collision.kPerson, Collision.kOrb): // handle running into orb
       self.runAction(Orb.kCollectSfx)
+      OrbCount.kInstance.handleText()
       contact.bodyB.node?.removeFromParent()
     default:
       break
@@ -154,16 +163,12 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset {
   
   func begin() {
     let pl = Player.kInstance
+    let phy = Physics.kInstance
     let w = SKAction.waitForDuration(1)
     let rb = SKAction.runBlock({
       
-      if self.mGameOver {
-        pl.mVelocity = 0
-      }
-      
-      if pl.mVelocity > 1.0 {
-        pl.mMovement *= pl.mVelocity
-        pl.mVelocity -= pl.mVelocity * 0.005
+      if phy.mRunSpeed < Physics.kMaxRunSpeed {
+        phy.mRunSpeed *= 1.2
       } else {
         self.removeActionForKey(Player.kTimer)
       }
@@ -176,16 +181,31 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset {
   }
   
   func end() {
-    let el = HudUi.kHUDs[EndLabel.kIndex]
+    let el = HudUi.kHUDs[EndLabel.kIndex] as! SKLabelNode
     
     self.runAction(Player.kFallSfx)
     
     el.position = self.getCenterPoint()
+    el.text = OrbCount.kInstance.mCount >= OrbCount.kNeeded ? "Winner Winner!" :
+    "Try Again."
     HudUi.kInstance.mSprite.addChild(el)
     
     Player.kInstance.mSprite.removeFromParent()
     self.mBegin = false
     self.mGameOver = true
+  }
+  
+  func isScenePaused() -> Bool {
+    return self.paused
+  }
+  
+  func pause() {
+    self.paused = true
+  }
+  
+  func resume() {
+    self.mPreviousTime = nil
+    self.paused = false
   }
   
   // Set up background
@@ -265,8 +285,11 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset {
   private func setUpHUD() {
     let h = HudUi.kInstance
     let hud = h.mSprite
+    let kHUDs = HudUi.kHUDs
     h.fInit()
-    hud.addChild(HudUi.kHUDs[MeterLabel.kIndex])
+    hud.addChild(kHUDs[MeterLabel.kIndex])
+    hud.addChild(kHUDs[Pause.kIndex])
+    hud.addChild(kHUDs[OrbCount.kIndex])
     self.addChild(hud)
   }
   
@@ -277,13 +300,14 @@ final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset {
     self.physicsWorld.gravity = CGVectorMake(0, -Physics.kGravity)
     self.physicsWorld.contactDelegate = self
     self.userInteractionEnabled = true
+//    self.shouldEnableEffects = true
     self.camera = mCamera
     self.camera?.center(self.size)
     setUpBackground()
     setUpPlayer()
     setUpOre()
     setUpHUD()
-    self.camera?.position.x = Player.kInstance.mSprite.position.x * 9.42
+    self.camera?.position.x = UIScreen.scaleWidth(0.5)
     self.camera?.frame.size
     
     for _ in 0...9 {

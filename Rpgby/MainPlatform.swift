@@ -23,6 +23,8 @@ final class MainPlatform: Platform {
     let s = self.mSprite
     
     s.scale(0.7)
+//    s.size = UIScreen.scaleSize(0.7, height: 0.45)
+    print(s.size)
     s.anchorPointX(0)
     s.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(s.size.width, s.size.height - 160), center: self.getCenterPoint())
     s.name = MainPlatform.kName

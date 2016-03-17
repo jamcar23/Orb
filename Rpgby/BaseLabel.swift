@@ -11,6 +11,10 @@ import SpriteKit
 class BaseLabel: SKLabelNode  {
   override var mName: String { return "BaseLabel" }
   
+  override init() {
+    super.init()
+  }
+  
   init(text: String) {
     super.init()
     

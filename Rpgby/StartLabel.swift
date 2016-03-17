@@ -21,7 +21,7 @@ final class StartLabel: BaseLabel, Manager, Reset {
   override var mName: String { return StartLabel.kName }
   var mCount = 3
   
-  private init() {
+  private override init() {
     super.init(text: mCount.description)
     self.createNode()
   }

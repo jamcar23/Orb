@@ -13,7 +13,7 @@ class EndLabel: BaseLabel {
   static let kIndex = 1
   static let kInstance = EndLabel()
   
-  private init() {
+  override init() {
     super.init(text: "Game Over")
   }
 

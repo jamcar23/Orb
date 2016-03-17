@@ -8,10 +8,16 @@
 
 import SpriteKit
 
-class HudUi: BaseSprite, Reset {
+protocol HUD {
+  func setHudPosition(frame: CGRect)
+}
+
+final class HudUi: BaseSprite, Reset {
   static let kName = "HUD"
   static let kInstance = HudUi()
   static let kHUDs = HudUi.createHUD()
+  static let kOffset: (sides: CGFloat, top: CGFloat) = (sides: 15, top: 40)
+  static let kBlurFilter = CIFilter(name: "CIGaussianBlur")
   override var mName: String { return HudUi.kName }
   
   init() {
@@ -25,23 +31,25 @@ class HudUi: BaseSprite, Reset {
     self.mSprite.zPosition = Spacing.kHUDZIndex
     self.mSprite.position = self.mSprite.anchorPoint
     
-    (HudUi.kHUDs[MeterLabel.kIndex] as! MeterLabel).setLabelPosition(self
-      .mSprite.frame)
-    
     for hud in HudUi.kHUDs {
       if let h = hud as? Reset {
         h.fInit()
+      }
+      
+      if let h = hud as? HUD {
+        h.setHudPosition(self.mSprite.frame)
       }
     }
   }
   
   static func createHUD() -> [SKNode] {
-    let m = MeterLabel.kInstance
     var n = [SKNode]()
     
     n.insert(StartLabel.kInstance, atIndex: StartLabel.kIndex)
     n.insert(EndLabel.kInstance, atIndex: EndLabel.kIndex)
-    n.insert(m, atIndex: MeterLabel.kIndex)
+    n.insert(MeterLabel.kInstance, atIndex: MeterLabel.kIndex)
+    n.insert(Pause.kInstance, atIndex: Pause.kIndex)
+    n.insert(OrbCount.kInstance, atIndex: OrbCount.kIndex)
     
     for h in n {
       h.createNode()

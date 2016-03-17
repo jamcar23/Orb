@@ -26,8 +26,6 @@ final class Player: BaseSprite {
   
   var mJumping = false
   var mCounting = false
-  var mMovement: CGFloat = 2
-  var mVelocity: CGFloat = 1.2
   var mRunAni: SKAction!
   var mJumpUpAni: SKAction!
   var mJumpDownAni: SKAction!
@@ -88,7 +86,7 @@ final class Player: BaseSprite {
       s.runAction(mJumpUpAni)
 //      let x = phy.calcXDistance(45, time: t)
       mJumpY = phy.calcYDistance(45, time: t)
-      phyBody?.applyImpulse(CGVectorMake(0, mJumpY + 5))
+      phyBody?.applyImpulse(CGVectorMake(0, mJumpY + (s.frame.height * 0.075)))
     }
   }
   
@@ -137,9 +135,6 @@ final class Player: BaseSprite {
   
   override func createNode() {
     let s = self.mSprite
-    
-    self.mMovement = 2
-    self.mVelocity = 1.2
     
     s.removeAllActions()
     s.scale(0.075)

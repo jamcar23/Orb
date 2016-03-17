@@ -8,14 +8,14 @@
 
 import SpriteKit
 
-final class MeterLabel: BaseLabel, Reset {
+final class MeterLabel: BaseLabel, Reset, HUD {
   static let kName = "MeterLabel"
   static let kIndex = 2
   static let kInstance = MeterLabel()
   
   var mDistance = 0
   
-  private init() {
+  private override init() {
     super.init(text: "0 M")
     self.createNode()
   }
@@ -25,8 +25,9 @@ final class MeterLabel: BaseLabel, Reset {
     self.createNode()
   }
   
-  func setLabelPosition(frame: CGRect) {
-    self.position = CGPointMake(frame.origin.x + 15, frame.size.height - 40)
+  func setHudPosition(frame: CGRect) {
+    let o = HudUi.kOffset
+    self.position = CGPointMake(frame.origin.x + o.sides, frame.size.height - o.top)
   }
   
   func handleText() {
