@@ -8,9 +8,8 @@
 
 import SpriteKit
 
-final class GameScene: SKScene, SKPhysicsContactDelegate, Manager, Reset,
+final class GameScene: BaseScene, SKPhysicsContactDelegate, Manager, Reset,
 PauseDelegate {
-  static let kBackground = "Background_cloud"
   var mCountDown = false
   var mBegin = false
   var mGameOver = false
@@ -20,18 +19,6 @@ PauseDelegate {
   var mPreviousSprite: SKSpriteNode!
   var mPreviousTime: CFTimeInterval?
   let mCamera = SKCameraNode()
-  
-  override init(size: CGSize) {
-    super.init(size: size)
-    self.size = size
-    
-    fInit()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    fInit()
-  }
   
   // Handle jumping
   
@@ -210,20 +197,20 @@ PauseDelegate {
   
   // Set up background
   
-  private func setUpBackground() {
-    let bg = SKSpriteNode(imageNamed: GameScene.kBackground)
+  override func setUpBackground() {
+    super.setUpBackground()
+    let bg = self.childNodeWithName(BaseScene.kBackground) as! SKSpriteNode
     bg.position = mCamera.position
-    bg.center(self.size)
-    bg.size.height = self.size.height
-    bg.name = GameScene.kBackground
-    bg.zPosition = Spacing.kBackgroundZIndex
     
     let bg2 = bg.copy() as! SKSpriteNode
-    bg2.name = GameScene.kBackground + "2"
+    bg2.name = BaseScene.kBackground + "2"
     bg2.position = setBackgroundPosition(bg, bg2: bg2, adv: 100)
     
     mBackgrounds.append(bg)
     mBackgrounds.append(bg2)
+    
+    bg.removeFromParent()
+    bg2.removeFromParent()
     
     self.addChild(bg)
     self.addChild(bg2)
@@ -239,6 +226,8 @@ PauseDelegate {
     p.createNode()
     
     mPlatforms.append(g)
+    
+    p.mSprite.removeFromParent()
     
     self.addChild(p.mSprite)
     self.addChild(mPlatforms.lastSprite())
@@ -295,7 +284,7 @@ PauseDelegate {
   
   // Single init func to be called from multiple init
   
-  func fInit() {
+  override func fInit() {
     self.view?.ignoresSiblingOrder = true
     self.physicsWorld.gravity = CGVectorMake(0, -Physics.kGravity)
     self.physicsWorld.contactDelegate = self

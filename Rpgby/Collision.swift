@@ -10,7 +10,7 @@ import Foundation
 
 // Class for collision categories
 
-class Collision {
+final class Collision {
   static let kPlatform: UInt32 = 0x1 << 0
   static let kPerson: UInt32 = 0x1 << 1
   static let kOrb: UInt32 = 0x1 << 2

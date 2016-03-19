@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+// Base class for labels to share
+
 class BaseLabel: SKLabelNode  {
   override var mName: String { return "BaseLabel" }
   

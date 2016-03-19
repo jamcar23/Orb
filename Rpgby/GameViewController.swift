@@ -9,8 +9,8 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController {
-  var mScene: GameScene!
+final class GameViewController: UIViewController {
+  var mScene: MenuScene!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,7 +24,7 @@ class GameViewController: UIViewController {
     skView.ignoresSiblingOrder = true
     
     /* Set the scale mode to scale to fit the window */
-    mScene = GameScene(size: skView.bounds.size)
+    mScene = MenuScene(size: skView.bounds.size)
     mScene.scaleMode = .ResizeFill
     
     skView.presentScene(mScene)

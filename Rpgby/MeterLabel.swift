@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+// Class that manage distance ran HUD element
+
 final class MeterLabel: BaseLabel, Reset, HUD {
   static let kName = "MeterLabel"
   static let kIndex = 2
@@ -37,6 +39,7 @@ final class MeterLabel: BaseLabel, Reset, HUD {
   func fInit() {
     mDistance = 0
     handleText()
+    self.removeFromParent()
   }
   
   override func createNode() {

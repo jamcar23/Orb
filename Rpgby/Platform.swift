@@ -49,6 +49,8 @@ class Platform: BaseSprite {
       time: nil)
   }
   
+  // Set the orbs position releative to the platform
+  
   func setOrb(orb: SKSpriteNode) {
     let s = self.mSprite
     let x = s.position.x

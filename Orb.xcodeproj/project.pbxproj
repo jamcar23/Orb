@@ -40,8 +40,12 @@
 		EFA8A9751C974AB700085A18 /* Phyiscs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9741C974AB700085A18 /* Phyiscs.swift */; };
 		EFA8A9771C99CBB000085A18 /* MeterLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9761C99CBB000085A18 /* MeterLabel.swift */; };
 		EFA8A9821C9B2E4500085A18 /* Pause.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9811C9B2E4500085A18 /* Pause.swift */; };
-		EFA8A9851C9B389700085A18 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9841C9B389700085A18 /* BlurView.swift */; };
 		EFA8A9871C9B51A700085A18 /* OrbCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9861C9B51A700085A18 /* OrbCount.swift */; };
+		EFA8A9891C9B755800085A18 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9881C9B755800085A18 /* UIScreenExtension.swift */; };
+		EFA8A98B1C9DEFAE00085A18 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A98A1C9DEFAE00085A18 /* MenuScene.swift */; };
+		EFA8A98D1C9DF0BC00085A18 /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A98C1C9DF0BC00085A18 /* BaseScene.swift */; };
+		EFA8A98F1C9DF78E00085A18 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A98E1C9DF78E00085A18 /* Play.swift */; };
+		EFA8A9911C9DF80900085A18 /* PlayPause.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9901C9DF80900085A18 /* PlayPause.swift */; };
 		EFCF3E441C9130F60014A66C /* running.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E431C9130F60014A66C /* running.atlas */; };
 		EFCF3E481C9132090014A66C /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E471C9132090014A66C /* jump.atlas */; };
 		EFCF3E4A1C91321E0014A66C /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E491C91321E0014A66C /* background.atlas */; };
@@ -90,8 +94,12 @@
 		EFA8A9741C974AB700085A18 /* Phyiscs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Phyiscs.swift; sourceTree = "<group>"; };
 		EFA8A9761C99CBB000085A18 /* MeterLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeterLabel.swift; sourceTree = "<group>"; };
 		EFA8A9811C9B2E4500085A18 /* Pause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pause.swift; sourceTree = "<group>"; };
-		EFA8A9841C9B389700085A18 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		EFA8A9861C9B51A700085A18 /* OrbCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrbCount.swift; sourceTree = "<group>"; };
+		EFA8A9881C9B755800085A18 /* UIScreenExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
+		EFA8A98A1C9DEFAE00085A18 /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		EFA8A98C1C9DF0BC00085A18 /* BaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
+		EFA8A98E1C9DF78E00085A18 /* Play.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
+		EFA8A9901C9DF80900085A18 /* PlayPause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPause.swift; sourceTree = "<group>"; };
 		EFCF3E431C9130F60014A66C /* running.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = running.atlas; sourceTree = "<group>"; };
 		EFCF3E471C9132090014A66C /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = jump.atlas; path = idle/jump.atlas; sourceTree = "<group>"; };
 		EFCF3E491C91321E0014A66C /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
@@ -173,9 +181,11 @@
 				EF908A211C862B7F006364BA /* Res */,
 				EF908A0B1C862A3F006364BA /* AppDelegate.swift */,
 				EF908A0F1C862A3F006364BA /* GameScene.swift */,
+				EFA8A98A1C9DEFAE00085A18 /* MenuScene.swift */,
+				EFA8A98C1C9DF0BC00085A18 /* BaseScene.swift */,
 				EF98A4511C876065005E57D1 /* SKProtocol.swift */,
+				EFA8A9881C9B755800085A18 /* UIScreenExtension.swift */,
 				EFA8A9741C974AB700085A18 /* Phyiscs.swift */,
-				EFA8A9841C9B389700085A18 /* BlurView.swift */,
 				EF55D0DB1C94B8790020F89D /* Sprites */,
 				EF363CD01C9081BB00A060F8 /* ArrayExtension.swift */,
 				EF363CCA1C8F49D000A060F8 /* GameManager.swift */,
@@ -253,6 +263,8 @@
 			children = (
 				EFCF3E531C9207C70014A66C /* HUD.swift */,
 				EFA8A9811C9B2E4500085A18 /* Pause.swift */,
+				EFA8A9901C9DF80900085A18 /* PlayPause.swift */,
+				EFA8A98E1C9DF78E00085A18 /* Play.swift */,
 				EFA8A9861C9B51A700085A18 /* OrbCount.swift */,
 				EF55D0DA1C94B85E0020F89D /* Labels */,
 			);
@@ -366,14 +378,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF363CD11C9081BB00A060F8 /* ArrayExtension.swift in Sources */,
+				EFA8A98B1C9DEFAE00085A18 /* MenuScene.swift in Sources */,
 				EFA8A9771C99CBB000085A18 /* MeterLabel.swift in Sources */,
 				EF16E1B41C93CD6400069B67 /* Operators.swift in Sources */,
 				EF363CCF1C8F9A2900A060F8 /* LargePlatform.swift in Sources */,
 				EF363CCB1C8F49D000A060F8 /* GameManager.swift in Sources */,
 				EF16E1B61C94AB3C00069B67 /* SmallPlatform.swift in Sources */,
-				EFA8A9851C9B389700085A18 /* BlurView.swift in Sources */,
 				EF908A5B1C865D6A006364BA /* Spacing.swift in Sources */,
 				EF98A4541C8760EA005E57D1 /* BaseSprite.swift in Sources */,
+				EFA8A98F1C9DF78E00085A18 /* Play.swift in Sources */,
+				EFA8A9891C9B755800085A18 /* UIScreenExtension.swift in Sources */,
 				EF16E1BA1C94AE6100069B67 /* MedPlatform.swift in Sources */,
 				EFCF3E541C9207C70014A66C /* HUD.swift in Sources */,
 				EFCF3E561C920D410014A66C /* BaseLabel.swift in Sources */,
@@ -383,6 +397,7 @@
 				EF98A4521C876065005E57D1 /* SKProtocol.swift in Sources */,
 				EF98A4581C876398005E57D1 /* Player.swift in Sources */,
 				EFA8A9871C9B51A700085A18 /* OrbCount.swift in Sources */,
+				EFA8A98D1C9DF0BC00085A18 /* BaseScene.swift in Sources */,
 				EF908A101C862A3F006364BA /* GameScene.swift in Sources */,
 				EF908A121C862A3F006364BA /* GameViewController.swift in Sources */,
 				EF98A4561C8761D3005E57D1 /* MainPlatform.swift in Sources */,
@@ -392,6 +407,7 @@
 				EF908A2F1C863093006364BA /* SKExtension.swift in Sources */,
 				EF908A501C86438E006364BA /* Collision.swift in Sources */,
 				EF908A0C1C862A3F006364BA /* AppDelegate.swift in Sources */,
+				EFA8A9911C9DF80900085A18 /* PlayPause.swift in Sources */,
 				EFCF3E581C920EB10014A66C /* StartLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

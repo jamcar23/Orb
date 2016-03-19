@@ -116,6 +116,8 @@ final class Player: BaseSprite {
     return x <= frame.origin.x || y <= 0
   }
   
+  // Creates the jump timer action
+  
   private func createJumpTimerAction() -> SKAction {
     let wt: CGFloat = 0.3
     let w = SKAction.waitForDuration(0.01)

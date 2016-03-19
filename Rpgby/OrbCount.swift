@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+// Class to manage orb count HUD element
+
 final class OrbCount: SKNode, HUD, Reset {
   static let kIndex = 4
   static let kInstance = OrbCount()
@@ -37,6 +39,7 @@ final class OrbCount: SKNode, HUD, Reset {
   func fInit() {
     mCount = -1
     handleText()
+    self.removeFromParent()
   }
   
   override func createNode() {

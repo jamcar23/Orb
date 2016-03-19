@@ -8,9 +8,13 @@
 
 import SpriteKit
 
+// Protocol for HUD elements that need to have things set dynamically
+
 protocol HUD {
   func setHudPosition(frame: CGRect)
 }
+
+// Class to manage the HUD node
 
 final class HudUi: BaseSprite, Reset {
   static let kName = "HUD"
@@ -26,7 +30,10 @@ final class HudUi: BaseSprite, Reset {
     fInit()
   }
   
+  // func init
+  
   func fInit() {
+    self.mSprite.removeFromParent()
     self.mSprite.anchorPointX(0)
     self.mSprite.zPosition = Spacing.kHUDZIndex
     self.mSprite.position = self.mSprite.anchorPoint
@@ -41,6 +48,8 @@ final class HudUi: BaseSprite, Reset {
       }
     }
   }
+  
+  // Creates each HUD element
   
   static func createHUD() -> [SKNode] {
     var n = [SKNode]()

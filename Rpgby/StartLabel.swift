@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+// Class for label to count down the begin of the game
+
 final class StartLabel: BaseLabel, Manager, Reset {
   static let kName = "StartLabel"
   static let kIndex = 0

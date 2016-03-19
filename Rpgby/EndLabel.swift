@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+// Label to be shown at the end of the game
+
 class EndLabel: BaseLabel {
   static let kName = "StartLabel"
   static let kIndex = 1

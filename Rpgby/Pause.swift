@@ -8,26 +8,26 @@
 
 import SpriteKit
 
+// Protocol for scene to implement for proper pausing
+
 protocol PauseDelegate {
   func isScenePaused() -> Bool
   func pause()
   func resume()
 }
 
-final class Pause: SKSpriteNode, HUD {
+// Class for managing Pause icon/sprite
+
+final class Pause: PlayPause, HUD, Reset {
   static let kName = "Pause"
   static let kIndex = 3
-  static let kTextures = SKTextureAtlas(named: "playPause")
-  static let kPauseName = "ic_pause_48pt"
-  static let kPlayName = "ic_play_48pt"
   static let kInstance = Pause()
   static let kPauseLabel = EndLabel()
   
   override var mName: String { return Pause.kName }
   
   private init() {
-    let t = Pause.kTextures.textureNamed(Pause.kPauseName)
-    super.init(texture: t, color: UIColor.clearColor(), size: t.size())
+    super.init(name: PlayPause.kPauseName)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -56,6 +56,10 @@ final class Pause: SKSpriteNode, HUD {
         self.scene!.addChild(pl)
       }
     }
+  }
+  
+  func fInit() {
+    self.removeFromParent()
   }
   
   override func createNode() {

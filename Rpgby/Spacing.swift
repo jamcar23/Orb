@@ -10,7 +10,7 @@ import UIKit
 
 // Handle spacing elements like ZIndex, etc.
 
-class Spacing {
+final class Spacing {
   static let kBackgroundZIndex: CGFloat = -1
   static let kPersonOrbZIndex: CGFloat = 0
   static let kPlatformZIndex: CGFloat = 1
