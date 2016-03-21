@@ -15,6 +15,12 @@ class BaseSprite: NSObject, Node {
   let mSprite: SKSpriteNode!
   var mName: String { return "BaseSprite" }
   
+  override init() {
+    self.mSprite = SKSpriteNode()
+    
+    super.init()
+  }
+  
   init(texture: SKTexture) {
     self.mSprite = SKSpriteNode(texture: texture)
   }

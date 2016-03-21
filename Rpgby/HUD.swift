@@ -24,7 +24,7 @@ final class HudUi: BaseSprite, Reset {
   static let kBlurFilter = CIFilter(name: "CIGaussianBlur")
   override var mName: String { return HudUi.kName }
   
-  init() {
+  override init() {
     super.init(color: UIColor.clearColor(), size: UIScreen.mainScreen().bounds.size)
     
     fInit()

@@ -20,7 +20,7 @@ final class Play: PlayPause, HUD {
   }
   
   func setHudPosition(frame: CGRect) {
-    self.position = CGPointMake(frame.width / 2, frame.origin.y +
+    self.position = CGPointMake(frame.width / 2 - 21, frame.origin.y +
       HudUi.kOffset.top * 2)
   }
   
@@ -29,7 +29,7 @@ final class Play: PlayPause, HUD {
       let gs = GameScene(size: s.view!.bounds.size)
       gs.scaleMode = .ResizeFill
       
-      s.view?.presentScene(gs, transition: SKTransition.crossFadeWithDuration(2))
+      s.view?.presentScene(gs, transition: SKTransition.doorsOpenHorizontalWithDuration(2))
     }
   }
 }

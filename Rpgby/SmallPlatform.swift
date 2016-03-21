@@ -12,7 +12,7 @@ final class SmallPlatform: Platform {
   static let kName = "SmallPlatform"
   override var mName: String { return SmallPlatform.kName }
   
-  init() {
+  override init() {
     super.init(texture: Platform.kTextures.textureNamed(SmallPlatform.kName))
     self.mBottom = false
   }

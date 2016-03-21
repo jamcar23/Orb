@@ -46,6 +46,8 @@
 		EFA8A98D1C9DF0BC00085A18 /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A98C1C9DF0BC00085A18 /* BaseScene.swift */; };
 		EFA8A98F1C9DF78E00085A18 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A98E1C9DF78E00085A18 /* Play.swift */; };
 		EFA8A9911C9DF80900085A18 /* PlayPause.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9901C9DF80900085A18 /* PlayPause.swift */; };
+		EFA8A9931CA0A31400085A18 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9921CA0A31400085A18 /* Credits.swift */; };
+		EFA8A9951CA0A4D000085A18 /* CreditsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9941CA0A4D000085A18 /* CreditsLabel.swift */; };
 		EFCF3E441C9130F60014A66C /* running.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E431C9130F60014A66C /* running.atlas */; };
 		EFCF3E481C9132090014A66C /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E471C9132090014A66C /* jump.atlas */; };
 		EFCF3E4A1C91321E0014A66C /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E491C91321E0014A66C /* background.atlas */; };
@@ -100,6 +102,8 @@
 		EFA8A98C1C9DF0BC00085A18 /* BaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
 		EFA8A98E1C9DF78E00085A18 /* Play.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
 		EFA8A9901C9DF80900085A18 /* PlayPause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPause.swift; sourceTree = "<group>"; };
+		EFA8A9921CA0A31400085A18 /* Credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
+		EFA8A9941CA0A4D000085A18 /* CreditsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsLabel.swift; sourceTree = "<group>"; };
 		EFCF3E431C9130F60014A66C /* running.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = running.atlas; sourceTree = "<group>"; };
 		EFCF3E471C9132090014A66C /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = jump.atlas; path = idle/jump.atlas; sourceTree = "<group>"; };
 		EFCF3E491C91321E0014A66C /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				EFCF3E551C920D410014A66C /* BaseLabel.swift */,
+				EFA8A9941CA0A4D000085A18 /* CreditsLabel.swift */,
 				EFCF3E631C92794C0014A66C /* EndLabel.swift */,
 				EFCF3E571C920EB10014A66C /* StartLabel.swift */,
 				EFA8A9761C99CBB000085A18 /* MeterLabel.swift */,
@@ -265,6 +270,7 @@
 				EFA8A9811C9B2E4500085A18 /* Pause.swift */,
 				EFA8A9901C9DF80900085A18 /* PlayPause.swift */,
 				EFA8A98E1C9DF78E00085A18 /* Play.swift */,
+				EFA8A9921CA0A31400085A18 /* Credits.swift */,
 				EFA8A9861C9B51A700085A18 /* OrbCount.swift */,
 				EF55D0DA1C94B85E0020F89D /* Labels */,
 			);
@@ -393,12 +399,14 @@
 				EFCF3E561C920D410014A66C /* BaseLabel.swift in Sources */,
 				EF363CCD1C8F4B1800A060F8 /* Platform.swift in Sources */,
 				EFA8A9821C9B2E4500085A18 /* Pause.swift in Sources */,
+				EFA8A9931CA0A31400085A18 /* Credits.swift in Sources */,
 				EFA8A9751C974AB700085A18 /* Phyiscs.swift in Sources */,
 				EF98A4521C876065005E57D1 /* SKProtocol.swift in Sources */,
 				EF98A4581C876398005E57D1 /* Player.swift in Sources */,
 				EFA8A9871C9B51A700085A18 /* OrbCount.swift in Sources */,
 				EFA8A98D1C9DF0BC00085A18 /* BaseScene.swift in Sources */,
 				EF908A101C862A3F006364BA /* GameScene.swift in Sources */,
+				EFA8A9951CA0A4D000085A18 /* CreditsLabel.swift in Sources */,
 				EF908A121C862A3F006364BA /* GameViewController.swift in Sources */,
 				EF98A4561C8761D3005E57D1 /* MainPlatform.swift in Sources */,
 				EF16E1B81C94AD9100069B67 /* LowPlatform.swift in Sources */,

@@ -34,7 +34,7 @@ final class Player: BaseSprite {
   var mJumpY: CGFloat = 0
   var mTime: CGFloat = 0.001
   
-  private init() {
+  private override init() {
     super.init(texture: SKTexture(imageNamed: "idle-1"))
     Player.kRunTex.preloadWithCompletionHandler({
       self.mRunAni = SKAction.animateWithTextures(Player.kRunTex.toTextures(),

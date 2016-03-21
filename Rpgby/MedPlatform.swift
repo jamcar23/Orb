@@ -12,7 +12,7 @@ final class MedPlatform: Platform {
   static let kName = "MedPlatform"
   override var mName: String { return MedPlatform.kName }
   
-  init() {
+  override init() {
     super.init(texture: Platform.kTextures.textureNamed(MedPlatform.kName))
     self.mBottom = true
   }

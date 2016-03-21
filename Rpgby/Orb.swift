@@ -21,7 +21,7 @@ final class Orb: BaseSprite {
   static let kCollectSfx = SKAction.playSoundFileNamed("Coin.mp3",
     waitForCompletion: false)
   
-  private init() {
+  private override init() {
     super.init(texture: Orb.kTextures.textureNamed(Orb.kRed))
   }
   

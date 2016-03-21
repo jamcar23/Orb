@@ -14,15 +14,21 @@ final class MenuScene: BaseScene {
   override func fInit() {
     let t = MenuScene.kTitle
     let p = Play.kInstace
+    let c = Credits.kInstace
     
     self.setUpBackground()
     t.position = CGPointMake(self.getMidX(), self.frame.size.height -
       HudUi.kOffset.top * 2)
     p.setHudPosition(self.frame)
+    c.setHudPosition(self.frame)
     p.userInteractionEnabled = true
+    c.userInteractionEnabled = true
+    
+    c.size = p.size
     
     self.addChild(t)
     self.addChild(p)
+    self.addChild(c)
     
     self.userInteractionEnabled = true
   }
