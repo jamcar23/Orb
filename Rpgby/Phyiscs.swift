@@ -11,7 +11,7 @@ import SpriteKit
 final class Physics: Reset {
   static let kInstance = Physics()
   static let kGravity: CGFloat = 4.2
-  static let kMaxJumpTime: CGFloat = 4 // seconds
+  static let kMaxJumpTime: CGFloat = 3.75 // seconds
   static let kMaxRunSpeed: CGFloat = 800
   var mVelocityY: CGFloat!
   var mVelocityX: CGFloat = 2
@@ -73,11 +73,16 @@ final class Physics: Reset {
   
   // Calculates max jump height based on angle and time
   
+  //  func calcYDistance(angle: CGFloat, time: CGFloat) -> CGFloat {
+  //    return ((mVelocityY ^^ 2) * (sin(angle) ^^ 2)) / (2 * Physics.kGravity)
+  //  }
+  
   func calcYDistance(angle: CGFloat, time: CGFloat) -> CGFloat {
-    return ((mVelocityY ^^ 2) * (sin(angle) ^^ 2)) / (2 * Physics.kGravity)
+    return (mVelocityY * time) - ( 0.5 * (Physics.kGravity * (time ^^ 2)))
   }
   
-  // Checks if time is not nil and less than max time 
+  
+  // Checks if time is not nil and less than max time
   
   func calcTime(time: CGFloat?) -> CGFloat {
     return time != nil && time! < Physics.kMaxJumpTime ? time! : Physics.kMaxJumpTime
