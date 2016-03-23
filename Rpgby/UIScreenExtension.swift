@@ -8,7 +8,7 @@
 
 import UIKit
 
-// Helper funcs for UIScreen
+// Helper funcs for UIScreen and CGRect
 
 extension UIScreen {
   static func scaleWidth(scale: Double) -> CGFloat {
@@ -27,4 +27,35 @@ extension UIScreen {
   static func mainScreenScale() -> CGFloat {
     return UIScreen.mainScreen().scale
   }
+}
+
+extension CGRect: XY {
+  func getMaxY() -> CGFloat {
+    return CGRectGetMaxY(self)
+  }
+  
+  func getMidY() -> CGFloat {
+    return CGRectGetMidY(self)
+  }
+  
+  func getMinY() -> CGFloat {
+    return CGRectGetMinY(self)
+  }
+  
+  func getMaxX() -> CGFloat {
+    return CGRectGetMaxX(self)
+  }
+  
+  func getMidX() -> CGFloat {
+    return CGRectGetMidX(self)
+  }
+  
+  func getMinX() -> CGFloat {
+    return CGRectGetMinX(self)
+  }
+  
+  func getCenterPoint() -> CGPoint {
+    return CGPointMake(getMidX(), getMidY())
+  }
+  
 }

@@ -222,7 +222,7 @@ PauseDelegate {
     let g = Platform.kAllPlatforms[0]
     let p = Player.kInstance
     
-    g.setPosition(-1, size: self.size)
+    g.setPosition(nil, size: self.size)
     p.createNode()
     
     mPlatforms.append(g)
@@ -261,7 +261,7 @@ PauseDelegate {
     
     mPreviousPlatform = n.0
     mPreviousSprite = mPlatforms.lastSprite()
-    p.setPosition(mPreviousSprite.getMaxX(), size: self.size)
+    p.setPosition(mPreviousSprite.frame, size: self.size)
     mPlatforms.append(p)
     self.addChild(mPlatforms.lastSprite())
     

@@ -11,9 +11,7 @@ import SpriteKit
 // Protocol for helper methods for SKNode
 // See SKExtension.swift for implementation
 
-protocol Node {
-  var mName: String { get }
-  func createNode()
+protocol XY {
   func getMaxY() -> CGFloat
   func getMidY() -> CGFloat
   func getMinY() -> CGFloat
@@ -21,6 +19,11 @@ protocol Node {
   func getMidX() -> CGFloat
   func getMinX() -> CGFloat
   func getCenterPoint() -> CGPoint
+}
+
+protocol Node: XY {
+  var mName: String { get }
+  func createNode()
 }
 
 protocol Reset {

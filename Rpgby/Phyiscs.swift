@@ -11,7 +11,7 @@ import SpriteKit
 final class Physics: Reset {
   static let kInstance = Physics()
   static let kGravity: CGFloat = 4.2
-  static let kMaxJumpTime: CGFloat = 3.5 // seconds
+  static let kMaxJumpTime: CGFloat = 4 // seconds
   static let kMaxRunSpeed: CGFloat = 800
   var mVelocityY: CGFloat!
   var mVelocityX: CGFloat = 2
@@ -35,7 +35,7 @@ final class Physics: Reset {
       }
       
       let max = calcYDistance(45, time: t)
-      s.position.y = calcRandom(max - Player.kInstance.mSprite.size
+      s.position.y = calcRandom((max + h * 0.75) - Player.kInstance.mSprite.size
         .height, lower: 0, min: s.halfHeight())
   }
   

@@ -35,17 +35,19 @@ class Platform: BaseSprite {
   
   // Public to call for setting the position
   
-  func setPosition(previous: CGFloat, size: CGSize) {
+  func setPosition(previous: CGRect?, size: CGSize) {
     let p = Physics.kInstance
+    let x = previous?.getMaxX() ?? -1
+    let y = previous?.getMaxY() ?? 0
     
-    if previous >= 0 {
-      p.randomDistance(sprite: self.mSprite, previous: previous, width:
+    if x >= 0 {
+      p.randomDistance(sprite: self.mSprite, previous: x, width:
         size.width, time: nil)
-    } else if previous == -1 {
+    } else if previous == nil {
       self.mSprite.position = self.mSprite.anchorPoint
     }
     
-    p.randomElevation(sprite: self.mSprite, height: size.height, bottom: mBottom,
+    p.randomElevation(sprite: self.mSprite, height: y, bottom: mBottom,
       time: nil)
   }
   

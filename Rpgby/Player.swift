@@ -86,6 +86,7 @@ final class Player: BaseSprite {
       s.runAction(mJumpUpAni)
 //      let x = phy.calcXDistance(45, time: t)
       mJumpY = phy.calcYDistance(45, time: t)
+      print("jumpY: " + mJumpY.description)
       phyBody?.applyImpulse(CGVectorMake(0, mJumpY + (s.frame.height * 0.075)))
     }
   }
@@ -119,7 +120,7 @@ final class Player: BaseSprite {
   // Creates the jump timer action
   
   private func createJumpTimerAction() -> SKAction {
-    let wt: CGFloat = 0.3
+    let wt: CGFloat = 0.15
     let w = SKAction.waitForDuration(0.01)
     let t = SKAction.runBlock({
       if self.mTime < Physics.kMaxJumpTime {
