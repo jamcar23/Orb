@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -48,6 +48,8 @@
 		EFA8A9911C9DF80900085A18 /* PlayPause.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9901C9DF80900085A18 /* PlayPause.swift */; };
 		EFA8A9931CA0A31400085A18 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9921CA0A31400085A18 /* Credits.swift */; };
 		EFA8A9951CA0A4D000085A18 /* CreditsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9941CA0A4D000085A18 /* CreditsLabel.swift */; };
+		EFA8A9991CA46A1E00085A18 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A9981CA46A1E00085A18 /* DataManager.swift */; };
+		EFA8A99B1CA473DD00085A18 /* InstructionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A99A1CA473DD00085A18 /* InstructionLabel.swift */; };
 		EFCF3E441C9130F60014A66C /* running.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E431C9130F60014A66C /* running.atlas */; };
 		EFCF3E481C9132090014A66C /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E471C9132090014A66C /* jump.atlas */; };
 		EFCF3E4A1C91321E0014A66C /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E491C91321E0014A66C /* background.atlas */; };
@@ -104,6 +106,8 @@
 		EFA8A9901C9DF80900085A18 /* PlayPause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPause.swift; sourceTree = "<group>"; };
 		EFA8A9921CA0A31400085A18 /* Credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 		EFA8A9941CA0A4D000085A18 /* CreditsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsLabel.swift; sourceTree = "<group>"; };
+		EFA8A9981CA46A1E00085A18 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		EFA8A99A1CA473DD00085A18 /* InstructionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionLabel.swift; sourceTree = "<group>"; };
 		EFCF3E431C9130F60014A66C /* running.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = running.atlas; sourceTree = "<group>"; };
 		EFCF3E471C9132090014A66C /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = jump.atlas; path = idle/jump.atlas; sourceTree = "<group>"; };
 		EFCF3E491C91321E0014A66C /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 				EFCF3E551C920D410014A66C /* BaseLabel.swift */,
 				EFA8A9941CA0A4D000085A18 /* CreditsLabel.swift */,
 				EFCF3E631C92794C0014A66C /* EndLabel.swift */,
+				EFA8A99A1CA473DD00085A18 /* InstructionLabel.swift */,
 				EFCF3E571C920EB10014A66C /* StartLabel.swift */,
 				EFA8A9761C99CBB000085A18 /* MeterLabel.swift */,
 			);
@@ -191,6 +196,7 @@
 				EF98A4511C876065005E57D1 /* SKProtocol.swift */,
 				EFA8A9881C9B755800085A18 /* UIScreenExtension.swift */,
 				EFA8A9741C974AB700085A18 /* Phyiscs.swift */,
+				EFA8A9981CA46A1E00085A18 /* DataManager.swift */,
 				EF55D0DB1C94B8790020F89D /* Sprites */,
 				EF363CD01C9081BB00A060F8 /* ArrayExtension.swift */,
 				EF363CCA1C8F49D000A060F8 /* GameManager.swift */,
@@ -330,11 +336,12 @@
 				TargetAttributes = {
 					EF908A071C862A3F006364BA = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 423XER8HMY;
 					};
 				};
 			};
 			buildConfigurationList = EF908A031C862A3F006364BA /* Build configuration list for PBXProject "Orb" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -414,6 +421,8 @@
 				EFCF3E641C92794C0014A66C /* EndLabel.swift in Sources */,
 				EF908A2F1C863093006364BA /* SKExtension.swift in Sources */,
 				EF908A501C86438E006364BA /* Collision.swift in Sources */,
+				EFA8A99B1CA473DD00085A18 /* InstructionLabel.swift in Sources */,
+				EFA8A9991CA46A1E00085A18 /* DataManager.swift in Sources */,
 				EF908A0C1C862A3F006364BA /* AppDelegate.swift in Sources */,
 				EFA8A9911C9DF80900085A18 /* PlayPause.swift in Sources */,
 				EFCF3E581C920EB10014A66C /* StartLabel.swift in Sources */,
@@ -529,13 +538,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Rpgby/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = xyz.jamescarroll.Rpgby;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.jamescarroll.Orb;
 				PRODUCT_NAME = Orb;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 				"Texture Atlas Maximum Size" = 2048x2048;
 			};
 			name = Debug;
@@ -544,13 +558,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Rpgby/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = xyz.jamescarroll.Rpgby;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.jamescarroll.Orb;
 				PRODUCT_NAME = Orb;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = 1;
 				"Texture Atlas Maximum Size" = 2048x2048;
 			};
 			name = Release;

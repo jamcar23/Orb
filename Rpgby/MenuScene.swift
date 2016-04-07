@@ -11,6 +11,8 @@ import SpriteKit
 final class MenuScene: BaseScene {
   static let kTitle = MenuScene.setUpTitle()
   
+  // Function init
+  
   override func fInit() {
     let t = MenuScene.kTitle
     let p = Play.kInstace
@@ -23,8 +25,8 @@ final class MenuScene: BaseScene {
     c.setHudPosition(self.frame)
     p.userInteractionEnabled = true
     c.userInteractionEnabled = true
-    
-    c.size = p.size
+    let ar = c.size.width / c.size.height
+    c.size = CGSizeMake(p.size.height * ar, p.size.height)
     
     self.addChild(t)
     self.addChild(p)
@@ -32,6 +34,8 @@ final class MenuScene: BaseScene {
     
     self.userInteractionEnabled = true
   }
+  
+  // Sets up main title
   
   private static func setUpTitle() -> SKLabelNode {
     let l = SKLabelNode(text: "Orb")

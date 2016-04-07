@@ -24,6 +24,7 @@ class EndLabel: BaseLabel {
   }
   
   override func createNode() {
+    super.createNode()
     self.fontColor = UIColor.blackColor()
     self.fontSize = 74
   }

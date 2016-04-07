@@ -10,17 +10,16 @@ import SpriteKit
 
 final class CreditsLabel: BaseLabel {
   static let kName = "CreditsLabel"
-  static let kCredits = [
-    "Developed by James Carroll",
-    "Visual Artist:\n\n",
-    "Audio Artist:\n\n"
-  ]
+  static let kCreditTypes = ["Developed by ", "Visual Artist: ", "Audio Artist: ",
+    "Thanks For Playing!"]
+  static let kCredits = [["James Carroll"], ["Luis Zuno", "Bevouliin", "Bluce"],
+    ["Trevor Lentz", "chasersgaming", "Section 31 -Tech"], [""]]
   static let kInstance = CreditsLabel()
   static let kBackground = CreditsLabel.setUpBackground()
   static let kTimer = CreditsLabel.createTimer()
   
   override var mName: String { return CreditsLabel.kName }
-  var mCurrent = 0
+  var mCurrent = (0, 0)
   
   private override init() {
     super.init(text: "")
@@ -31,10 +30,10 @@ final class CreditsLabel: BaseLabel {
   }
   
   override func createNode() {
-    self.mCurrent = 0
+    super.createNode()
+    self.mCurrent = (0, 0)
     self.fontColor = UIColor.whiteColor()
     self.fontSize = 42
-    self.zPosition = 10
     self.runAction(CreditsLabel.kTimer)
   }
   
@@ -42,17 +41,30 @@ final class CreditsLabel: BaseLabel {
     let w = SKAction.waitForDuration(2)
     let r = SKAction.runBlock({
       let s = CreditsLabel.kInstance
+      var cur = s.mCurrent
       
-      if s.mCurrent >= CreditsLabel.kCredits.count {
+      if  cur.0 >= CreditsLabel.kCreditTypes.count {
         s.removeAllActions()
         CreditsLabel.kBackground.removeFromParent()
         s.removeFromParent()
         return
       }
       
-      s.text = CreditsLabel.kCredits[s.mCurrent]
+      let t = kCreditTypes[cur.0]
+      let c = kCredits[cur.0]
+      let n = c[cur.1]
       
-      ++s.mCurrent
+      s.text = t + n
+      
+      cur.1 += 1
+      
+      if cur.1 >= c.count {
+        cur.0 += 1
+        cur.1 = 0
+      }
+      
+      s.mCurrent = cur
+      
     })
     
     return SKAction.repeatActionForever(SKAction.sequence([r, w]))

@@ -35,7 +35,7 @@ final class Physics: Reset {
       }
       
       let max = calcYDistance(45, time: t)
-      s.position.y = calcRandom((max + h * 0.75) - Player.kInstance.mSprite.size
+      s.position.y = calcRandom((max + (h * 0.9)) - Player.kInstance.mSprite.size
         .height, lower: 0, min: s.halfHeight())
   }
   
@@ -73,14 +73,9 @@ final class Physics: Reset {
   
   // Calculates max jump height based on angle and time
   
-  //  func calcYDistance(angle: CGFloat, time: CGFloat) -> CGFloat {
-  //    return ((mVelocityY ^^ 2) * (sin(angle) ^^ 2)) / (2 * Physics.kGravity)
-  //  }
-  
   func calcYDistance(angle: CGFloat, time: CGFloat) -> CGFloat {
     return (mVelocityY * time) - ( 0.5 * (Physics.kGravity * (time ^^ 2)))
   }
-  
   
   // Checks if time is not nil and less than max time
   

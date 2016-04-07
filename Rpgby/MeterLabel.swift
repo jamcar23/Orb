@@ -37,6 +37,7 @@ final class MeterLabel: BaseLabel, Reset, HUD {
   }
   
   func fInit() {
+    super.createNode()
     mDistance = 0
     handleText()
     self.removeFromParent()

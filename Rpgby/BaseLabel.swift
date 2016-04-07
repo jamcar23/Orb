@@ -28,6 +28,6 @@ class BaseLabel: SKLabelNode  {
   }
   
   override func createNode() {
-    return
+    self.zPosition = Spacing.kHUDZIndex
   }
 }

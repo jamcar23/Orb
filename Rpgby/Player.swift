@@ -79,7 +79,7 @@ final class Player: BaseSprite {
     let phyBody = s.physicsBody
     let t = phy.calcTime(self.mTime)
     
-    if mJumping && mCounting {
+    if mCounting {
       mCounting = false
       s.removeAllActions()
       s.runAction(Player.kJumpSfx)

@@ -57,7 +57,7 @@ class Platform: BaseSprite {
     let s = self.mSprite
     let x = s.position.x
     let r = Physics.kInstance.calcRandom(getMaxX(), lower: orb.halfWidth(), min:
-      x)
+      x - orb.halfWidth())
     orb.position = CGPointMake(r, getMaxY())
   }
   

@@ -47,6 +47,7 @@ final class StartLabel: BaseLabel, Manager, Reset {
   }
   
   override func createNode() {
+    super.createNode()
     self.fontColor = UIColor.blackColor()
     self.fontSize = 128
   }
@@ -66,7 +67,7 @@ final class StartLabel: BaseLabel, Manager, Reset {
         sl.removeFromParent()
       }
       
-      --sl.mCount
+      sl.mCount -= 1
     })
     let seq = SKAction.sequence([r, w])
     var seqs = [SKAction]()

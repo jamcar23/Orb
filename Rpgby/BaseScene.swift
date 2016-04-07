@@ -24,6 +24,8 @@ class BaseScene: SKScene {
     fInit()
   }
   
+  // Handles setting up background
+  
   func setUpBackground() {
     let bg = SKSpriteNode(imageNamed: BaseScene.kBackground)
     bg.center(self.size)

@@ -26,11 +26,19 @@ PauseDelegate {
     /* Called when a touch begins */
     let pl = Player.kInstance
     let hud = HudUi.kInstance.mSprite
+    let khud = HudUi.kHUDs
     
     if !mCountDown {
+      let il = InstructionLabel.kInstance.mLabels
       mCountDown = true
       
-      if let sl = HudUi.kHUDs[StartLabel.kIndex] as? StartLabel {
+      for i in il {
+        i.removeFromParent()
+      }
+      
+      hud.addChild(khud[Pause.kIndex])
+      
+      if let sl = khud[StartLabel.kIndex] as? StartLabel {
         hud.addChild(sl)
         sl.position = self.getCenterPoint()
         hud.runAction(StartLabel.kCountAct, completion: begin)
@@ -45,7 +53,7 @@ PauseDelegate {
       self.mPlatforms.removeAll()
       self.mBackgrounds.removeAll()
       self.mBegin = false
-      self.mCountDown = false 
+      self.mCountDown = false
       self.mGameOver = false
       self.mPreviousTime = nil
       self.fInit()
@@ -92,10 +100,11 @@ PauseDelegate {
     if mBegin {
       if !self.paused {
         let x =  phy.mRunSpeed * CGFloat(currentTime - (mPreviousTime ?? currentTime))
+        let ix = Int(x)
         p.mSprite.position.x += x
         hud.position.x += x
         mCamera.position.x += x
-        ml.mDistance += Int(x)
+        ml.mDistance += ix < 10 ? ix : ix / 10
         ml.handleText()
         phy.mVelocityX = x
       }
@@ -148,6 +157,8 @@ PauseDelegate {
     }
   }
   
+  // Things that happen in the beginning
+  
   func begin() {
     let pl = Player.kInstance
     let phy = Physics.kInstance
@@ -167,32 +178,29 @@ PauseDelegate {
       rb])), withKey: Player.kTimer)
   }
   
+  // Things that happen in the end
+  
   func end() {
     let el = HudUi.kHUDs[EndLabel.kIndex] as! SKLabelNode
+    let oc = OrbCount.kInstance
     
     self.runAction(Player.kFallSfx)
     
     el.position = self.getCenterPoint()
-    el.text = OrbCount.kInstance.mCount >= OrbCount.kNeeded ? "Winner Winner!" :
-    "Try Again."
-    HudUi.kInstance.mSprite.addChild(el)
     
+    if oc.mCount > oc.mNeed {
+      el.text = "New High Score!"
+      DataManager.setMaxOrbsCollected(oc.mCount)
+    } else if oc.mCount == oc.mNeed {
+      el.text = "Winner Winner!"
+    } else {
+      el.text = "Try Again."
+    }
+    
+    HudUi.kInstance.mSprite.addChild(el)
     Player.kInstance.mSprite.removeFromParent()
     self.mBegin = false
     self.mGameOver = true
-  }
-  
-  func isScenePaused() -> Bool {
-    return self.paused
-  }
-  
-  func pause() {
-    self.paused = true
-  }
-  
-  func resume() {
-    self.mPreviousTime = nil
-    self.paused = false
   }
   
   // Set up background
@@ -271,15 +279,33 @@ PauseDelegate {
     }
   }
   
+  // Sets up HUD elements
+  
   private func setUpHUD() {
     let h = HudUi.kInstance
     let hud = h.mSprite
     let kHUDs = HudUi.kHUDs
     h.fInit()
     hud.addChild(kHUDs[MeterLabel.kIndex])
-    hud.addChild(kHUDs[Pause.kIndex])
     hud.addChild(kHUDs[OrbCount.kIndex])
     self.addChild(hud)
+  }
+  
+  // Handles setting up instructions
+  
+  private func setUpInstructions() {
+    if !DataManager.hasSeenInstructions() {
+      let il = InstructionLabel.kInstance
+      
+      il.createLabels(self.size, texts: "Tap to begin/jump/reset.", "Longer taps "
+        + "= higher jumps.", "Collect as many orbs as you can.", "Don't fall off.")
+      
+      for i in il.mLabels {
+        self.addChild(i)
+      }
+      
+      DataManager.kDefaults.setBool(true, forKey: DataManager.kInstruct)
+    }
   }
   
   // Single init func to be called from multiple init
@@ -289,18 +315,34 @@ PauseDelegate {
     self.physicsWorld.gravity = CGVectorMake(0, -Physics.kGravity)
     self.physicsWorld.contactDelegate = self
     self.userInteractionEnabled = true
-//    self.shouldEnableEffects = true
+    //    self.shouldEnableEffects = true
     self.camera = mCamera
     self.camera?.center(self.size)
     setUpBackground()
     setUpPlayer()
     setUpOre()
     setUpHUD()
+    setUpInstructions()
     self.camera?.position.x = UIScreen.scaleWidth(0.5)
     self.camera?.frame.size
     
     for _ in 0...9 {
       createPlatform()
     }
+  }
+  
+  // MARK - PasswordDelegate
+  
+  func isScenePaused() -> Bool {
+    return self.paused
+  }
+  
+  func pause() {
+    self.paused = true
+  }
+  
+  func resume() {
+    self.mPreviousTime = nil
+    self.paused = false
   }
 }

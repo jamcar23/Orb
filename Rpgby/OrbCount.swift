@@ -14,30 +14,39 @@ final class OrbCount: SKNode, HUD, Reset {
   static let kIndex = 4
   static let kInstance = OrbCount()
   static let kLabel = SKLabelNode()
-  static let kNeeded = 5
+  static let kDefaultNeed = 3
   
   var mCount = -1
+  var mNeed = OrbCount.kDefaultNeed
   
   private override init() {
     super.init()
+    handleNeedAmount()
   }
 
   required init?(coder aDecoder: NSCoder) {
       super.init(coder: aDecoder)
   }
   
+  
   func setHudPosition(frame: CGRect) {
     let o = HudUi.kOffset
     self.position = CGPointMake(frame.size.width - o.sides, frame.size.height - o.top)
   }
   
+  private func handleNeedAmount() {
+    let m = DataManager.getMaxOrbsCollected()
+    mNeed = m >= OrbCount.kDefaultNeed ? m : OrbCount.kDefaultNeed
+  }
+  
   func handleText() {
-    ++mCount
-    OrbCount.kLabel.text = mCount.description + "/" + OrbCount.kNeeded.description + " Orbs"
+    mCount += 1
+    OrbCount.kLabel.text = mCount.description + "/" + mNeed.description + " Orbs"
   }
   
   func fInit() {
     mCount = -1
+    handleNeedAmount()
     handleText()
     self.removeFromParent()
   }
