@@ -9,7 +9,7 @@
 import SpriteKit
 
 final class SmallPlatform: Platform {
-  static let kName = "SmallPlatform"
+  static let kName = "platform_small1"
   override var mName: String { return SmallPlatform.kName }
   
   override init() {
@@ -20,9 +20,7 @@ final class SmallPlatform: Platform {
   override func createNode() {
     let s = self.mSprite
     
-    s.scale(0.85)
-    s.anchorPointX(0)
-    s.physicsBody = SKPhysicsBody(rectangleOfSize: s.size, center: s.getCenterPoint())
-    self.setSharedProperties()
+    self.setSharedProperties(CGSizeMake(s.size.width - 50,
+      s.size.height - 75))
   }
 }

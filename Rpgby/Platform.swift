@@ -12,15 +12,19 @@ import SpriteKit
 
 class Platform: BaseSprite {
   static let kAllPlatforms = Platform.createPlatforms()
-  static let kTextures = SKTextureAtlas(named: "world")
+  static let kTextures = SKTextureAtlas(named: "Platforms")
   override var mName: String { return "Platform" }
   var mBottom = true
   
   // Handle setting up everything platforms share
   
-  func setSharedProperties() {
+  func setSharedProperties(size: CGSize) {
     let s = self.mSprite
     
+    s.anchorPointX(0)
+    s.scale(0.75)
+    s.physicsBody = SKPhysicsBody(rectangleOfSize: size, center:
+      s.getCenterPoint())
     s.physicsBody?.dynamic = false
     s.physicsBody?.restitution = 0
     s.physicsBody?.affectedByGravity = false
@@ -30,7 +34,6 @@ class Platform: BaseSprite {
     s.physicsBody?.contactTestBitMask = Collision.kPerson
     
     s.zPosition = Spacing.kPlatformZIndex
-    s.anchorPoint.x = 0
   }
   
   // Public to call for setting the position
@@ -66,11 +69,11 @@ class Platform: BaseSprite {
   static func createPlatforms() -> [Platform] {
     var all = [Platform]()
     
-    all.append(MainPlatform())
-    all.append(LargePlatform())
+    all.append(FluffyPlatform())
+    all.append(FluffyPlatform2())
     all.append(SmallPlatform())
-    all.append(LowPlatform())
     all.append(MedPlatform())
+    all.append(SmallPlatform2())
     
     for a in all {
       a.createNode()

@@ -1,0 +1,11 @@
+v1.1
+NEW added support for iPad
+IMPROVED camera follows player while jumping
+FIXED (maybe) issue where jumping is delayed on landing
+FIXED issue where the game would stay paused after restarting
+FIXED issue where the pause label would overlap ending label
+FIXED issue where death is delayed from falling off left side of screen
+
+v1.0
+
+Initial Beta

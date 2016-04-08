@@ -12,7 +12,7 @@ import SpriteKit
 // Base class for all sprites
 
 class BaseSprite: NSObject, Node {
-  let mSprite: SKSpriteNode!
+  var mSprite: SKSpriteNode!
   var mName: String { return "BaseSprite" }
   
   override init() {

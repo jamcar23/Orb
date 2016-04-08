@@ -12,7 +12,7 @@ import UIKit
 
 final class Spacing {
   static let kBackgroundZIndex: CGFloat = -1
-  static let kPersonOrbZIndex: CGFloat = 0
-  static let kPlatformZIndex: CGFloat = 1
+  static let kPersonOrbZIndex: CGFloat = 1
+  static let kPlatformZIndex: CGFloat = 0
   static let kHUDZIndex: CGFloat = 2
 }

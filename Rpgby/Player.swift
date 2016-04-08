@@ -109,12 +109,12 @@ final class Player: BaseSprite {
   
   // Checks if the player is off the screen
   
-  func isDead(frame: CGRect) -> Bool {
+  func isDead(frame: CGRect, width w: CGFloat) -> Bool {
     let s = self.mSprite
     let x = s.getMaxX()
     let y = s.getMidY()
     
-    return x <= frame.origin.x || y <= 0
+    return x <= frame.origin.x - w || y <= 0
   }
   
   // Creates the jump timer action
@@ -142,7 +142,7 @@ final class Player: BaseSprite {
     s.removeAllActions()
     s.scale(0.075)
     s.anchorPointX(0)
-    s.position = CGPointMake(30, 142)
+    s.position = CGPointMake(30, 500)
     s.physicsBody = SKPhysicsBody(rectangleOfSize: s.size)
     s.physicsBody?.categoryBitMask = Collision.kPerson
     s.physicsBody?.collisionBitMask = Collision.kPlatform

@@ -9,20 +9,18 @@
 import SpriteKit
 
 final class MedPlatform: Platform {
-  static let kName = "MedPlatform"
+  static let kName = "platform_med"
   override var mName: String { return MedPlatform.kName }
   
   override init() {
     super.init(texture: Platform.kTextures.textureNamed(MedPlatform.kName))
-    self.mBottom = true
+    self.mBottom = false
   }
   
   override func createNode() {
     let s = self.mSprite
     
-    s.scale(0.5)
-    s.anchorPointX(0)
-    s.physicsBody = SKPhysicsBody(rectangleOfSize: s.size, center: s.getCenterPoint())
-    self.setSharedProperties()
+    s.name = MedPlatform.kName
+    self.setSharedProperties(CGSizeMake(s.size.width - 95, s.size.height - 75))
   }
 }

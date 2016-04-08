@@ -15,10 +15,13 @@ PauseDelegate {
   var mGameOver = false
   var mBackgrounds = [SKSpriteNode]()
   var mPlatforms = [Platform]()
+  var mBottomGrass = [SKSpriteNode]()
   var mPreviousPlatform = 0
+  var mPreviousBottomGrassPos: CGFloat = 0
   var mPreviousSprite: SKSpriteNode!
   var mPreviousTime: CFTimeInterval?
   let mCamera = SKCameraNode()
+  let mScreen = (width: UIScreen.scaleWidth(0.5), height: UIScreen.scaleHeight(0.5))
   
   // Handle jumping
   
@@ -56,8 +59,8 @@ PauseDelegate {
       self.mCountDown = false
       self.mGameOver = false
       self.mPreviousTime = nil
+      self.resume()
       self.fInit()
-      
     }
   }
   
@@ -75,14 +78,25 @@ PauseDelegate {
     if mPlatforms.count > 0 {
       let pz = mPlatforms[0]
       
+      
       if mPreviousSprite.isPast(self.mCamera.frame) && mPlatforms.count < 10 {
         self.createPlatform()
       }
+      
+//      if mBottomGrass[mBottomGrass.count - 1].isPast(self.mCamera.frame) &&
+//        mPlatforms.count < 25 {
+//        self.createGrass(true)
+//      }
       
       if pz.mSprite.isPast(self.mCamera.frame) {
         pz.mSprite.removeFromParent()
         self.mPlatforms.removeFirst()
       }
+      
+//      if gz.isPast(self.mCamera.frame) {
+////        gz.removeFromParent()
+//        self.mBottomGrass.removeFirst()
+//      }
     }
   }
   
@@ -107,11 +121,14 @@ PauseDelegate {
         ml.mDistance += ix < 10 ? ix : ix / 10
         ml.handleText()
         phy.mVelocityX = x
+        
+        mCamera.position.y = p.mSprite.position.y > mScreen.height ? p.mSprite.position.y : mScreen.height
+        hud.position.y = mCamera.position.y - mScreen.height
       }
       
       mPreviousTime = currentTime
       
-      if p.isDead(hud.frame) {
+      if p.isDead(mCamera.frame, width: mScreen.width) {
         end()
         return
       }
@@ -121,8 +138,7 @@ PauseDelegate {
       
       if mBackgrounds.count > 0 {
         let bg = mBackgrounds[0]
-        let bg2 = mBackgrounds[1]
-        
+        let bg2 = mBackgrounds[1]        
         
         if bg.getMaxX() + adv <=  cx {
           bg.position = setBackgroundPosition(bg2, bg2: bg, adv: adv)
@@ -131,6 +147,9 @@ PauseDelegate {
         if bg2.getMaxX() + adv <= cx {
           bg2.position = setBackgroundPosition(bg, bg2: bg2, adv: adv)
         }
+        
+        bg.position.y = mCamera.position.y
+        bg2.position.y = mCamera.position.y
       }
     }
   }
@@ -155,6 +174,12 @@ PauseDelegate {
     default:
       break
     }
+  }
+  
+  private func setXPosForItemFollowingPlayer(node: SKNode, x: CGFloat) {
+    let s = Player.kInstance.mSprite
+    
+    node.position = CGPointMake(node.position.x + x, s.position.y)
   }
   
   // Things that happen in the beginning
@@ -186,7 +211,7 @@ PauseDelegate {
     
     self.runAction(Player.kFallSfx)
     
-    el.position = self.getCenterPoint()
+    el.position = CGPointMake(self.getMidX(), mCamera.getMidY())
     
     if oc.mCount > oc.mNeed {
       el.text = "New High Score!"
@@ -199,6 +224,7 @@ PauseDelegate {
     
     HudUi.kInstance.mSprite.addChild(el)
     Player.kInstance.mSprite.removeFromParent()
+    Pause.kInstance.removeFromParent()
     self.mBegin = false
     self.mGameOver = true
   }
@@ -279,6 +305,20 @@ PauseDelegate {
     }
   }
   
+  // Selects the next grass, randomly
+  
+  private func createGrass(setOnBottom: Bool) {
+    let g = Grass.kInstance.nextGrass(true)
+    
+    if setOnBottom {
+      g.position = CGPointMake(mPreviousBottomGrassPos, 50)
+      mPreviousBottomGrassPos += g.getMaxX()
+    }
+    mBottomGrass.append(g)
+    
+    self.addChild(g)
+  }
+  
   // Sets up HUD elements
   
   private func setUpHUD() {
@@ -288,6 +328,7 @@ PauseDelegate {
     h.fInit()
     hud.addChild(kHUDs[MeterLabel.kIndex])
     hud.addChild(kHUDs[OrbCount.kIndex])
+    
     self.addChild(hud)
   }
   
@@ -323,11 +364,15 @@ PauseDelegate {
     setUpOre()
     setUpHUD()
     setUpInstructions()
-    self.camera?.position.x = UIScreen.scaleWidth(0.5)
-    self.camera?.frame.size
+    self.camera?.position = CGPointMake(mScreen.width, mScreen.height)
     
     for _ in 0...9 {
       createPlatform()
+//      createGrass(true)
+    }
+    
+    for _ in 0...14 {
+//      createGrass(true)
     }
   }
   
