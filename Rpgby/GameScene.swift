@@ -79,8 +79,8 @@ PauseDelegate {
       let pz = mPlatforms[0]
       
       
-      if mPreviousSprite.isPast(self.mCamera.frame) && mPlatforms.count < 10 {
-        self.createPlatform()
+      if mPreviousSprite.isPast(self.mCamera.frame) && mPlatforms.count < 20 {
+        self.handlePlatforms()
       }
       
 //      if mBottomGrass[mBottomGrass.count - 1].isPast(self.mCamera.frame) &&
@@ -115,15 +115,20 @@ PauseDelegate {
       if !self.paused {
         let x =  phy.mRunSpeed * CGFloat(currentTime - (mPreviousTime ?? currentTime))
         let ix = Int(x)
-        p.mSprite.position.x += x
+        p.movePlayer(x)
         hud.position.x += x
         mCamera.position.x += x
-        ml.mDistance += ix < 10 ? ix : ix / 10
-        ml.handleText()
+        ml.handleDistance(ix)
         phy.mVelocityX = x
+        
+        print(p.mTeleportPos.description + " --- " + p.mSprite.position.x.description)
         
         mCamera.position.y = p.mSprite.position.y > mScreen.height ? p.mSprite.position.y : mScreen.height
         hud.position.y = mCamera.position.y - mScreen.height
+        
+        if p.mTeleportPos != 0 && p.mTeleportPos <= p.mSprite.position.x {
+          p.reappear()
+        }
       }
       
       mPreviousTime = currentTime
@@ -155,13 +160,13 @@ PauseDelegate {
   }
   
   func didBeginContact(contact: SKPhysicsContact) {
+    let p = Player.kInstance
     var a = contact.bodyA.categoryBitMask
     var b = contact.bodyB.categoryBitMask
     (a, b) = a < b ? (a, b) : (b, a)
     
     switch (a, b) {
     case (Collision.kPlatform, Collision.kPerson): // handle landing
-      let p = Player.kInstance
       p.mJumping = false
       
       if mBegin {
@@ -171,6 +176,15 @@ PauseDelegate {
       self.runAction(Orb.kCollectSfx)
       OrbCount.kInstance.handleText()
       contact.bodyB.node?.removeFromParent()
+    case (Collision.kPerson, Collision.kTeleport): // handle running into teleport
+      p.teleport()
+    case (Collision.kPerson, Collision.kWing): // handle running into wing
+      var w: SKSpriteNode?
+      
+      w = (contact.bodyA.node?.name == Wings.kName ? contact.bodyA.node :
+        contact.bodyB.node) as? SKSpriteNode
+      
+      p.addWings(w)
     default:
       break
     }
@@ -271,9 +285,8 @@ PauseDelegate {
   // Sets up the orb
   
   private func setUpOre() {
-    let o = Orb.kInstance
+    let o = Item.kItems[Orb.kIndex]
     
-    o.createNode()
     o.setPosition(mPlatforms[0].mSprite)
     
     self.addChild(o.mSprite.copy() as! SKSpriteNode)
@@ -291,7 +304,7 @@ PauseDelegate {
   private func createPlatform() {
     let n = Platform.nextPlatform(mPreviousPlatform)
     let p: Platform = n.1
-    let o = Orb.kInstance
+    var i: Item?
     
     mPreviousPlatform = n.0
     mPreviousSprite = mPlatforms.lastSprite()
@@ -299,9 +312,28 @@ PauseDelegate {
     mPlatforms.append(p)
     self.addChild(mPlatforms.lastSprite())
     
-    if drand48() <= Orb.kProbablity {
-      o.setPosition(p.mSprite)
-      self.addChild(o.mSprite.copy() as! SKSpriteNode)
+    let r = drand48()
+    
+    switch r {
+    case Orb.kProbRange.0..<Orb.kProbRange.1:
+      i = Item.kItems[Orb.kIndex]
+    case Wings.kProbRange.0..<Wings.kProbRange.1:
+      i = Item.kItems[Wings.kIndex]
+    case Teleport.kProbRange.0..<Teleport.kProbRange.1:
+      i = Item.kItems[Teleport.kIndex]
+    default:
+      i = nil
+    }
+    
+    if let i = i {
+      i.setPosition(p.mSprite)
+      self.addChild(i.mSprite.copy() as! SKSpriteNode)
+    }
+  }
+  
+  private func handlePlatforms() {
+    while mPlatforms.count < 20 {
+      createPlatform()
     }
   }
   
@@ -366,14 +398,7 @@ PauseDelegate {
     setUpInstructions()
     self.camera?.position = CGPointMake(mScreen.width, mScreen.height)
     
-    for _ in 0...9 {
-      createPlatform()
-//      createGrass(true)
-    }
-    
-    for _ in 0...14 {
-//      createGrass(true)
-    }
+    handlePlatforms()
   }
   
   // MARK - PasswordDelegate

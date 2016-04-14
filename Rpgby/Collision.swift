@@ -14,4 +14,6 @@ final class Collision {
   static let kPlatform: UInt32 = 0x1 << 0
   static let kPerson: UInt32 = 0x1 << 1
   static let kOrb: UInt32 = 0x1 << 2
+  static let kTeleport: UInt32 = 0x01 << 3
+  static let kWing: UInt32 = 0x01 << 4
 }

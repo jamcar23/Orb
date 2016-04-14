@@ -42,6 +42,10 @@ final class OrbCount: SKNode, HUD, Reset {
   func handleText() {
     mCount += 1
     OrbCount.kLabel.text = mCount.description + "/" + mNeed.description + " Orbs"
+    
+    if mCount != 0 && mCount % 5 == 0 {
+      MeterLabel.kInstance.increaseMultiper()
+    }
   }
   
   func fInit() {

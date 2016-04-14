@@ -11,13 +11,14 @@ import SpriteKit
 
 // Class to handle orb sprites
 
-final class Orb: BaseSprite {
+final class Orb: Item {
   static let kName = "orb"
   static let kTextures = SKTextureAtlas(named: "orb")
   static let kRed = "red"
   static let kBlue = "blue"
-  static let kProbablity = 0.5
+  static let kProbRange = (0.0, 0.5)
   static let kInstance = Orb()
+  static let kIndex = 0
   static let kCollectSfx = SKAction.playSoundFileNamed("Coin.mp3",
     waitForCompletion: false)
   
@@ -36,19 +37,7 @@ final class Orb: BaseSprite {
     s.scale(0.035)
     s.physicsBody = SKPhysicsBody(circleOfRadius: s.size.width / 2)
     s.physicsBody?.categoryBitMask = Collision.kOrb
-    s.physicsBody?.collisionBitMask = Collision.kPlatform
-    s.physicsBody?.contactTestBitMask = Collision.kPerson
-    s.physicsBody?.restitution = 0.2
+    setSharedProperties()
     s.name = Orb.kName
-    s.zPosition = Spacing.kPersonOrbZIndex
-  }
-  
-  func setPosition(platform: SKSpriteNode) {
-    let s = self.mSprite
-    let x = platform.position.x
-    let r = Physics.kInstance.calcRandom(platform.getMaxX(),
-      lower: x, min: 0)
-    
-    s.position = CGPointMake(r - s.halfWidth(), platform.getMaxY())
   }
 }

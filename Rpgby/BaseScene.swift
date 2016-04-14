@@ -10,7 +10,7 @@
 import SpriteKit
 
 class BaseScene: SKScene {
-  static let kBackground = "Background_cloud"
+  static let kBackground = "Background"
   
   override init(size: CGSize) {
     super.init(size: size)

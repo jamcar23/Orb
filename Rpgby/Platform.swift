@@ -66,7 +66,7 @@ class Platform: BaseSprite {
   
   // MARK: - Static methods
   
-  static func createPlatforms() -> [Platform] {
+  private static func createPlatforms() -> [Platform] {
     var all = [Platform]()
     
     all.append(FluffyPlatform())

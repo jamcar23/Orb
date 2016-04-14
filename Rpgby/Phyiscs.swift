@@ -35,8 +35,8 @@ final class Physics: Reset {
       }
       
       let max = calcYDistance(45, time: t)
-      s.position.y = calcRandom((max + (h * 0.9)) - Player.kInstance.mSprite.size
-        .height, lower: h * 0.5, min: s.halfHeight())
+      s.position.y = calcRandom((max + (h * 0.75)) - Player.kInstance.mSprite.size
+        .height, lower: 0, min: s.halfHeight())
   }
   
   // Set a random distance to jump within a certain margin

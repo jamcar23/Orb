@@ -17,6 +17,9 @@
 		EF363CCF1C8F9A2900A060F8 /* PlatformFluffy2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF363CCE1C8F9A2900A060F8 /* PlatformFluffy2.swift */; };
 		EF363CD11C9081BB00A060F8 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF363CD01C9081BB00A060F8 /* ArrayExtension.swift */; };
 		EF54B8101CB7202A00E7BD8F /* Grass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF54B80F1CB7202A00E7BD8F /* Grass.swift */; };
+		EF60F7CA1CC028EB003AC5BA /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF60F7C91CC028EB003AC5BA /* Item.swift */; };
+		EF60F7CC1CC03489003AC5BA /* Teleport.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF60F7CB1CC03489003AC5BA /* Teleport.swift */; };
+		EF60F7CE1CC04E4A003AC5BA /* Wings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF60F7CD1CC04E4A003AC5BA /* Wings.swift */; };
 		EF908A0C1C862A3F006364BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A0B1C862A3F006364BA /* AppDelegate.swift */; };
 		EF908A101C862A3F006364BA /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A0F1C862A3F006364BA /* GameScene.swift */; };
 		EF908A121C862A3F006364BA /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A111C862A3F006364BA /* GameViewController.swift */; };
@@ -52,7 +55,6 @@
 		EFA8A99B1CA473DD00085A18 /* InstructionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A99A1CA473DD00085A18 /* InstructionLabel.swift */; };
 		EFCF3E441C9130F60014A66C /* running.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E431C9130F60014A66C /* running.atlas */; };
 		EFCF3E481C9132090014A66C /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E471C9132090014A66C /* jump.atlas */; };
-		EFCF3E4A1C91321E0014A66C /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EFCF3E491C91321E0014A66C /* background.atlas */; };
 		EFCF3E541C9207C70014A66C /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCF3E531C9207C70014A66C /* HUD.swift */; };
 		EFCF3E561C920D410014A66C /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCF3E551C920D410014A66C /* BaseLabel.swift */; };
 		EFCF3E581C920EB10014A66C /* StartLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCF3E571C920EB10014A66C /* StartLabel.swift */; };
@@ -74,6 +76,9 @@
 		EF363CCE1C8F9A2900A060F8 /* PlatformFluffy2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlatformFluffy2.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EF363CD01C9081BB00A060F8 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		EF54B80F1CB7202A00E7BD8F /* Grass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grass.swift; sourceTree = "<group>"; };
+		EF60F7C91CC028EB003AC5BA /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		EF60F7CB1CC03489003AC5BA /* Teleport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teleport.swift; sourceTree = "<group>"; };
+		EF60F7CD1CC04E4A003AC5BA /* Wings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wings.swift; sourceTree = "<group>"; };
 		EF908A081C862A3F006364BA /* Orb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF908A0B1C862A3F006364BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF908A0F1C862A3F006364BA /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -111,7 +116,6 @@
 		EFA8A99A1CA473DD00085A18 /* InstructionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionLabel.swift; sourceTree = "<group>"; };
 		EFCF3E431C9130F60014A66C /* running.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = running.atlas; sourceTree = "<group>"; };
 		EFCF3E471C9132090014A66C /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = jump.atlas; path = idle/jump.atlas; sourceTree = "<group>"; };
-		EFCF3E491C91321E0014A66C /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
 		EFCF3E531C9207C70014A66C /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HUD.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EFCF3E551C920D410014A66C /* BaseLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
 		EFCF3E571C920EB10014A66C /* StartLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartLabel.swift; sourceTree = "<group>"; };
@@ -164,7 +168,10 @@
 			children = (
 				EF98A4531C8760EA005E57D1 /* BaseSprite.swift */,
 				EF98A4591C87652F005E57D1 /* Orb.swift */,
+				EF60F7C91CC028EB003AC5BA /* Item.swift */,
 				EF98A4571C876398005E57D1 /* Player.swift */,
+				EF60F7CB1CC03489003AC5BA /* Teleport.swift */,
+				EF60F7CD1CC04E4A003AC5BA /* Wings.swift */,
 				EF54B80F1CB7202A00E7BD8F /* Grass.swift */,
 				EF55D0D91C94B84A0020F89D /* Platforms */,
 				EFA8A9831C9B319400085A18 /* HUD */,
@@ -232,7 +239,6 @@
 		EF908A311C863CC0006364BA /* world */ = {
 			isa = PBXGroup;
 			children = (
-				EFCF3E491C91321E0014A66C /* background.atlas */,
 			);
 			name = world;
 			sourceTree = "<group>";
@@ -377,7 +383,6 @@
 				EF98A4631C8775FF005E57D1 /* Coin.mp3 in Resources */,
 				EFDD0E7B1CB7EE9400406FC0 /* CHANGELOG in Resources */,
 				EF98A4651C8775FF005E57D1 /* S31-Internal-Reflection.mp3 in Resources */,
-				EFCF3E4A1C91321E0014A66C /* background.atlas in Resources */,
 				EF98A4661C8775FF005E57D1 /* spaceranger3.mp3 in Resources */,
 				EF908A171C862A3F006364BA /* Assets.xcassets in Resources */,
 				EF98A4641C8775FF005E57D1 /* S31-City-on-Speed.mp3 in Resources */,
@@ -394,6 +399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF363CD11C9081BB00A060F8 /* ArrayExtension.swift in Sources */,
+				EF60F7CC1CC03489003AC5BA /* Teleport.swift in Sources */,
 				EFA8A98B1C9DEFAE00085A18 /* MenuScene.swift in Sources */,
 				EFA8A9771C99CBB000085A18 /* MeterLabel.swift in Sources */,
 				EF16E1B41C93CD6400069B67 /* Operators.swift in Sources */,
@@ -407,6 +413,7 @@
 				EFA8A9891C9B755800085A18 /* UIScreenExtension.swift in Sources */,
 				EF16E1BA1C94AE6100069B67 /* PlatformMed.swift in Sources */,
 				EFCF3E541C9207C70014A66C /* HUD.swift in Sources */,
+				EF60F7CA1CC028EB003AC5BA /* Item.swift in Sources */,
 				EFCF3E561C920D410014A66C /* BaseLabel.swift in Sources */,
 				EF363CCD1C8F4B1800A060F8 /* Platform.swift in Sources */,
 				EFA8A9821C9B2E4500085A18 /* Pause.swift in Sources */,
@@ -429,6 +436,7 @@
 				EFA8A9991CA46A1E00085A18 /* DataManager.swift in Sources */,
 				EF908A0C1C862A3F006364BA /* AppDelegate.swift in Sources */,
 				EFA8A9911C9DF80900085A18 /* PlayPause.swift in Sources */,
+				EF60F7CE1CC04E4A003AC5BA /* Wings.swift in Sources */,
 				EFCF3E581C920EB10014A66C /* StartLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

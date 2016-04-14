@@ -1,10 +1,16 @@
 v1.1
+NEW multipler for every 5 orbs collected
+NEW teleport further added in the game safely
+NEW wings give you 60% normal gravity
+
+v1.0.1
 NEW added support for iPad
 IMPROVED camera follows player while jumping
-FIXED (maybe) issue where jumping is delayed on landing
+FIXED (maybe) issue where jumping again is delayed on landing
 FIXED issue where the game would stay paused after restarting
 FIXED issue where the pause label would overlap ending label
 FIXED issue where death is delayed from falling off left side of screen
+FIXED issue where the platform would be too high to jump to
 
 v1.0
 

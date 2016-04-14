@@ -26,6 +26,7 @@ final class Player: BaseSprite {
   
   var mJumping = false
   var mCounting = false
+  var mTeleporting = false
   var mRunAni: SKAction!
   var mJumpUpAni: SKAction!
   var mJumpDownAni: SKAction!
@@ -33,6 +34,9 @@ final class Player: BaseSprite {
   private var mBaseY: CGFloat = 0
   var mJumpY: CGFloat = 0
   var mTime: CGFloat = 0.001
+  var mOldSize: (player: CGSize!, wing: CGSize?)
+  var mTeleportPos: CGFloat = 0
+  var mWings: SKSpriteNode?
   
   private override init() {
     super.init(texture: SKTexture(imageNamed: "idle-1"))
@@ -48,6 +52,8 @@ final class Player: BaseSprite {
         resize: false, restore: false)
       self.mJumpDownAni = SKAction.animateWithTextures([texs[0]], timePerFrame:
         0, resize: false, restore: false)
+      
+      self.mOldSize = (player: self.mSprite.size, wing: nil)
     })
     
     self.mJumpTimeAct = createJumpTimerAction()
@@ -135,6 +141,74 @@ final class Player: BaseSprite {
     return SKAction.repeatActionForever(SKAction.sequence([t, w]))
   }
   
+  func movePlayer(distance: CGFloat) {
+    let s = self.mSprite
+    s.position.x += distance
+    
+    if let w = mWings {
+      w.position.x = s.position.x
+      w.position.y = s.position.y + s.halfHeight() / 3
+    }
+  }
+  
+  // Handle removing wings
+  
+  func removeWings() {
+    if let s = self.mSprite.scene {
+      s.physicsWorld.gravity.dy = -Physics.kGravity
+    }
+    
+    if let w = mWings {
+      w.removeFromParent()
+      mWings = nil
+    }
+  }
+  
+  func addWings(wing: SKSpriteNode?) {
+    let s = self.mSprite
+    
+    if mWings == nil && wing != nil {
+      mWings = wing
+      mWings?.physicsBody = nil
+      mOldSize.wing = mWings?.size
+      mWings?.position = CGPointMake(s.position.x + s.halfWidth(),
+                                     s.position.y + s.halfHeight() / 3)
+      if let sc = s.scene {
+        sc.physicsWorld.gravity.dy *= 0.6
+        sc.runAction(Wings.kWingTimer)
+      }
+    }
+  }
+  
+  // Handle reappearing after teleport
+  
+  func reappear() {
+    let s = self.mSprite
+    
+    s.size = mOldSize.player
+    s.physicsBody?.dynamic = true
+    mTeleportPos = 0
+    mTeleporting = false
+    
+    if let w = mWings, let ws = mOldSize.wing {
+      w.size = ws
+    }
+  }
+  
+  // Handle teleporting
+  
+  func teleport() {
+    let s = self.mSprite
+    let zs = CGSizeMake(0, 0)
+    
+    s.size = zs
+    mWings?.size = zs
+    s.physicsBody?.dynamic = false
+    mTeleportPos = mSprite.position.x + 1500
+    mJumping = false
+    mTeleporting = true
+  }
+  
   
   override func createNode() {
     let s = self.mSprite
@@ -150,8 +224,9 @@ final class Player: BaseSprite {
     s.physicsBody?.allowsRotation = false
     s.physicsBody?.velocity.dx = 1.2
     s.name = Player.kName
-    s.zPosition = Spacing.kPersonOrbZIndex
+    s.zPosition = Spacing.kPersonZIndex
     
+    mWings = nil
     Physics.kInstance.mVelocityY = 200 * s.physicsBody!.mass
   }
 }

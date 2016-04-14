@@ -16,6 +16,7 @@ final class MeterLabel: BaseLabel, Reset, HUD {
   static let kInstance = MeterLabel()
   
   var mDistance = 0
+  var mMultipler = 1.0
   
   private override init() {
     super.init(text: "0 M")
@@ -32,14 +33,23 @@ final class MeterLabel: BaseLabel, Reset, HUD {
     self.position = CGPointMake(frame.origin.x + o.sides, frame.size.height - o.top)
   }
   
-  func handleText() {
-    self.text = mDistance.description + " M"
+  func handleDistance(distance: Int) {
+    let d: Int = Int(Double(distance) * mMultipler)
+    mDistance += d < 10 ? d : d / 10
+    
+    let m = mDistance.description + " M"
+    self.text = mMultipler == 1 ? m : m + " - " + mMultipler.description + "x"
+  }
+  
+  func increaseMultiper() {
+    mMultipler += 0.5
   }
   
   func fInit() {
     super.createNode()
     mDistance = 0
-    handleText()
+    mMultipler = 1
+    handleDistance(0)
     self.removeFromParent()
   }
   

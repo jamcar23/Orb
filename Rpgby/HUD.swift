@@ -51,7 +51,7 @@ final class HudUi: BaseSprite, Reset {
   
   // Creates each HUD element
   
-  static func createHUD() -> [SKNode] {
+  private static func createHUD() -> [SKNode] {
     var n = [SKNode]()
     
     n.insert(StartLabel.kInstance, atIndex: StartLabel.kIndex)
