@@ -24,7 +24,7 @@ final class Credits: SKSpriteNode, HUD {
   }
   
   func setHudPosition(frame: CGRect) {
-    self.position = CGPointMake(frame.width / 2 + UIScreen.scaleWidth(0.1), frame.origin.y +
+    self.position = CGPointMake(frame.width / 2, frame.origin.y +
       HudUi.kOffset.top * 2)
   }
   

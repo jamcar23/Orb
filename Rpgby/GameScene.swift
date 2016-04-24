@@ -121,8 +121,6 @@ PauseDelegate {
         ml.handleDistance(ix)
         phy.mVelocityX = x
         
-        print(p.mTeleportPos.description + " --- " + p.mSprite.position.x.description)
-        
         mCamera.position.y = p.mSprite.position.y > mScreen.height ? p.mSprite.position.y : mScreen.height
         hud.position.y = mCamera.position.y - mScreen.height
         
@@ -222,18 +220,27 @@ PauseDelegate {
   func end() {
     let el = HudUi.kHUDs[EndLabel.kIndex] as! SKLabelNode
     let oc = OrbCount.kInstance
+    let dm = MeterLabel.kInstance.mDistance
     
     self.runAction(Player.kFallSfx)
     
     el.position = CGPointMake(self.getMidX(), mCamera.getMidY())
     
-    if oc.mCount > oc.mNeed {
+    if oc.mCount > oc.mNeed  {
       el.text = "New High Score!"
       DataManager.setMaxOrbsCollected(oc.mCount)
+      GameCenter.kInstance.postScores()
     } else if oc.mCount == oc.mNeed {
       el.text = "Winner Winner!"
     } else {
       el.text = "Try Again."
+    }
+    
+    
+    if dm > DataManager.getMaxDistanceRan() {
+      DataManager.setMaxDistanceRand(dm)
+      GameCenter.kInstance.postScores()
+      el.text = "New Distance!"
     }
     
     HudUi.kInstance.mSprite.addChild(el)

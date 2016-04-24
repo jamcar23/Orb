@@ -8,16 +8,24 @@
 
 import UIKit
 import SpriteKit
+import GameKit
 
-final class GameViewController: UIViewController {
+final class GameViewController: UIViewController, UINavigationControllerDelegate {
+  weak var mGameCenterController: GKGameCenterViewController!
   var mScene: MenuScene!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    let gc = GameCenter.kInstance
+    
+    mGameCenterController = GKGameCenterViewController()
+    mGameCenterController.delegate = self
+    mGameCenterController.gameCenterDelegate = gc
+    
     // Configure the view.
     let skView = self.view as! SKView
-    skView.showsFPS = true
-    skView.showsNodeCount = true
+//    skView.showsFPS = true
+//    skView.showsNodeCount = true
 //    skView.showsPhysics = true // creates memory leak
     
     /* Sprite Kit applies additional optimizations to improve rendering performance */
@@ -28,6 +36,9 @@ final class GameViewController: UIViewController {
     mScene.scaleMode = .ResizeFill
     
     skView.presentScene(mScene)
+    
+    gc.mDelegate = self
+    gc.authenticate()
   }
   
   override func shouldAutorotate() -> Bool {
@@ -41,5 +52,9 @@ final class GameViewController: UIViewController {
   
   override func prefersStatusBarHidden() -> Bool {
     return true
+  }
+  
+  func showGameCenter() {
+    showViewController(mGameCenterController)
   }
 }

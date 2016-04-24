@@ -17,20 +17,24 @@ final class MenuScene: BaseScene {
     let t = MenuScene.kTitle
     let p = Play.kInstace
     let c = Credits.kInstace
+    let l = Leaderboards.kInstance
     
     self.setUpBackground()
     t.position = CGPointMake(self.getMidX(), self.frame.size.height -
       HudUi.kOffset.top * 2)
     p.setHudPosition(self.frame)
     c.setHudPosition(self.frame)
+    l.setHudPosition(self.frame)
     p.userInteractionEnabled = true
     c.userInteractionEnabled = true
+    l.userInteractionEnabled = true
     let ar = c.size.width / c.size.height
     c.size = CGSizeMake(p.size.height * ar, p.size.height)
     
     self.addChild(t)
     self.addChild(p)
     self.addChild(c)
+    self.addChild(l)
     
     self.userInteractionEnabled = true
   }

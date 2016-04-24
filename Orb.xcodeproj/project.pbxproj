@@ -20,6 +20,8 @@
 		EF60F7CA1CC028EB003AC5BA /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF60F7C91CC028EB003AC5BA /* Item.swift */; };
 		EF60F7CC1CC03489003AC5BA /* Teleport.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF60F7CB1CC03489003AC5BA /* Teleport.swift */; };
 		EF60F7CE1CC04E4A003AC5BA /* Wings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF60F7CD1CC04E4A003AC5BA /* Wings.swift */; };
+		EF60F7D01CC9359E003AC5BA /* GameCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF60F7CF1CC9359D003AC5BA /* GameCenter.swift */; };
+		EF60F7D21CC93BBD003AC5BA /* Leaderboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF60F7D11CC93BBD003AC5BA /* Leaderboards.swift */; };
 		EF908A0C1C862A3F006364BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A0B1C862A3F006364BA /* AppDelegate.swift */; };
 		EF908A101C862A3F006364BA /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A0F1C862A3F006364BA /* GameScene.swift */; };
 		EF908A121C862A3F006364BA /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF908A111C862A3F006364BA /* GameViewController.swift */; };
@@ -79,6 +81,8 @@
 		EF60F7C91CC028EB003AC5BA /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		EF60F7CB1CC03489003AC5BA /* Teleport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teleport.swift; sourceTree = "<group>"; };
 		EF60F7CD1CC04E4A003AC5BA /* Wings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wings.swift; sourceTree = "<group>"; };
+		EF60F7CF1CC9359D003AC5BA /* GameCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCenter.swift; sourceTree = "<group>"; };
+		EF60F7D11CC93BBD003AC5BA /* Leaderboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Leaderboards.swift; sourceTree = "<group>"; };
 		EF908A081C862A3F006364BA /* Orb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF908A0B1C862A3F006364BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF908A0F1C862A3F006364BA /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 				EF55D0DB1C94B8790020F89D /* Sprites */,
 				EF363CD01C9081BB00A060F8 /* ArrayExtension.swift */,
 				EF363CCA1C8F49D000A060F8 /* GameManager.swift */,
+				EF60F7CF1CC9359D003AC5BA /* GameCenter.swift */,
 				EF16E1B31C93CD6400069B67 /* Operators.swift */,
 				EF908A4F1C86438E006364BA /* Collision.swift */,
 				EFDD0E7A1CB7EE9400406FC0 /* CHANGELOG */,
@@ -286,6 +291,7 @@
 				EFA8A9901C9DF80900085A18 /* PlayPause.swift */,
 				EFA8A98E1C9DF78E00085A18 /* Play.swift */,
 				EFA8A9921CA0A31400085A18 /* Credits.swift */,
+				EF60F7D11CC93BBD003AC5BA /* Leaderboards.swift */,
 				EFA8A9861C9B51A700085A18 /* OrbCount.swift */,
 				EF55D0DA1C94B85E0020F89D /* Labels */,
 			);
@@ -400,12 +406,14 @@
 			files = (
 				EF363CD11C9081BB00A060F8 /* ArrayExtension.swift in Sources */,
 				EF60F7CC1CC03489003AC5BA /* Teleport.swift in Sources */,
+				EF60F7D01CC9359E003AC5BA /* GameCenter.swift in Sources */,
 				EFA8A98B1C9DEFAE00085A18 /* MenuScene.swift in Sources */,
 				EFA8A9771C99CBB000085A18 /* MeterLabel.swift in Sources */,
 				EF16E1B41C93CD6400069B67 /* Operators.swift in Sources */,
 				EF363CCF1C8F9A2900A060F8 /* PlatformFluffy2.swift in Sources */,
 				EF54B8101CB7202A00E7BD8F /* Grass.swift in Sources */,
 				EF363CCB1C8F49D000A060F8 /* GameManager.swift in Sources */,
+				EF60F7D21CC93BBD003AC5BA /* Leaderboards.swift in Sources */,
 				EF16E1B61C94AB3C00069B67 /* PlatformSmall1.swift in Sources */,
 				EF908A5B1C865D6A006364BA /* Spacing.swift in Sources */,
 				EF98A4541C8760EA005E57D1 /* BaseSprite.swift in Sources */,
