@@ -227,6 +227,6 @@ final class Player: BaseSprite {
     s.zPosition = Spacing.kPersonZIndex
     
     mWings = nil
-    Physics.kInstance.mVelocityY = 200 * s.physicsBody!.mass
+    Physics.kInstance.mVelocityY = 200 * (s.physicsBody?.mass ?? 0)
   }
 }

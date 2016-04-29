@@ -221,6 +221,7 @@ PauseDelegate {
     let el = HudUi.kHUDs[EndLabel.kIndex] as! SKLabelNode
     let oc = OrbCount.kInstance
     let dm = MeterLabel.kInstance.mDistance
+    let gc = GameCenter.kInstance
     
     self.runAction(Player.kFallSfx)
     
@@ -229,13 +230,25 @@ PauseDelegate {
     if oc.mCount > oc.mNeed  {
       el.text = "New High Score!"
       DataManager.setMaxOrbsCollected(oc.mCount)
-      GameCenter.kInstance.postScores()
+      gc.postScores()
     } else if oc.mCount == oc.mNeed {
       el.text = "Winner Winner!"
     } else {
       el.text = "Try Again."
     }
     
+    if oc.mCount > 3 || oc.mNeed > 3 {
+      gc.completeGettingStarted()
+      
+      if oc.mCount >= 10 || oc.mNeed >= 10{
+        gc.completeBigTen()
+      }
+    }
+    
+    gc.updateCollectiveOrb(orbs: oc.mCount)
+    gc.updateCollectiveRunAchievement(meters: dm)
+    gc.completeDying()
+    gc.postAchievements()
     
     if dm > DataManager.getMaxDistanceRan() {
       DataManager.setMaxDistanceRand(dm)

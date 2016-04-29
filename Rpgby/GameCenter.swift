@@ -10,12 +10,21 @@ import GameKit
 
 final class GameCenter: NSObject, GKGameCenterControllerDelegate {
   static let kInstance = GameCenter()
+  static let kViewController = GKGameCenterViewController()
+  static let kAchievements = [
+    GKAchievement(identifier: kPackgeName + ".gettingstarted"),
+    GKAchievement(identifier: kPackgeName + ".keeprunning"),
+    GKAchievement(identifier: kPackgeName + ".bigten"),
+    GKAchievement(identifier: kPackgeName + ".died"),
+    GKAchievement(identifier: kPackgeName + ".collector")
+  ]
   let kPlayer = GKLocalPlayer.localPlayer()
   
   var mDelegate: GameCenterDelegate!
   
   private override init() {
     super.init()
+    GameCenter.kViewController.gameCenterDelegate = self
   }
   
   func authenticate() {
@@ -51,7 +60,45 @@ final class GameCenter: NSObject, GKGameCenterControllerDelegate {
     
     GKScore.reportScores([ob, db], withCompletionHandler: { err in
       if let e = err {
-        print(e.description)
+        print("Error in postScores: " + e.description)
+      }
+    })
+  }
+  
+  func updateCollectiveRunAchievement(meters m: Int) {
+    updateAchievement(GameCenter.kAchievements[1], percent: (Double(m) / 20000.0))
+  }
+  
+  func updateCollectiveOrb(orbs o: Int) {
+    updateAchievement(GameCenter.kAchievements[4], percent: (Double(o) / 1000))
+  }
+  
+  func completeGettingStarted() {
+    updateAchievement(GameCenter.kAchievements[0], percent: 1)
+  }
+  
+  func completeBigTen() {
+    updateAchievement(GameCenter.kAchievements[2], percent: 1)
+  }
+  
+  func completeDying() {
+    updateAchievement(GameCenter.kAchievements[3], percent: 1)
+  }
+  
+  private func updateAchievement(achievement: GKAchievement, percent: Double) {
+    if !achievement.completed {
+      achievement.showsCompletionBanner = true
+      achievement.percentComplete += percent * 100
+    }
+  }
+  
+  func postAchievements() {
+    let ach = GameCenter.kAchievements.flatMap{ (gak: GKAchievement) in
+      return gak.percentComplete > 1.0 ?  gak : nil}
+    
+    GKAchievement.reportAchievements(ach, withCompletionHandler: { (err: NSError?) in
+      if let e = err {
+        print("Error in postAchievements: " + e.description)
       }
     })
   }

@@ -18,9 +18,8 @@ final class GameViewController: UIViewController, UINavigationControllerDelegate
     super.viewDidLoad()
     let gc = GameCenter.kInstance
     
-    mGameCenterController = GKGameCenterViewController()
+    mGameCenterController = GameCenter.kViewController
     mGameCenterController.delegate = self
-    mGameCenterController.gameCenterDelegate = gc
     
     // Configure the view.
     let skView = self.view as! SKView
